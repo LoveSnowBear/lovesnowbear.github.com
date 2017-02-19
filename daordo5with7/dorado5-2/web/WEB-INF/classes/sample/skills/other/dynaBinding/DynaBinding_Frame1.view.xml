@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee">
+			<MasterLink />
+			<Fields />
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%" />
+		<Control id="buttonOpenDialog" type="Button" value="打开绑定此数据集的新框架(仅支持IE)">
+			<Events>
+				<Event name="onClick">if (browserType==BROWSER_IE) {
+  commandOpenDialog.execute(window);
+}
+else {
+  alert("Unsupportted operation.");
+}</Event>
+			</Events>
+		</Control>
+		<Control id="commandOpenDialog" type="RequestCommand" path="dyna-binding-frame1-dialog.jsp">
+			<Frame target="_modeless_dialog" resizable="true" width="400" height="400" />
+			<Parameters />
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="onDatasetsPrepared">registerMe();</Event>
+		<Event name="functions">function registerMe() {
+  window.parent.establishBinding(datasetEmployee);
+}</Event>
+	</Events>
+</view>
+

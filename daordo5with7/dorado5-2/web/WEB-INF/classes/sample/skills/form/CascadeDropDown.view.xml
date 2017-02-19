@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetBranch" type="Reference" sourceModule="sample.HR" sourceDataset="datasetBranch">
+			<MasterLink />
+			<Fields>
+				<Field name="branch_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="branch_name" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDept" type="Reference" sourceModule="sample.HR" sourceDataset="datasetDept">
+			<MasterLink masterDataset="datasetBranch" masterKeyFields="branch_id" detailKeyFields="branch_id" detailKeyParameters="branch_id" />
+			<Fields>
+				<Field name="dept_id" dataType="string" label="部门编码">
+					<Properties />
+				</Field>
+				<Field name="dept_name" dataType="string" label="部门名称">
+					<Properties />
+				</Field>
+				<Field name="branch_id" dataType="string" label="分公司编码">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee">
+			<MasterLink masterDataset="datasetDept" masterKeyFields="dept_id" detailKeyFields="dept_id" detailKeyParameters="dept_id" />
+			<Fields>
+				<Field name="employee_id" dataType="string" label="员工编码">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string" label="姓名">
+					<Properties />
+				</Field>
+				<Field name="dept_id" dataType="string" label="部门编码">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetForTest1" type="Custom">
+			<MasterLink />
+			<Fields>
+				<Field name="branch_id">
+					<Properties />
+				</Field>
+				<Field name="branch_name" label="分公司">
+					<Properties />
+				</Field>
+				<Field name="dept_id">
+					<Properties />
+				</Field>
+				<Field name="dept_name" label="部门">
+					<Properties />
+				</Field>
+				<Field name="employee_id">
+					<Properties />
+				</Field>
+				<Field name="employee_name" label="员工">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetForTest2" type="Custom">
+			<MasterLink />
+			<Fields>
+				<Field name="branch_id">
+					<Properties />
+				</Field>
+				<Field name="branch_name" label="分公司">
+					<Properties />
+				</Field>
+				<Field name="dept_id">
+					<Properties />
+				</Field>
+				<Field name="dept_name" label="部门">
+					<Properties />
+				</Field>
+				<Field name="employee_id">
+					<Properties />
+				</Field>
+				<Field name="employee_name" label="员工">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="formForTest1" type="AutoForm" dataset="datasetForTest1" width="600" defaultLabelWidth="60">
+			<FormGroup columnCount="2" title="利用DatasetDropDown实现的联动下拉" name="groupMain">
+				<Element name="branch_name" field="branch_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor dropDown="dropdownBranch1" />
+				</Element>
+				<Element name="description" type="Renderer" showLabel="false" rowSpan="3">
+					<FieldLabel />
+				</Element>
+				<Element name="dept_name" field="dept_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor dropDown="dropdownDept1" />
+				</Element>
+				<Element name="employee_name" field="employee_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor dropDown="dropdownEmployee1" />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="dropdownBranch1" type="DatasetDropDown" dataset="datasetBranch" readFields="branch_id,branch_name" writeFields="branch_id,branch_name" visibleFields="branch_name" />
+		<Control id="dropdownDept1" type="DatasetDropDown" dataset="datasetDept" visibleFields="dept_name" writeFields="dept_id,dept_name" readFields="dept_id,dept_name" />
+		<Control id="dropdownEmployee1" type="DatasetDropDown" dataset="datasetEmployee" readFields="employee_id,employee_name" writeFields="employee_id,employee_name" visibleFields="employee_name" />
+		<Control id="formForTest2" type="AutoForm" dataset="datasetForTest2" width="600" defaultLabelWidth="60">
+			<FormGroup columnCount="2" title="利用DynamicDropDown实现的联动下拉" name="groupMain">
+				<Element name="branch_name" field="branch_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor dropDown="dropdownBranch2" />
+				</Element>
+				<Element name="description" type="Renderer" showLabel="false" rowSpan="3">
+					<FieldLabel />
+				</Element>
+				<Element name="dept_name" field="dept_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor dropDown="dropdownDept2" />
+				</Element>
+				<Element name="employee_name" field="employee_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor dropDown="dropdownEmployee2" />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="dropdownBranch2" type="DatasetDropDown" dataset="datasetBranch" readFields="branch_id,branch_name" writeFields="branch_id,branch_name" visibleFields="branch_name">
+			<Events>
+				<Event name="onSelect">dropdownDept2.parameters().setValue("branch_id", selectedObject.getValue("branch_id"));
+return true;</Event>
+			</Events>
+		</Control>
+		<Control id="dropdownDept2" type="DynamicDropDown" readFields="dept_id,dept_name" writeFields="dept_id,dept_name" visibleFields="dept_name" cachable="false">
+			<Dataset type="DropDown" sourceModule="sample.HR" sourceDataset="datasetDept">
+				<Fields />
+				<Parameters />
+				<Properties />
+			</Dataset>
+			<Parameters />
+			<Events>
+				<Event name="onSelect">dropdownEmployee2.parameters().setValue("dept_id", selectedObject.getValue("dept_id"));
+return true;</Event>
+			</Events>
+		</Control>
+		<Control id="dropdownEmployee2" type="DynamicDropDown" readFields="employee_id,employee_name" visibleFields="employee_name" writeFields="employee_id,employee_name" cachable="false">
+			<Dataset type="DropDown" sourceModule="sample.HR" sourceDataset="datasetEmployee">
+				<Fields />
+				<Parameters />
+				<Properties />
+			</Dataset>
+			<Parameters />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

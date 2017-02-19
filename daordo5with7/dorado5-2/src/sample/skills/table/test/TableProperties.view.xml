@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Wrapper" dataSource="doradosample" originTable="EMPLOYEE" wrappedType="AutoSql">
+			<Joins />
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="工号">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false" label="部门编号">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="姓名">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" label="性别" dataType="boolean" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="BIRTHDAY" originField="BIRTHDAY" table="EMPLOYEE" dataType="date" group="false" label="生日">
+					<Properties />
+				</Field>
+				<Field name="MARRIED" originField="MARRIED" table="EMPLOYEE" group="false" label="婚否" dataType="boolean" dropDown="dropdownBoolean">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="EMAIL" originField="EMAIL" table="EMPLOYEE" dataType="string" group="false" label="邮件">
+					<Properties />
+				</Field>
+				<Field name="WEB" originField="WEB" table="EMPLOYEE" dataType="string" group="false" label="网址">
+					<Properties />
+				</Field>
+				<Field name="CMNT" originField="CMNT" table="EMPLOYEE" dataType="string" group="false" label="备注">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetTable" type="Custom">
+			<MasterLink />
+			<Fields>
+				<Field name="confirmCancel" toolTip="是否在取消时添加确认框" label="取消提示" dataType="boolean" dropDown="dropdownBoolean">
+					<Properties />
+				</Field>
+				<Field name="confirmDelete" label="删除提示" toolTip="是否在删除时添加确认框" dataType="boolean" dropDown="dropdownBoolean">
+					<Properties />
+				</Field>
+				<Field name="editable" dataType="boolean" dropDown="dropdownBoolean" label="可编辑" toolTip="设置为true时,表格还可以新增和删除操作">
+					<Properties />
+				</Field>
+				<Field name="fixedColumn" label="锁定列数目" dataType="int" dropDown="dropdownNum">
+					<Properties />
+				</Field>
+				<Field name="footerHeight" dataType="int" label="统计栏高度">
+					<Properties />
+				</Field>
+				<Field name="headerHeight" dataType="int" label="表格头高度">
+					<Properties />
+				</Field>
+				<Field name="highlightSelection" label="行高亮显示" dataType="boolean" dropDown="dropdownBoolean">
+					<Properties />
+				</Field>
+				<Field name="maxRow" dataType="int" toolTip="数据表格能够显示的最大记录条数" label="最大记录条数">
+					<Properties />
+				</Field>
+				<Field name="readOnly" dataType="boolean" dropDown="dropdownBoolean" label="只读" toolTip="设置为true时,表格无法新增和删除行">
+					<Properties />
+				</Field>
+				<Field name="rowHeight" label="数据行行高" dataType="int">
+					<Properties />
+				</Field>
+				<Field name="showFooter" label="显示统计栏" dataType="boolean" dropDown="dropdownBoolean">
+					<Properties />
+				</Field>
+				<Field name="scrollMode" label="滚动方式" dropDown="dropdownScrollMode">
+					<Properties />
+				</Field>
+				<Field name="showHScrollBar" dataType="boolean" dropDown="dropdownBoolean" label="横向滚动栏">
+					<Properties />
+				</Field>
+				<Field name="showHeader" label="显示表格头" dataType="boolean" dropDown="dropdownBoolean">
+					<Properties />
+				</Field>
+				<Field name="showIndicator" label="显示行指示器" dataType="boolean" dropDown="dropdownBoolean">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="afterChange">switch (field.getName()) {
+  case "confirmCancel":
+    tableEmployee.setConfirmCancel(record.getValue("confirmCancel"));
+    tableEmployee.refresh();
+    break;
+  case "confirmDelete":
+    tableEmployee.setConfirmDelete(record.getValue("confirmDelete"));
+    tableEmployee.refresh();
+    break;
+  case "editable":
+    tableEmployee.setEditable(record.getValue("editable"));
+    tableEmployee.refresh();
+    break;
+  case "fixedColumn":
+    tableEmployee.setFixedColumn(record.getValue("fixedColumn"));
+    tableEmployee.refresh();
+    break;
+  case "footerHeight":
+    tableEmployee.setFooterHeight(record.getValue("footerHeight"));
+    tableEmployee.rebuild();
+    tableEmployee.refresh();
+    break;
+  case "headerHeight":
+    tableEmployee.setHeaderHeight(record.getValue("headerHeight"));
+    tableEmployee.rebuild();
+    tableEmployee.refresh();
+    break;
+  case "highlightSelection":
+    tableEmployee.setHighlightSelection(record.getValue("highlightSelection"));
+    tableEmployee.refresh();
+    break;
+  case "maxRow":
+    tableEmployee.setMaxRow(record.getValue("maxRow"));
+    tableEmployee.rebuild();
+    tableEmployee.refresh();
+    break;
+  case "readOnly":
+    tableEmployee.setReadOnly(record.getValue("readOnly"));
+    tableEmployee.refresh();
+    break;
+  case "rowHeight":
+    tableEmployee.setRowHeight(record.getValue("rowHeight"));
+    tableEmployee.rebuild();
+    tableEmployee.refresh();
+    break;
+  case "showFooter":
+    tableEmployee.setShowFooter(record.getValue("showFooter"));
+    tableEmployee.rebuild();
+    tableEmployee.refresh();
+    break;
+  case "showHScrollBar":
+    tableEmployee.setShowHScrollBar(record.getValue("showHScrollBar"));
+    tableEmployee.rebuild();
+    tableEmployee.refresh();
+    break;
+  case "showHeader":
+    tableEmployee.setShowHeader(record.getValue("showHeader"));
+    tableEmployee.rebuild();
+    tableEmployee.refresh();
+    break;
+  case "showIndicator":
+    tableEmployee.setShowIndicator(record.getValue("showIndicator"));
+    tableEmployee.refresh();
+    break;
+}</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="datasetColumn" type="Custom">
+			<MasterLink />
+			<Fields>
+				<Field name="name" label="列名称">
+					<Properties />
+				</Field>
+				<Field name="field" dataType="string" dropDown="dropdownField" label="绑定字段">
+					<Properties />
+				</Field>
+				<Field name="label" label="列标题">
+					<Properties />
+				</Field>
+				<Field name="align" dropDown="dropdownAlign" dataType="string" defaultValue="left" label="列对齐方式">
+					<Properties />
+				</Field>
+				<Field name="width" dataType="int" label="列宽度">
+					<Properties />
+				</Field>
+				<Field name="visible" dropDown="dropdownBoolean" label="可见" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="toolTip" label="提示信息" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sortable" dataType="boolean" dropDown="dropdownBoolean" label="排序">
+					<Properties />
+				</Field>
+				<Field name="resizable" dataType="boolean" dropDown="dropdownBoolean" label="列宽度可变">
+					<Properties />
+				</Field>
+				<Field name="rendererType" dropDown="dropdownRendererType" dataType="string" label="渲染器类型">
+					<Properties />
+				</Field>
+				<Field name="headClickable" dataType="boolean" dropDown="dropdownBoolean" label="允许表格头单击">
+					<Properties />
+				</Field>
+				<Field name="footerValue" dataType="string" label="统计栏的值">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="afterChange">if (dataset.getCurrent()){
+  var columnName = record.getValue("name"); 
+  var newValue = record.getValue(field.getName()); 
+  
+  switch (field.getName()) {
+    case "align":
+      tableEmployee.getColumn(columnName).setAlign(newValue);
+      tableEmployee.rebuild();
+      break;
+    case "label":
+      tableEmployee.getColumn(columnName).setLabel(newValue);
+      break;
+    case "width":
+      tableEmployee.getColumn(columnName).setWidth(newValue);
+      break;
+    case "toolTip":
+      tableEmployee.getColumn(columnName).setToolTip(newValue);
+      tableEmployee.rebuild();
+      break;
+    case "visible":
+      tableEmployee.getColumn(columnName).setVisible(newValue);
+      break;
+    case "sortable":
+      tableEmployee.getColumn(columnName).setSortable(newValue);
+      break;
+    case "resizable":
+      tableEmployee.getColumn(columnName).setResizable(newValue);
+      break;
+    case "rendererType":
+      tableEmployee.getColumn(columnName).setRendererType(newValue);
+      tableEmployee.rebuild();
+      break;
+    case "headClickable":
+      tableEmployee.getColumn(columnName).setHeaderClickable(newValue);
+      break;
+    case "footerValue":
+      tableEmployee.getColumn(columnName).setFooterValue(newValue);
+      break;
+    case "field":
+      tableEmployee.getColumn(columnName).setField(newValue);   
+      tableEmployee.rebuild();   
+      break;
+  }
+  
+  tableEmployee.refresh();
+}</Event>
+			</Events>
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" height="100%" width="100%" maxRow="20" showFooter="true" fixedColumn="1">
+			<Column name="EMPLOYEE_NAME" field="EMPLOYEE_NAME" sortable="false" />
+			<Column name="EMPLOYEE_ID" field="EMPLOYEE_ID" sortable="false" />
+			<Column name="DEPT_ID" field="DEPT_ID" sortable="false" />
+			<Column name="SEX" field="SEX" sortable="false" />
+			<Column name="BIRTHDAY" field="BIRTHDAY" sortable="false" />
+			<Column name="MARRIED" field="MARRIED" sortable="false" />
+			<Column name="SALARY" field="SALARY" sortable="false" />
+			<Column name="DEGREE" field="DEGREE" sortable="false" />
+			<Column name="EMAIL" field="EMAIL" sortable="false" />
+			<Column name="WEB" field="WEB" sortable="false" />
+			<Column name="CMNT" field="CMNT" sortable="false" />
+			<Events>
+				<Event name="onHeaderClick">alert("click column. name:"+column.getName());</Event>
+			</Events>
+		</Control>
+		<Control id="dropdownBoolean" type="ListDropDown" mapValue="true" fixed="true">
+			<DropDownItem value="true" label="是" />
+			<DropDownItem value="false" label="否" />
+		</Control>
+		<Control id="formTable" type="AutoForm" dataset="datasetTable">
+			<FormGroup columnCount="1" name="group1" title="基本属性">
+				<Element name="readOnly" type="RadioGroup" field="readOnly">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+				<Element name="editable" type="RadioGroup" field="editable">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+				<Element name="headerHeight" field="headerHeight" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="footerHeight" field="footerHeight" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="rowHeight" field="rowHeight" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="fixedColumn" field="fixedColumn" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+			<FormGroup name="group2" title="其它属性" columnCount="1" expanded="true">
+				<Element name="confirmCancel" type="RadioGroup" field="confirmCancel">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+				<Element name="confirmDelete" type="RadioGroup" field="confirmDelete">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+				<Element name="highlightSelection" type="RadioGroup" field="highlightSelection">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+				<Element name="showHeader" type="RadioGroup" field="showHeader">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+				<Element name="showFooter" type="RadioGroup" field="showFooter">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+				<Element name="showHScrollBar" type="RadioGroup" field="showHScrollBar">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+				<Element name="showIndicator" type="RadioGroup" field="showIndicator">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+				<Element name="scrollMode" field="scrollMode" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="maxRow" field="maxRow" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="formColumn" type="AutoForm" dataset="datasetColumn">
+			<FormGroup columnCount="1" name="group1" title="基本属性">
+				<Element name="align" type="RadioGroup" field="align">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+				<Element name="width" field="width" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="label" field="label" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="visible" type="RadioGroup" field="visible">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+			</FormGroup>
+			<FormGroup name="group2" title="其它属性" columnCount="1" expanded="true">
+				<Element name="field" field="field" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="footerValue" field="footerValue" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="headClickable" type="RadioGroup" field="headClickable">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+				<Element name="rendererType" field="rendererType" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="toolTip" field="toolTip" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="sortable" type="RadioGroup" field="sortable">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+				<Element name="resizable" type="RadioGroup" field="resizable">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="tabset1" type="TabSet" currentTab="tab2">
+			<Tab name="tab1" label="表格体属性" />
+			<Tab name="tab2" label="表格列属性" />
+		</Control>
+		<Control id="dropdownAlign" type="ListDropDown" mapValue="true" fixed="true">
+			<DropDownItem value="left" label="居左" />
+			<DropDownItem value="center" label="居中" />
+			<DropDownItem value="right" label="居右" />
+		</Control>
+		<Control id="tableColumn" type="DataTable" dataset="datasetColumn" width="100%" readOnly="true" showHScrollBar="false" showIndicator="false" height="300">
+			<Column name="name" field="name" width="120" />
+			<Column name="label" field="label" width="170" />
+		</Control>
+		<Control id="dropdownNum" type="ListDropDown">
+			<DropDownItem value="0" />
+			<DropDownItem value="1" />
+			<DropDownItem value="2" />
+			<DropDownItem value="3" />
+			<DropDownItem value="4" />
+			<DropDownItem value="5" />
+			<DropDownItem value="6" />
+			<DropDownItem value="7" />
+			<DropDownItem value="8" />
+		</Control>
+		<Control id="dropdownRendererType" type="ListDropDown" fixed="true">
+			<DropDownItem value="text" />
+			<DropDownItem value="textarea" />
+			<DropDownItem value="checkbox" />
+			<DropDownItem value="radiogroup" />
+		</Control>
+		<Control id="dropdownField" type="ListDropDown" mapValue="true" fixed="true">
+			<DropDownItem value="EMPLOYEE_ID" label="工号" />
+			<DropDownItem value="DEPT_ID" label="部门编号" />
+			<DropDownItem value="EMPLOYEE_NAME" label="姓名" />
+			<DropDownItem value="SEX" label="性别" />
+			<DropDownItem value="BIRTHDAY" label="生日" />
+			<DropDownItem value="MARRIED" label="婚否" />
+			<DropDownItem value="SALARY" label="薪水" />
+			<DropDownItem value="DEGREE" label="学历" />
+			<DropDownItem value="EMAIL" label="邮件" />
+			<DropDownItem value="WEB" label="网址" />
+			<DropDownItem value="CMNT" label="备注" />
+		</Control>
+		<Control id="dropdownScrollMode" type="ListDropDown" fixed="true">
+			<DropDownItem value="record" />
+			<DropDownItem value="simple" />
+		</Control>
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="onLoad">initDatasetTable();
+initDatasetColumn();</Event>
+		<Event name="functions">function initDatasetTable(){
+  datasetTable.insertRecord();
+  datasetTable.disableEvents();
+  datasetTable.setValue("confirmCancel", tableEmployee.isConfirmCancel());
+  datasetTable.setValue("confirmDelete", tableEmployee.isConfirmDelete());
+  datasetTable.setValue("editable", tableEmployee.isEditable());
+  datasetTable.setValue("fixedColumn", tableEmployee.getFixedColumn());
+  datasetTable.setValue("footerHeight", tableEmployee.getFooterHeight());
+  datasetTable.setValue("headerHeight", tableEmployee.getHeaderHeight());
+  datasetTable.setValue("highlightSelection", tableEmployee.isHighlightSelection());
+  datasetTable.setValue("maxRow", tableEmployee.getMaxRow());
+  datasetTable.setValue("readOnly", tableEmployee.isReadOnly());
+  datasetTable.setValue("rowHeight", tableEmployee.getRowHeight());
+  datasetTable.setValue("showFooter", tableEmployee.isReadOnly());
+  datasetTable.setValue("showHeader", tableEmployee.isShowHeader());
+  datasetTable.setValue("scrollMode", tableEmployee.getScrollMode());
+  datasetTable.setValue("showHScrollBar", tableEmployee.isShowHScrollBar());
+  datasetTable.setValue("showIndicator", tableEmployee.isShowIndicator());
+  datasetTable.enableEvents();
+}
+function initDatasetColumn(){
+  var dataset = datasetColumn;
+  
+  dataset.disableEvents();
+  try {
+  
+  		var colCount = tableEmployee.getColumnCount();
+		for (var i = 0; i &lt; colCount; i++) {
+			var column = tableEmployee.getColumn(i);
+			dataset.insertRecord();
+			//dataset.setValue("select", column.isVisible());
+
+			var name = column.getName();
+			dataset.setValue("name", name);
+
+			var label = column.getLabel();
+			if (!label) {
+				var field = datasetEmployee.getField(name);
+				if (field != null) {
+					label = field.getLabel();
+				}
+			}
+			dataset.setValue("label", label);
+			dataset.setValue("align", column.getAlign());
+			dataset.setValue("width", column.getWidth());
+			dataset.setValue("toolTip", column.getToolTip());
+			dataset.setValue("visible", column.isVisible());
+			dataset.setValue("sortable", column.isSortable());
+			dataset.setValue("resizable", column.isResizable());
+			
+			dataset.setValue("rendererType", column.getRendererType());
+			//dataset.setValue("headClickable", column.isHeadClickable());
+			dataset.setValue("footerValue", column.getFooterValue());
+			dataset.setValue("field", column.getField());
+			dataset.postRecord();
+		}
+		dataset.moveFirst();
+
+  }
+  finally {
+    dataset.enableEvents();
+  }
+}</Event>
+	</Events>
+</view>
+

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.skills.table.test.EventsViewViewModel">
+	<Datasets>
+		<Dataset id="datasetEvents" type="Custom" insertOnEmpty="true" listener="sample.skills.table.test.EventsListener">
+			<MasterLink />
+			<Fields>
+				<Field name="event" label="事件" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="parameters" label="参数">
+					<Properties />
+				</Field>
+				<Field name="script" dataType="string" label="事件代码">
+					<Properties />
+				</Field>
+				<Field name="sample">
+					<Properties />
+				</Field>
+				<Field name="remark" label="说明">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters>
+				<Parameter name="eventSet" value="Table" dataType="string" />
+			</Parameters>
+			<Properties />
+			<Events>
+				<Event name="beforeInsert">return new AbortException();</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="datasetColumns" type="Custom" listener="sample.skills.table.test.ColumnsListener" readOnly="true">
+			<MasterLink />
+			<Fields>
+				<Field name="column">
+					<Properties />
+				</Field>
+				<Field name="label" label="列名">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events />
+		</Dataset>
+		<Dataset id="datasetColumnEvents" type="Custom" listener="sample.skills.table.test.ColumnEventsListener">
+			<MasterLink masterDataset="datasetColumns" masterKeyFields="column" detailKeyFields="column" detailKeyParameters="column" />
+			<Fields>
+				<Field name="column">
+					<Properties />
+				</Field>
+				<Field name="label">
+					<Properties />
+				</Field>
+				<Field name="event" label="事件列表" dataType="string" readOnly="true">
+					<Properties />
+				</Field>
+				<Field name="script" dataType="string" label="事件代码">
+					<Properties />
+				</Field>
+				<Field name="parameters">
+					<Properties />
+				</Field>
+				<Field name="sample">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events />
+		</Dataset>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee">
+			<MasterLink />
+			<Fields>
+				<Field name="married" dataType="boolean" label="婚否">
+					<Properties />
+				</Field>
+				<Field name="employee_id" dataType="string" label="工号">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string" label="姓名">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date" format="yyyy年MM月dd日" label="生日">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean" label="性别">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="float" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string" label="网址">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableEvents" type="DataTable" dataset="datasetEvents" height="100%" width="100%" readOnly="true" showHScrollBar="false" showVScrollBar="false" showIndicator="false" showHeader="false">
+			<Column name="event" field="event">
+				<Events>
+					<Event name="onRefresh">cell.innerHTML = value+"("+record.getValue("parameters")+")";
+return false;</Event>
+				</Events>
+			</Column>
+		</Control>
+		<Control id="tableColumns" type="DataTable" dataset="datasetColumns" width="100%" height="100%" showHScrollBar="false" showIndicator="false">
+			<Column name="label" field="label" width="50">
+				<Events />
+			</Column>
+		</Control>
+		<Control id="tableColumnEvents" type="DataTable" dataset="datasetColumnEvents" height="100%" width="100%" showHScrollBar="false" showIndicator="false">
+			<Column name="event" field="event" width="280">
+				<Events>
+					<Event name="onHeaderRefresh">if (datasetColumns.getCurrent()){
+  var label = datasetColumns.getValue("label");
+  cell.innerHTML = "["+label+"]"+value;
+}
+else
+cell.innerHTML = value;
+return false;</Event>
+					<Event name="onRefresh">cell.innerHTML = value+"\n("+record.getValue("parameters")+")";
+return false;</Event>
+				</Events>
+			</Column>
+		</Control>
+		<Control id="buttonAppendEvents1" type="Button" value="保存并预览">
+			<Events>
+				<Event name="onClick">if (datasetEvents.getCurrent()){
+  var event = datasetEvents.getString("event");
+  var parameters = datasetEvents.getString("parameters");
+  var script = datasetEvents.getString("script");
+  if (script.length&gt;0){
+    eval("var func = function("+parameters+"){"+script+"}");
+    EventManager.clearDoradoEvent(tableEmployee, event);
+    EventManager.addDoradoEvent(tableEmployee, event, func);
+  }
+}</Event>
+			</Events>
+		</Control>
+		<Control id="splitpanel1" type="SplitPanel" orientation="horizontal" />
+		<Control id="formEvents" type="AutoForm" dataset="datasetEvents">
+			<FormGroup columnCount="1" name="group1" title="事件代码" showBevel="false">
+				<Element name="script" field="script" type="TextEditor" showLabel="false">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="200" />
+				</Element>
+				<Element name="element1" type="Custom" showLabel="false" controlId="buttonAppendEvents1" controlAlign="center">
+					<FieldLabel />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="formColumnEvents" type="AutoForm" dataset="datasetColumnEvents">
+			<FormGroup columnCount="1" showBevel="false">
+				<Element name="script" field="script" type="TextEditor" showLabel="false">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="200" />
+				</Element>
+				<Element name="element1" type="Custom" showLabel="false" controlId="buttonAppendEvents2" controlAlign="center">
+					<FieldLabel />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="datalabelColumnSample" type="DataLabel" dataset="datasetColumnEvents" field="sample" />
+		<Control id="datalabelSample" type="DataLabel" dataset="datasetEvents" field="sample" />
+		<Control id="outlookBar1" type="OutlookBar" animated="false">
+			<Group name="group1" label="表格事件列表" />
+			<Group name="group2" label="列事件设置" />
+		</Control>
+		<Control id="buttonAppendEvents2" type="Button" value="保存并预览">
+			<Events>
+				<Event name="onClick">if (datasetColumns.getCurrent() &amp;&amp; datasetColumnEvents.getCurrent()){
+  var columnName = datasetColumns.getValue("column");
+  var eventName = datasetColumnEvents.getString("event");
+  var parameters = datasetColumnEvents.getString("parameters");
+  var script = datasetColumnEvents.getString("script");
+  if (script.length&gt;0){
+    eval("var func = function("+parameters+"){"+script+"}");
+    var column = tableEmployee.getColumn(columnName);
+    EventManager.clearDoradoEvent(column, eventName);
+    EventManager.addDoradoEvent(column, eventName, func);
+    
+    switch(eventName){
+      case "onHeaderRefresh ":
+      tableEmployee.refreshHeader();
+      break;
+      case "onFooterRefresh":
+      tableEmployee.refreshFooter();
+      break;
+      case "onRefresh":
+      tableEmployee.refresh();
+      break;
+    }
+  }
+}</Event>
+			</Events>
+		</Control>
+		<Control id="datalabelRemark" type="DataLabel" dataset="datasetEvents" field="remark">
+			<Events>
+				<Event name="onRefresh">label.innerHTML=value;
+return false;</Event>
+			</Events>
+		</Control>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" showDefinedColsOnly="true" width="100%" height="100%" highlightSelection="false">
+			<Column name="married" field="married" rendererType="checkbox" width="40" sortable="false" headerClickable="true">
+				<Events>
+					<Event name="onRefresh">if (record.getValue("married")){
+  row.style.backgroundColor = "#E6E6E6";
+}
+else{
+  row.style.backgroundColor = "white";
+}
+return true;</Event>
+				</Events>
+			</Column>
+			<Column name="employee_name" field="employee_name" width="150" readOnly="true" sortable="false" headerClickable="true">
+				<Events>
+					<Event name="onRefresh">cell.innerText = value + " (" + record.getValue("employee_id") + ")";</Event>
+				</Events>
+			</Column>
+			<Column name="sex" field="sex" dropDown="dropdownSex" align="center" width="70" editorType="radiogroup" sortable="false" headerClickable="true">
+				<Events>
+					<Event name="onRefresh">if (record.getValue("sex")){
+  cell.innerHTML = "&lt;img src='../../../images/man.gif'&gt;";
+}
+else{
+  cell.innerHTML = "&lt;img src='../../../images/woman.gif'&gt;";
+}</Event>
+				</Events>
+			</Column>
+			<Column name="birthday" field="birthday" width="110" sortable="false" headerClickable="true" />
+			<Column name="salary" field="salary" width="150" sortable="false" headerClickable="true">
+				<Events>
+					<Event name="onRefresh">var salary = record.getValue("salary");;
+if (salary &gt; 4000) {
+  cell.style.color="red";
+  cell.style.fontWeight="bold";
+}
+else {
+  cell.style.color="";
+  cell.style.fontWeight="";
+}
+cell.innerText = "$ " + value + " /month";</Event>
+				</Events>
+			</Column>
+			<Column name="web" field="web" readOnly="true" width="160" sortable="false" headerClickable="true">
+				<Events>
+					<Event name="onRefresh">cell.innerHTML = "&lt;a href='http://" + value + "' target='_blank'&gt;" + value + "&lt;/a &gt;";</Event>
+				</Events>
+			</Column>
+			<Column name="operation" label="操作" align="center" readOnly="true" width="180">
+				<Events>
+					<Event name="onRefresh">var html = "&lt;button onclick=\"raiseSalary(1000);\" style=\"border-width:1px\"&gt;加薪(+)&lt;/button&gt;&amp;nbsp;" +
+  "&lt;button onclick=\"raiseSalary(-1000);\" style=\"border-width:1px\"&gt;减薪(-)&lt;/button&gt;";
+cell.innerHTML = html;
+cell.record = record;</Event>
+				</Events>
+			</Column>
+			<Events />
+		</Control>
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">function raiseSalary(adjust) {
+  var record = event.srcElement.parentElement.record;
+  datasetEmployee.setCurrent(record);
+  datasetEmployee.setValue("salary", datasetEmployee.getValue("salary") + adjust);
+}</Event>
+	</Events>
+</view>
+

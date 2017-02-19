@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetBranch" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="BRANCH">
+			<Joins />
+			<Fields>
+				<Field name="BRANCH_ID" originField="BRANCH_ID" table="BRANCH" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="BRANCH_NAME" originField="BRANCH_NAME" table="BRANCH" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDept" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="DEPT">
+			<Joins />
+			<Fields>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="BRANCH_ID" originField="BRANCH_ID" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":branch_id" escapeEnabled="false" table="DEPT" originField="BRANCH_ID" operator="=" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tree1" type="DataTree" width="100%" height="100%">
+			<TreeLevel name="levelBranch" type="Simple" dataset="datasetBranch" labelField="BRANCH_NAME">
+				<TreeLevel name="levelDept" type="Simple" dataset="datasetDept" masterKeyFields="branch_id" detailKeyParameters="branch_id" labelField="DEPT_NAME" hasChild="false" />
+			</TreeLevel>
+			<Events>
+				<Event name="onDblClick">var node = tree.getCurrentNode();
+if(node){
+  if(node.getTreeLevel().getName()=='levelDept'){
+    var dept = node.getRecord();
+    DropDown.closeFrame(dept);
+  }
+}</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

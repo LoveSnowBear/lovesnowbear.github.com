@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets />
+	<Controls>
+		<Control id="treeNav" type="Tree" width="100%" height="100%">
+			<Events>
+				<Event name="onDblClick">var path = tree.getCurrentNode().getPath();
+if(path){
+  openPage(__CONTEXT_PATH + path);
+}</Event>
+				<Event name="onClick">return false;</Event>
+				<Event name="onInitNode">if(node.isHasChild()){
+  node.setIcon(__CONTEXT_PATH + "/images/folder-closed.gif");
+  node.setExpandedIcon(__CONTEXT_PATH + "/images/folder-opened.gif");
+}else{
+  node.setIcon(__CONTEXT_PATH + "/images/star.gif");
+  node.setExpandedIcon(__CONTEXT_PATH + "/images/star.gif");
+}</Event>
+			</Events>
+			<TreeNode label="数据查询场景">
+				<TreeNode label="简单查询" path="/skills/data/query.jsp" />
+				<TreeNode label="使用Tabset将查询条件分组" path="/scene/query/tabsetquery.jsp" />
+				<TreeNode label="查询条件隐藏，使用快捷键呼叫出来" path="/scene/query/hiddenquery.jsp" />
+				<TreeNode label="将查询结果在树节点中的定位" path="/scene/query/tree-query.jsp" />
+				<TreeNode label="主从（联动）显示">
+					<TreeNode label=" 表格+表格" path="/scene/query/masterlink/tabletable.jsp" />
+					<TreeNode label=" 树+表格" path="/skills/tree/nav-tree.jsp" />
+					<TreeNode label="表格+AutoForm" path="/scene/query/masterlink/tableform.jsp" />
+				</TreeNode>
+			</TreeNode>
+			<TreeNode label="数据维护场景">
+				<TreeNode label="单条记录的维护（利用联动的AutoForm）" path="/scene/submit/simple-record1.jsp" />
+				<TreeNode label="单条记录的维护（利用弹出的AutoForm）" path="/scene/submit/simple-record2.jsp" />
+				<TreeNode label="批量数据维护（利用可编辑的DataTable）" path="/scene/submit/mutiple-record.jsp" />
+				<TreeNode label="主从表提交" path="/skills/data/master-detail2.jsp" />
+				<TreeNode label="根据业务主键自动填写完整信息" path="/scene/submit/info-datatable.jsp" />
+				<TreeNode label="提交并记录日志" path="/skills/data/update.jsp" />
+				<TreeNode label="利用Excel批量数据导入" path="/scene/submit/excel-import.jsp" />
+			</TreeNode>
+			<TreeNode label="数据校验">
+				<TreeNode label="简单校验器" path="/scene/validate/simpleValidate.jsp" />
+				<TreeNode label="正则表达式校验" path="/scene/validate/patternValidate.jsp" />
+				<TreeNode label="唯一性校验" path="/scene/validate/uniqueValidateByDataset.jsp" />
+				<TreeNode label="自定义校验器" path="/scene/validate/customValidator.jsp" />
+			</TreeNode>
+			<TreeNode label="数据录入">
+				<TreeNode label="录入辅助（Dropdown展示）" path="/scene/input/input-assist/input-assist.jsp" />
+				<TreeNode label="自动过滤Dropdown" path="/scene/input/filter-dropdown.jsp" />
+			</TreeNode>
+			<TreeNode label="文件上传">
+				<TreeNode label="单文件上传" path="/scene/upload/simpleUpload/uploadDemo.jsp" />
+				<TreeNode label="多文件上传" path="/scene/upload/multiUpload1/uploadDemo.jsp" />
+				<TreeNode label="带进度条的上传" path="/scene/upload/multiUpload2/uploadDemo.jsp" />
+			</TreeNode>
+		</Control>
+		<Control id="spMain" type="SplitPanel" orientation="horizontal" position="200" width="100%" height="100%" />
+	</Controls>
+	<Properties />
+</view>
+

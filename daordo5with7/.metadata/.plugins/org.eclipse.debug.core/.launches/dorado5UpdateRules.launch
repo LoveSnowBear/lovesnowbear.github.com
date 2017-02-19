@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.bstek.ide.launching.doradoLaunchDelegate">
+<booleanAttribute key="org.eclipse.debug.ui.private" value="true"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.bstek.dorado.idesupport.StandaloneRuleSetExporter"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="&quot;H:\daordo5with7\dorado5\.rules&quot; &quot;file:H:/daordo5with7/dorado5/web/WEB-INF/dorado-home&quot;"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="dorado5"/>
+<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="H:/daordo5with7/dorado5"/>
+</launchConfiguration>

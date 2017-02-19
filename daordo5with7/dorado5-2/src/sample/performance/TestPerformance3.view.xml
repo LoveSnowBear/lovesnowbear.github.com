@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.performance.TestPerformance3">
+	<Datasets>
+		<Dataset id="dataset1" type="Custom">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date" format="yyyy年MM月dd日">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="dataset2" type="Custom">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date" format="yyyy年MM月dd日">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+		<Control id="table1" type="DataTable" dataset="dataset1" height="100%" confirmDelete="false" confirmCancel="false" />
+		<Control id="table2" type="DataTable" dataset="dataset2" height="100%" confirmDelete="false" confirmCancel="false" />
+		<Control id="buttonCopy" type="Button" value="复制1000条记录 (可避免重复添加)">
+			<Events>
+				<Event name="onClick">var startTime = new Date();
+
+dataset2.disableControls();
+var keyMap = new Object();  // 用于避免记录重复插入的对象，作用类似域哈希表
+var record = dataset2.getFirstRecord();
+while (record) {
+  keyMap[record.getString("employee_id")] = true;
+  record = record.getNextRecord();
+}
+
+var records = new Array();
+var record = dataset1.getFirstRecord();
+while (record != null) {
+  if (!keyMap[record.getString("employee_id")]) {
+    var newRecord = new Record(dataset2);
+    newRecord.copyRecord(record);
+    records.push(newRecord);
+  }
+  record = record.getNextRecord();
+}
+dataset2.enableControls();
+dataset2.insertRecords(records);  // 批量添加记录
+
+var endTime = new Date();
+alert("复制完成！\n" +
+  "已添加了" + records.length + "条记录，\n" +
+  "共耗时:" + (endTime.getTime() - startTime.getTime()) / 1000 + "秒。");</Event>
+			</Events>
+		</Control>
+		<Control id="buttonDelete" type="Button" value="删除右侧表格中50%的记录">
+			<Events>
+				<Event name="onClick">if (!dataset2.getCurrent()) return;
+
+var startTime = new Date();
+
+var count = 0;
+dataset2.disableControls();
+try {
+  dataset2.moveFirst();
+  while (!dataset2.isLast()) {
+    dataset2.deleteRecord();
+    count ++;
+    dataset2.moveNext();
+  }
+}
+finally {
+  dataset2.enableControls();
+  dataset2.refreshControls();
+}
+
+var endTime = new Date();
+alert("操作完成！\n" +
+  "已删除了" + count + "条记录，\n" +
+  "共耗时:" + (endTime.getTime() - startTime.getTime()) / 1000 + "秒。");</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+	<Events />
+</view>
+

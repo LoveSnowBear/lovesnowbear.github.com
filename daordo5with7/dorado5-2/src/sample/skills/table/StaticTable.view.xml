@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee" noClient="true">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableEmployee" type="StaticTable" dataset="datasetEmployee" width="100%" height="100%">
+			<Column name="employee_name" field="employee_name" pattern="record.getString(&quot;employee_name&quot;)+&quot; (&quot;+record.getString(&quot;employee_id&quot;)+&quot;)&quot;" />
+			<Column name="dept_id" field="dept_id" noWrap="true" />
+			<Column name="sex" field="sex" pattern="Util.switchValue(record.getBoolean(&quot;sex&quot;),Resource.hr.male,Resource.hr.female)" width="60" />
+			<ColumnGroup name="group1" label="组合列1">
+				<Column name="birthday" field="birthday" width="120" />
+				<Column name="salary" field="salary" pattern="&quot;&lt;label &quot;+Util.switchValue(record.getFloat(&quot;salary&quot;)&gt;4000,&quot;style='color:red'&quot;,&quot;&quot;)+&quot;&gt;$&quot;+record.getFloat(&quot;salary&quot;)+&quot;&lt;/label&gt;&quot;" width="80" />
+				<ColumnGroup name="group2" label="组合列2">
+					<Column name="married" field="married" width="60" />
+					<Column name="degree" field="degree" width="60" />
+				</ColumnGroup>
+			</ColumnGroup>
+			<Column name="email" field="email" pattern="&quot;&lt;a href='mailto:&quot;+record.getString(&quot;email&quot;)+&quot;'&gt;&quot;+record.getString(&quot;email&quot;)+&quot;&lt;/a&gt;&quot;" />
+			<Column name="web" field="web" pattern="&quot;&lt;a href='http://&quot;+record.getString(&quot;web&quot;)+&quot;'&gt;&quot;+record.getString(&quot;web&quot;)+&quot;&lt;/a&gt;&quot;" />
+			<Column name="cmnt" field="cmnt" />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

@@ -1,0 +1,98 @@
+body
+{
+font-family: verdana;
+font-size: 9pt;
+margin: 3px;
+scrollbar-3dlight-color: C5D9E8;
+scrollbar-arrow-color: black;
+scrollbar-darkshadow-color: white;
+scrollbar-face-color: #EDF2F6;
+scrollbar-highlight-color: #F8F7F9;
+scrollbar-shadow-color: C5D9E8;
+}
+
+a
+{
+font-family: verdana;
+color: blue;
+}
+
+a:visited
+{
+font-family: verdana;
+color: navy;
+}
+
+table
+{
+font-family: verdana;
+font-size: 9pt;
+}
+
+form
+{
+margin: 0px;
+}
+
+input
+{
+font-family: verdana;
+font-size: 9pt;
+}
+
+hr
+{
+border-style: dotted;
+border-width: 1px;
+border-color: gray;
+margin: 0px;
+height: 0;
+}
+
+p
+{
+margin-top: 5px;
+margin-bottom: 5px;
+margin-left: 0px;
+margin-right: 0px;
+}
+
+.input
+{
+font-family: verdana;
+font-size: 9pt;
+border: 1px solid gray;
+}
+
+.table
+{
+font-family: verdana;
+font-size: 9pt;
+border-collapse: collapse;
+}
+
+.page_header
+{
+background-color: #A0A0A0;
+color: white;
+font-family: verdana;
+font-size: 9pt;
+font-weight: bold;
+}
+
+.sub_title1
+{
+font-family: verdana;
+font-size: 9pt;
+font-weight: bold;
+}
+
+.hint
+{
+border-width: 1px;
+border-color: #caa700;
+border-style: solid;
+background-color: #ffffa2;
+padding: 4;
+margin: 0;
+}

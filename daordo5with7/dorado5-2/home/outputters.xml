@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<elements>
+	<element clazz="com.bstek.dorado.view.data.validate.impl.CustomValidator">
+		<outputter type="smartweb2" clazz="sample.scene.validate.custom.CustomValidatorOutputter" />
+	</element>
+	<element clazz="sample.scene.validate.custom.MailValidator">
+		<outputter type="smartweb2" clazz="sample.scene.validate.custom.MailValidatorOutputter" />
+	</element>
+</elements>

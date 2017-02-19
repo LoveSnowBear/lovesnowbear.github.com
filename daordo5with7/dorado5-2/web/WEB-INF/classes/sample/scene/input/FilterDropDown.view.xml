@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="dsForm1" type="Form" insertOnEmpty="true">
+			<MasterLink />
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="员工编号" dropDown="ddEmployee1_id">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="姓名" dropDown="ddEmployee1_name">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false" label="部门" dropDown="ddDept1" toolTip="手动过滤DropDown(点击Enter键查询)">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" label="性别" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="dsTable1" type="Custom" insertOnEmpty="true">
+			<MasterLink />
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="员工编号" dropDown="ddEmployee1_id_name">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="姓名" dropDown="ddEmployee1_id_name">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" label="性别" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false" label="部门" dropDown="ddDept1">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="dsForm2" type="Form" insertOnEmpty="true">
+			<MasterLink />
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="员工编号" dropDown="ddEmployee2_id">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="姓名" dropDown="ddEmployee2_name">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false" label="部门" dropDown="ddDept1" toolTip="手动过滤DropDown(点击Enter键查询)">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" label="性别" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="dsTable2" type="Custom" insertOnEmpty="true">
+			<MasterLink />
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="员工编号" dropDown="ddEmployee2_id">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="姓名" dropDown="ddEmployee2_name">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" label="性别" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false" label="部门" dropDown="ddDept2">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="dsEmployee1_id_dic" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="EMPLOYEE" autoLoadData="false" pageSize="20">
+			<Joins>
+				<Join name="DEPT" originTable="DEPT" keyFields="DEPT_ID" sourceTable="EMPLOYEE" sourceKeyFields="DEPT_ID" />
+			</Joins>
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="员工编号">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="姓名">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" label="性别" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":employee_id" escapeEnabled="true" table="EMPLOYEE" originField="EMPLOYEE_ID" operator="like" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters>
+				<Parameter name="employee_id" />
+			</Parameters>
+			<Properties />
+			<Events>
+				<Event name="beforeFlushData">Debugger.log(dataset.parameters() +"\n");</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="dsEmployee1_name_dic" type="Wrapper" dataSource="doradosample" originTable="EMPLOYEE" autoLoadData="false" pageSize="20" wrappedType="AutoSql">
+			<Joins>
+				<Join name="DEPT" originTable="DEPT" keyFields="DEPT_ID" sourceTable="EMPLOYEE" sourceKeyFields="DEPT_ID" />
+			</Joins>
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="员工编号">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="姓名">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" label="性别" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":employee_name" escapeEnabled="true" table="EMPLOYEE" originField="EMPLOYEE_NAME" operator="like" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters>
+				<Parameter name="employee_name" />
+			</Parameters>
+			<Properties />
+			<Events>
+				<Event name="beforeFlushData">Debugger.log(dataset.parameters() +"\n");</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="dsEmployee1_id_name_dic" type="Wrapper" dataSource="doradosample" originTable="EMPLOYEE" autoLoadData="false" pageSize="20" wrappedType="AutoSql">
+			<Joins>
+				<Join name="DEPT" originTable="DEPT" keyFields="DEPT_ID" sourceTable="EMPLOYEE" sourceKeyFields="DEPT_ID" />
+			</Joins>
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="员工编号">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="姓名">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" label="性别" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":employee_id" escapeEnabled="true" table="EMPLOYEE" originField="EMPLOYEE_ID" operator="like" />
+				<MatchRule level="1" dataType="string" value=":employee_name" escapeEnabled="true" table="EMPLOYEE" originField="EMPLOYEE_NAME" operator="like" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="beforeFlushData">Debugger.log(dataset.parameters() +"\n");</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="dsEmployee2_name_dic" type="Wrapper" dataSource="doradosample" originTable="EMPLOYEE" autoLoadData="false" pageSize="20" wrappedType="AutoSql">
+			<Joins>
+				<Join name="DEPT" originTable="DEPT" keyFields="DEPT_ID" sourceTable="EMPLOYEE" sourceKeyFields="DEPT_ID" />
+			</Joins>
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="员工编号">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="姓名">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" label="性别" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":employee_name" escapeEnabled="true" table="EMPLOYEE" originField="EMPLOYEE_NAME" operator="like" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="beforeFlushData">Debugger.log(dataset.parameters() +"\n");</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="dsEmployee2_id_dic" type="Wrapper" dataSource="doradosample" originTable="EMPLOYEE" autoLoadData="false" wrappedType="AutoSql" pageSize="20">
+			<Joins>
+				<Join name="DEPT" originTable="DEPT" keyFields="DEPT_ID" sourceTable="EMPLOYEE" sourceKeyFields="DEPT_ID" />
+			</Joins>
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="员工编号">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="姓名">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" label="性别" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":employee_id" escapeEnabled="true" table="EMPLOYEE" originField="EMPLOYEE_ID" operator="like" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="beforeFlushData">Debugger.log(dataset.parameters() +"\n");</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="datasetDept1_dic" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="DEPT" autoLoadData="false" pageSize="20">
+			<Joins />
+			<Fields>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":dept_name" escapeEnabled="true" table="DEPT" originField="DEPT_NAME" operator="like" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDept2_dic" type="Wrapper" dataSource="doradosample" originTable="DEPT" autoLoadData="false" pageSize="20" wrappedType="AutoSql">
+			<Joins />
+			<Fields>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":dept_name" escapeEnabled="true" table="DEPT" originField="DEPT_NAME" operator="like" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tabset1" type="TabSet">
+			<Tab name="tab1" label="自动过滤" />
+			<Tab name="tab2" label="简单过滤" />
+		</Control>
+		<Control id="form1" type="AutoForm" dataset="dsForm1" groupType="subwindow" firstGroupAsHeader="true">
+			<FormGroup name="group0" labelWidth="65">
+				<Element name="EMPLOYEE_ID" field="EMPLOYEE_ID" type="TextEditor">
+					<FieldLabel />
+					<TextEditor>
+						<Events>
+							<Event name="onActive">(new AutoCompleteEditor(editor, "employee_id")).init();</Event>
+						</Events>
+					</TextEditor>
+				</Element>
+				<Element name="EMPLOYEE_NAME" field="EMPLOYEE_NAME" type="TextEditor">
+					<FieldLabel />
+					<TextEditor>
+						<Events>
+							<Event name="onActive">(new AutoCompleteEditor(editor, "employee_name")).init();</Event>
+						</Events>
+					</TextEditor>
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="table1" type="DataTable" dataset="dsTable1" width="100%" showHScrollBar="false" height="100%">
+			<ColumnGroup name="group1" label="自动过滤">
+				<Column name="EMPLOYEE_ID" field="EMPLOYEE_ID">
+					<Events>
+						<Event name="onGetCellEditor">(new AutoCompleteEditor(editor, "employee_id")).init();
+return editor;</Event>
+					</Events>
+				</Column>
+				<Column name="EMPLOYEE_NAME" field="EMPLOYEE_NAME">
+					<Events>
+						<Event name="onGetCellEditor">var filterEditor = (new AutoCompleteEditor(editor, "employee_name"));
+filterEditor.getFilterValue = function(){
+  return this.editor.value.toUpperCase() + "%";
+};
+filterEditor.init();
+
+return editor;</Event>
+					</Events>
+				</Column>
+				<Column name="DEPT_NAME" field="DEPT_NAME">
+					<Events>
+						<Event name="onGetCellEditor">(new AutoCompleteEditor(editor, "dept_name")).init();
+return editor;</Event>
+					</Events>
+				</Column>
+			</ColumnGroup>
+			<Column name="SEX" field="SEX" />
+			<Column name="SALARY" field="SALARY" />
+			<Column name="DEGREE" field="DEGREE" />
+		</Control>
+		<Control id="ddEmployee1_id" type="DatasetDropDown" dataset="dsEmployee1_id_dic" visibleFields="EMPLOYEE_ID,EMPLOYEE_NAME" readFields="EMPLOYEE_ID,EMPLOYEE_NAME" writeFields="EMPLOYEE_ID,EMPLOYEE_NAME" tag="|100">
+			<Events />
+		</Control>
+		<Control id="ddEmployee1_name" type="DatasetDropDown" dataset="dsEmployee1_name_dic" readFields="EMPLOYEE_ID,EMPLOYEE_NAME" visibleFields="EMPLOYEE_ID,EMPLOYEE_NAME" writeFields="EMPLOYEE_ID,EMPLOYEE_NAME" tag="|100" />
+		<Control id="ddEmployee1_id_name" type="DatasetDropDown" dataset="dsEmployee1_id_name_dic" visibleFields="EMPLOYEE_ID,EMPLOYEE_NAME" readFields="EMPLOYEE_ID,EMPLOYEE_NAME" writeFields="EMPLOYEE_ID,EMPLOYEE_NAME" width="300" tag="|100">
+			<Events />
+		</Control>
+		<Control id="ddEmployee2_id" type="DatasetDropDown" dataset="dsEmployee2_id_dic" readFields="EMPLOYEE_ID,EMPLOYEE_NAME" visibleFields="EMPLOYEE_ID,EMPLOYEE_NAME" writeFields="EMPLOYEE_ID,EMPLOYEE_NAME" width="260" />
+		<Control id="ddEmployee2_name" type="DatasetDropDown" dataset="dsEmployee2_name_dic" visibleFields="EMPLOYEE_ID,EMPLOYEE_NAME" readFields="EMPLOYEE_ID,EMPLOYEE_NAME" writeFields="EMPLOYEE_ID,EMPLOYEE_NAME" width="260">
+			<Events />
+		</Control>
+		<Control id="form2" type="AutoForm" dataset="dsForm2" groupType="subwindow" firstGroupAsHeader="true">
+			<FormGroup name="group0" labelWidth="65">
+				<Element name="EMPLOYEE_ID" field="EMPLOYEE_ID" type="TextEditor">
+					<FieldLabel />
+					<TextEditor>
+						<Events>
+							<Event name="onActive">(new FilterEditor(editor, "employee_id")).init();</Event>
+						</Events>
+					</TextEditor>
+				</Element>
+				<Element name="EMPLOYEE_NAME" field="EMPLOYEE_NAME" type="TextEditor">
+					<FieldLabel />
+					<TextEditor>
+						<Events>
+							<Event name="onActive">(new FilterEditor(editor, "employee_name")).init();</Event>
+						</Events>
+					</TextEditor>
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="table2" type="DataTable" dataset="dsTable2" width="100%" showHScrollBar="false" height="100%">
+			<ColumnGroup name="group1" label="简单过滤" toolTip="使用Enter键才会出现下拉选项">
+				<Column name="EMPLOYEE_ID" field="EMPLOYEE_ID">
+					<Events>
+						<Event name="onGetCellEditor">(new FilterEditor(editor, "employee_id")).init();
+return editor;</Event>
+					</Events>
+				</Column>
+				<Column name="EMPLOYEE_NAME" field="EMPLOYEE_NAME">
+					<Events>
+						<Event name="onGetCellEditor">var filterEditor = (new FilterEditor(editor, "employee_name"));
+filterEditor.getFilterValue = function(){
+  return this.editor.value.toUpperCase() + "%";
+};
+filterEditor.init();
+
+return editor;</Event>
+					</Events>
+				</Column>
+				<Column name="DEPT_NAME" field="DEPT_NAME">
+					<Events>
+						<Event name="onGetCellEditor">(new FilterEditor(editor, "dept_name")).init();
+return editor;</Event>
+					</Events>
+				</Column>
+			</ColumnGroup>
+			<Column name="SEX" field="SEX" />
+			<Column name="SALARY" field="SALARY" />
+			<Column name="DEGREE" field="DEGREE" />
+		</Control>
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true" fixed="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+		<Control id="ddDept1" type="DatasetDropDown" dataset="datasetDept1_dic" writeFields="DEPT_ID,DEPT_NAME" readFields="DEPT_ID,DEPT_NAME" visibleFields="DEPT_NAME" />
+		<Control id="ddDept2" type="DatasetDropDown" dataset="datasetDept1_dic" writeFields="DEPT_ID,DEPT_NAME" readFields="DEPT_ID,DEPT_NAME" visibleFields="DEPT_NAME" />
+		<Control id="buttonInsert1" type="Button" value="插入一行">
+			<Events>
+				<Event name="onClick">dsTable1.insertRecord();</Event>
+			</Events>
+		</Control>
+		<Control id="buttonInsert2" type="Button" value="插入一行">
+			<Events>
+				<Event name="onClick">dsTable2.insertRecord();</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">/**
+ * 根据AutoForm的id,字段的name得到AutoForm的编辑框的id
+ * @param {String} form_id
+ * @param {String} field_name
+ * @return {Editor}
+ */
+function getFormFieldEditor(form_id, field_name){
+   return document.getElementById(form_id + "_" + "editor" + "_" + field_name);
+};
+//----------------------------AutoCompleteEditor----------------------------
+/**
+ * @class AutoCompleteEditor 自动完成的编辑框
+ * @param {Editor} editor 编辑框
+ * @param {String} paramName 参数名，Dataset的参数名，该参数接收editor中的值
+ */
+function AutoCompleteEditor(editor,paramName){
+  this.editor = editor;
+  this.paramName = paramName;
+};
+AutoCompleteEditor.prototype={
+  /**
+   * 由editor传递给Dataset过滤参数的值
+   * @return {String}
+   */
+  getFilterValue:function(){
+    return "%" + this.editor.value.toUpperCase() + "%";
+  },
+  /**
+   * 初始化动作
+   */
+  init:function(){
+    this.__Init_Editor();//初始化editor
+    this.__Init_DropDown();//初始化dropdown
+  },
+  __Init_Editor:function(){
+    var wrappedEditor = this;
+    var editor = wrappedEditor.editor;
+    var dropdown = editor.getDropDown();
+    
+    if(!editor.$$wrap_init_flag){
+      editor.$$wrappedEditor = wrappedEditor;
+      EventManager.addSystemEvent(editor, "onfocus",
+        function(evt){
+          Debugger.log("onfocus");
+          evt = evt||window.event;
+          wrappedEditor.__Start_Auto_Query();
+          if(evt.stopPropagation){
+              evt.stopPropagation();
+          }else{
+              evt.cancelBubble=true;
+          }
+        }
+      );
+      EventManager.addSystemEvent(editor, "onblur",
+        function(evt){
+            Debugger.log("onblur");
+            evt = evt||window.event;
+            wrappedEditor.__Stop_Auto_Query();
+        }
+      );
+      EventManager.addSystemEvent(editor, "onkeydown",
+        function(evt){
+          evt = evt||window.event;
+          if(evt.keyCode == 13) {
+            var wrappedEditor = editor.$$wrappedEditor;
+            var dropdown = editor.getDropDown();
+            if(dropdown.isOpened()){
+              wrappedEditor.__SecondQuery_OR_ConfirmResult("ConfirmResult");
+              wrappedEditor.__Stop_Auto_Query();
+              wrappedEditor.__Async_Parameter_Value();
+              wrappedEditor.__Start_Auto_Query();
+              if(evt.stopPropagation){
+                evt.stopPropagation();
+              }else{
+                evt.cancelBubble=true;
+              }
+            }
+          }
+        }
+      );
+      editor.$$wrap_init_flag = true;
+    }
+  },
+  //停止自动查询
+  __Stop_Auto_Query:function(){
+      Debugger.log("__Stop_Auto_Query");
+      var wrappedEditor = this;
+      wrappedEditor.$$doing_auto_complete = false;
+      window.clearInterval(wrappedEditor.$$auto_complete_timer);
+  },
+  //启动自动查询
+  __Start_Auto_Query:function(){
+      Debugger.log("__Start_Auto_Query");
+      this.__Stop_Auto_Query();
+      var wrappedEditor = this;
+      var dropdown = wrappedEditor.editor.getDropDown();
+      wrappedEditor.$$doing_auto_complete = true;
+      wrappedEditor.$$old_value = wrappedEditor.editor.value;
+      wrappedEditor.$$auto_complete_timer = window.setInterval(
+        function(){
+              //debugger;
+              Debugger.log("$$auto_complete_timer");
+              if(!wrappedEditor.$$doing_auto_complete){return;}
+              if(!dropdown.isOpened()){
+                  if(wrappedEditor.__CheckQueryCondition()){
+                    var editor = wrappedEditor.editor;
+                    editor.getDropDown().open(editor);
+                  };
+              }else{
+                  var newValue = wrappedEditor.editor.value;
+                  if(wrappedEditor.$$old_value == newValue){
+                    Debugger.log("[CheckQuery]"+wrappedEditor.$$old_value+";"+newValue);
+                    wrappedEditor.__CheckQuery();
+                  }else{
+                    Debugger.log("[NewValue]"+newValue);
+                    wrappedEditor.$$old_value = newValue;
+                  }
+              }
+        },400);
+  },
+  __CheckQueryCondition:function(){
+    var paramName = this.paramName;
+    var dd = this.editor.getDropDown();
+    var ds = dd.getDataset();
+    var ps = ds.parameters();
+    var filterValue = this.getFilterValue();
+    return (filterValue != ps.getValue(paramName));
+  },
+  __CheckQuery:function(){
+    var paramName = this.paramName;
+    var dd = this.editor.getDropDown();
+    var ds = dd.getDataset();
+    var ps = ds.parameters();
+    var filterValue = this.getFilterValue();
+    if(filterValue != ps.getValue(paramName)){
+      ps.clear();
+      ps.setValue(paramName,filterValue);
+      ds.clearData();
+      ds.flushData();  
+    }
+  },
+  __SecondQuery_OR_ConfirmResult:function(actionFlag){
+    var paramName = this.paramName;
+    var dd = this.editor.getDropDown();
+    var ds = dd.getDataset();
+    var ps = ds.parameters();
+    var filterValue = this.getFilterValue();
+    
+    if("EnforceQuery" == actionFlag || filterValue != ps.getValue(paramName)){
+      ps.clear();
+      ps.setValue(paramName,filterValue);
+      ds.clearData();
+      ds.flushData();  
+    }else{
+      dd.close( ds.getCurrent() );
+    }
+  },
+  __Async_Parameter_Value:function(){
+    var paramName = this.paramName;
+    var dd = this.editor.getDropDown();
+    var ds = dd.getDataset();
+    var ps = ds.parameters();
+    var filterValue = this.getFilterValue();
+    
+    ps.setValue(paramName,filterValue);
+  },
+  __Init_DropDown:function(){
+    var dropdown = this.editor.getDropDown();
+    if(!dropdown.$$filter_init_flag){
+        EventManager.addDoradoEvent(dropdown, "beforeOpen", 
+          this.__DropDown_BeforeOpen
+        );
+        dropdown.$$filter_init_flag == true;
+    }
+  },
+  __DropDown_BeforeOpen:function(dropdown, editor){
+    var wrappedEditor = editor.$$wrappedEditor;
+    var filterValue = wrappedEditor.getFilterValue();
+    var paramName = wrappedEditor.paramName;
+    var ds = dropdown.getDataset();
+    var ps = ds.parameters();
+    
+    if(filterValue != ps.getValue(paramName)){
+      ps.clear();
+      ps.setValue(paramName, filterValue);
+      ds.clearData();
+      ds.flushData();
+    }
+  }
+};
+
+
+/////////////////////////////////////FilterEditor//////////////////////////////////////////
+/**
+ * 0.模仿DynamicDropDown的功能
+ * 1.editor作为过滤条件的编辑框
+ * 2.如果dropdown是close状态，editor回车时打开editor的dropdown
+ * 3.dropdown打开时根据editor.value作为过滤条件显示结果
+ * 4.如果dropdown是open状态，editor可以输入新的查询条件
+ * 5.如果dropdown是open状态，editor回车时检查，
+ * 6.如果本次过滤条件与上次相同认为是用户已经选择了一条查询结果，dropdown.close()
+ * 7.否则认为用户执行新的查询操作，显示新的查询结果
+ *
+ * @param Editor editor    编辑框
+ * @param String paramName 参数名称，
+ *        即标明editor的内容被放到dropdown.dataset的那个parameter中
+ * @version 1.2
+ * @since 20071017 10:35
+ * 说明：
+ *   1.目前是按照DatasetDropDown考虑的                [1.0]
+ *   2.按照通常的配置将dropdown绑定到dataset.filed上   [1.0]
+ *   3.设置dropdown的fixed=false,autoDropDown=false  [1.0]
+ *   4.坚持只有一个parameter有效的原则,在每次dataset.flushData()前清空parameters(),
+ *     然后在设置parameters().setValue(... , ...); [1.1]
+ *   5.手动设置Dataset.autoLoadPage=true;支持数据的分页加载，所以在dataset.flushData();前
+ *     做了dataset.clearData();但是目前DatasetDropDown的DataTable的显示有一个Bug:
+ *     不是所有的时候都显示VScrollBar，导致DataTable过高，影响显示。[1.2]
+ *   6.去掉了内部的onSelect事件__Default_OnSelect。[1.2]
+ *   7.重写了__SecondQuery_OR_ConfirmResult，支持在DropDown打开的时候使用shift+enter键
+ *     强制查询，不论前一次的查询条件是否与本次的相同；否则enter键的动作会根据本次和前一次的查询
+ *     条件是否相同决定执行第二次查询还是返回查询结果。[1.2]
+ * 使用:
+ *   1.特定的editor,比如AutoForm中的editor:
+ *     var employeeIdEditor = getFormFieldEditor("form1", "EMPLOYEE_ID");
+ *     (new FilterEditor(employeeIdEditor, "employee_id")).init();
+ *   2.DataTable的Cell中的editor:
+ *     在DataTable.Column的onGetCellEditor事件中：
+ *     (new FilterEditor(editor, "employee_id")).init();
+ *     return editor;
+ * 注：
+ *   1.此时不应该有DropDown的mapValue=true
+ */
+function FilterEditor(editor, paramName){
+  this.editor = editor;
+  this.paramName = paramName
+};
+/**
+ * FilterEditor的初始化函数
+ * @param Editor editor
+ * @param String paramName
+ */
+FilterEditor.prototype.init = function(){
+  this.__Init_Editor();//初始化editor
+  this.__Init_DropDown();//初始化dropdown
+};
+/**
+ * 根据editor得到过滤参数，允许被重写
+ */
+FilterEditor.prototype.getFilterValue = function(){
+  return "%" + this.editor.value.toUpperCase() + "%";
+};
+/**
+ * 初始化editor，并保证editor这能进行一次这样的初始化
+ * 注意:
+ *   1.为editor添加事件时，没有引用外层变量，这是因为引起过bug。
+ *     而是使用闭包引入其他变量
+ *   2.设置初始化标志
+ *   3.使用闭包将filterEditor赋值给editor.$$filtereditor
+ *   4.editor的onkeydown事件
+ */
+FilterEditor.prototype.__Init_Editor = function(){
+  var filterEditor = this;
+  var editor = filterEditor.editor;
+  var dropdown = editor.getDropDown();
+  
+  if(!editor.$$filter_init_flag){
+    //@1.使用闭包将filterEditor赋值给editor.$$filtereditor
+    editor.$$filtereditor = filterEditor;
+    //@2.editor的onkeydown事件
+    EventManager.addSystemEvent( editor, "onkeydown",
+      function(evt){
+          evt = evt||window.event;
+          var filterEditor = editor.$$filtereditor;
+          if(evt.keyCode == 13) {
+              if(!dropdown.isOpened()){
+                  filterEditor.__FirstQuery();
+              }else if(evt.shiftKey){
+                  filterEditor.__SecondQuery_OR_ConfirmResult("SecondQuery");
+              }else{
+                  filterEditor.__SecondQuery_OR_ConfirmResult();
+              }
+              if(evt.stopPropagation){
+                  evt.stopPropagation();
+              }else{
+                  evt.cancelBubble=true;
+              }
+          }
+      }
+    );
+    //@3.设置初始化标志
+    editor.$$filter_init_flag = true;
+  }
+};
+/**
+ * 初始化DropDown，并保证DropDown这能进行一次这样的初始化
+ * 注意:
+ *   1.为dropdown添加事件时，没有引用外层变量，这是因为引起过bug。
+ *     而是使用闭包引入其他变量
+ *   2.dropdown.$$filter_init_flag是dropdown是否进行过该初始化的标志
+ *   3.定义了dropdown的beforeOpen和onSelect事件
+ *   4.其中onSelect允许用户覆盖
+ *   5.定义dropdown的beforeOpen事件是因为:
+ *     在这个事件中执行查过滤动作，
+ *     如果用户使用快捷键打开dropdown(例如F2)时也有过滤效果，
+ *     并且如果这时没有这种效果，表现形式会不一致，并且代码难控制。
+ */
+FilterEditor.prototype.__Init_DropDown = function(){
+  var dropdown = this.editor.getDropDown();
+  if(!dropdown.$$filter_init_flag){
+      //@1.DropDown的beforOpen事件
+      EventManager.addDoradoEvent(dropdown, "beforeOpen", 
+        this.__DropDown_BeforeOpen
+      );
+      //@2.设置初始化标志
+      dropdown.$$filter_init_flag == true;
+  }
+};
+/**
+ * 为DropDown添加的默认的beforeOpen事件
+ */
+FilterEditor.prototype.__DropDown_BeforeOpen =  function(dropdown, editor){
+  var filterEditor = editor.$$filtereditor;
+  var filterValue = filterEditor.getFilterValue();
+  var paramName = filterEditor.paramName;
+  var ds = dropdown.getDataset();
+  var ps = ds.parameters();
+  
+  if(filterValue != ps.getValue(paramName)){
+    ps.clear();
+    ps.setValue(paramName, filterValue);
+    ds.clearData();
+    ds.flushData();
+  }
+};
+/**
+ * 第一次查询：即DropDown关闭的时候的查询。
+ */
+FilterEditor.prototype.__FirstQuery = function(){
+  var editor = this.editor;
+  editor.getDropDown().open(editor);
+};
+/**
+ * 第二次查询：即DropDown已经打开的时候的查询。
+ * 确定选择内容：即DropDown已经打开的时候。
+ */
+FilterEditor.prototype.__SecondQuery_OR_ConfirmResult = function(actionFlag){
+  var paramName = this.paramName;
+  var dd = this.editor.getDropDown();
+  var ds = dd.getDataset();
+  var ps = ds.parameters();
+  var filterValue = this.getFilterValue();
+  actionFlag = actionFlag || "ConfirmResult";
+  
+  if("SecondQuery" == actionFlag || filterValue != ps.getValue(paramName)){
+    ps.clear();
+    ps.setValue(paramName,filterValue);
+    ds.clearData();
+    ds.flushData();  
+  }else{
+    dd.close( ds.getCurrent() );
+  }
+}
+//-------------------------对DatasetDropDown的扩展--------------------------
+var dd$$g=!!DatasetDropDown.prototype.$$g;
+if(dd$$g){
+  DatasetDropDown.prototype.prepareDropDownTable=DatasetDropDown.prototype.$$g;
+}
+DatasetDropDown.prototype._prepareDropDownTable=DatasetDropDown.prototype.prepareDropDownTable;
+DatasetDropDown.prototype.prepareDropDownTable = function(table){
+  this._prepareDropDownTable(table);
+  table.setShowVScrollBar(true);
+  table.style.height= this.getHeight()||200;
+  var tag=this.getTag();
+  if(tag){
+    var widths=tag.match(/\|(\d+(?:,\d+)*)\s*/);
+    if(widths&amp;&amp;widths.length&gt;1){
+      widths=widths[1].split(",");
+      for(var i=0,l=widths.length; i&lt;l; i++){
+        var c=table.getColumn(i);
+        if(c)c.setWidth(parseInt(widths[i]));
+      }
+    }
+  }
+};
+if(dd$$g){
+  DatasetDropDown.prototype.$$g=DatasetDropDown.prototype.prepareDropDownTable;
+}</Event>
+		<Event name="onLoad">/*
+var dsArray=[dsTarget1,dsTarget2];
+for(var i=0; i&lt;dsArray.length; i++){
+  var ds=dsArray[i];
+  for(var j=0; j&lt;10; j++){
+    ds.insertRecord();
+  }
+  ds.moveFirst();
+}
+*/</Event>
+	</Events>
+</view>
+

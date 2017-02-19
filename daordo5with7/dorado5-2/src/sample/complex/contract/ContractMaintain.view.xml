@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetContract" type="Reference" sourceModule="sample.Contract" sourceDataset="datasetContract" insertOnEmpty="true" loadData="${Request.op==&quot;edit&quot;}" autoLoadData="${Util.isNotEmpty(Request.contract_no)}">
+			<MasterLink />
+			<Fields>
+				<Field name="contract_no" dataType="string" valueProtected="true">
+					<Properties />
+					<Validator type="Required" />
+					<Validator type="Length" minLength="4" maxLength="10" errorMessage="合同号的长度必须在4-10个字符之间" />
+				</Field>
+				<Field name="owner" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="owner_name" dataType="string" dropDown="dropdownEmployee">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="customer" dataType="string" dropDown="dropdownCustomer">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="sign_date" dataType="date" defaultValue="${Util.getDate(&quot;yyyy-MM-dd&quot;)}">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="delivery_date" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="delivery_place" dataType="string" dropDown="dropdownPlace">
+					<Properties />
+				</Field>
+				<Field name="terms" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters>
+				<Parameter name="contract_no" value="${Request.contract_no}" />
+			</Parameters>
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetContractItems" type="Reference" sourceModule="sample.Contract" sourceDataset="datasetContractItems">
+			<MasterLink masterDataset="datasetContract" masterKeyFields="contract_no" detailKeyFields="contract_no" detailKeyParameters="contract_no" />
+			<Fields>
+				<Field name="item_id" dataType="int">
+					<Properties />
+				</Field>
+				<Field name="contract_no" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="product_id" dataType="string" readOnly="true">
+					<Properties />
+				</Field>
+				<Field name="product_name" dataType="string" readOnly="true">
+					<Properties />
+				</Field>
+				<Field name="num" dataType="double" supportsSum="true">
+					<Properties />
+				</Field>
+				<Field name="price" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="cost" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="sum" dataType="float" readOnly="true" label="总金额" supportsSum="true">
+					<Properties />
+				</Field>
+				<Field name="cost_sum" dataType="float" readOnly="true" label="总成本" supportsSum="true">
+					<Properties />
+				</Field>
+				<Field name="profit" dataType="float" label="毛利" supportsSum="true">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string" editorType="textarea">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="afterScroll">buttonDelete.disabled = (datasetContractItems.getCurrent() == null);</Event>
+				<Event name="afterChange">switch (field.getName()) {
+  case "num":;
+  case "price":;
+  case "cost": {
+    calcItem(record);
+    break;
+  }
+}</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="datasetCustomer" type="Reference" sourceModule="sample.Contract" sourceDataset="datasetCustomer">
+			<MasterLink />
+			<Fields>
+				<Field name="custom_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="custom_name" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="formContract" type="AutoForm" dataset="datasetContract" defaultControlWidth="200">
+			<FormGroup title="合同主信息">
+				<Element name="contract_no" field="contract_no" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="owner_name" field="owner_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="customer" field="customer" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="sign_date" field="sign_date" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="delivery_date" field="delivery_date" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="delivery_place" field="delivery_place" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+			<FormGroup title="备注" columnCount="1">
+				<Element name="terms" field="terms" type="TextEditor">
+					<FieldLabel />
+					<TextEditor editorType="textarea" width="350" height="35" />
+				</Element>
+				<Element name="cmnt" field="cmnt" type="TextEditor">
+					<FieldLabel />
+					<TextEditor editorType="textarea" width="350" height="35" />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="dropdownEmployee" type="CustomDropDown" path="/skills/form/input-assist/dropdown-employee-tree.jsp" readFields="employee_id,employee_name" writeFields="owner,owner_name" fixed="true" width="200" height="250" />
+		<Control id="dropdownCustomer" type="DatasetDropDown" dataset="datasetCustomer" labelField="custom_name" valueField="custom_id" mapValue="true" fixed="true" />
+		<Control id="dropdownPlace" type="ListDropDown" autoDropDown="true">
+			<DropDownItem value="上海" />
+			<DropDownItem value="北京" />
+			<DropDownItem value="广州" />
+			<DropDownItem value="深圳" />
+			<DropDownItem value="青岛" />
+			<DropDownItem value="大连" />
+			<DropDownItem value="宁波" />
+			<DropDownItem value="厦门" />
+			<DropDownItem value="秦皇岛" />
+			<DropDownItem value="连云港" />
+		</Control>
+		<Control id="tableContractItems" type="DataTable" dataset="datasetContractItems" width="100%" height="100%" fixedColumn="2" showFooter="true">
+			<Column name="product_id" field="product_id" width="120" />
+			<Column name="product_name" field="product_name" width="120" />
+			<Column name="num" field="num" />
+			<Column name="price" field="price" />
+			<Column name="cost" field="cost" />
+			<Column name="sum" field="sum" />
+			<Column name="cost_sum" field="cost_sum" />
+			<Column name="profit" field="profit" />
+			<Column name="cmnt" field="cmnt" width="200" />
+		</Control>
+		<Control id="buttonCopyAdd" type="Button" value="复制并添加">
+			<Events>
+				<Event name="onClick">var recordForCopy = datasetContractItems.getCurrent();
+datasetContractItems.insertRecord();
+if (recordForCopy != null) {
+  datasetContractItems.copyRecord(recordForCopy);
+}</Event>
+			</Events>
+		</Control>
+		<Control id="buttonBatchAdd" type="Button" value="批量添加产品" command="commandShowProductDialog" />
+		<Control id="commandShowProductDialog" type="RequestCommand" path="product-tree-select.jsp">
+			<Frame target="_subwindow" center="true" />
+			<Parameters />
+		</Control>
+		<Control id="buttonDelete" type="Button" value="删除产品" disabled="true">
+			<Events>
+				<Event name="onClick">datasetContractItems.deleteRecord();</Event>
+			</Events>
+		</Control>
+		<Control id="buttonSave" type="Button" value="保存" width="80" command="commandSave">
+			<Events />
+		</Control>
+		<Control id="buttonSaveAndBack" type="Button" value="保存并返回" width="120">
+			<Events>
+				<Event name="onClick">if (commandSave.execute()) {
+  open("contract-query.jsp", "_self");
+}</Event>
+			</Events>
+		</Control>
+		<Control id="commandSave" type="UpdateCommand" reduceReturnInfo="true">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetContract" />
+				<DatasetInfo dataset="datasetContractItems" />
+			</DatasetInfos>
+			<Parameters />
+			<Events />
+		</Control>
+		<Control id="buttonBack" type="Button" value="返回" width="80">
+			<Events>
+				<Event name="onClick">open("contract-query.jsp", "_self");</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">// 计算所有记录金额,毛利以及合计
+function calcAll() {
+  datasetContractItems.disableControls();
+  try {
+    var record = datasetContractItems.getFirstRecord();
+    while (record) {
+      calcItem(record);
+      record = record.getNextRecord();
+    }
+  }
+  finally {
+    datasetContractItems.enableControls();
+  }
+}
+
+// 计算单条记录中的金额,毛利..
+function calcItem(record) {
+  var num = record.getValue("num");
+  var sum = record.getValue("price") * num;
+  var cost_sum = record.getValue("cost") * num;
+  record.setValue("sum", sum);
+  record.setValue("cost_sum", cost_sum);
+  record.setValue("profit", sum - cost_sum);
+  record.post();
+}
+
+// 处理产品选择,向datasetContractItems中添加产品
+function processSelectedProduct(nodes) {
+  for (var i = 0; i &lt; nodes.length; i++) {
+    var node = nodes[i];
+    datasetContractItems.insertRecord();
+    datasetContractItems.copyRecord(node.getRecord());
+    datasetContractItems.setValue("item_id", "");
+    datasetContractItems.postRecord();
+  }
+}</Event>
+		<Event name="onDatasetsPrepared">calcAll();</Event>
+	</Events>
+</view>
+

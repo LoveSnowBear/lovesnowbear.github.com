@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee" pageSize="10">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="employee_name" dataType="string">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_name" type="Lookup" lookupModule="sample.HR" lookupDataset="datasetDeptForLookup" lookupField="dept_name" keyFields="dept_id" lookupKeyFields="dept_id" label="${Resource.hr.dept_name}">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date" format="yyyy年MM月dd日">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string" dropDown="dropdownDegree">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDegree" type="Reference" sourceModule="sample.HR" sourceDataset="datasetDegree">
+			<MasterLink />
+			<Fields />
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+		<Control id="dropdownDegree" type="DatasetDropDown" dataset="datasetDegree" valueField="degree" />
+		<Control id="pilotGroupBox" type="DataPilot" dataset="datasetEmployee" />
+		<Control id="tableGroupBox" type="DataTable" dataset="datasetEmployee" width="100%" readOnly="true" showHScrollBar="false">
+			<Column name="employee_id" field="employee_id" />
+			<Column name="employee_name" field="employee_name" width="160" />
+		</Control>
+		<Control id="formGroupBox" type="AutoForm" dataset="datasetEmployee" width="80%">
+			<FormGroup title="主要信息" name="group1">
+				<Element name="element1" type="Custom" showLabel="false" controlId="pilotGroupBox" colSpan="2" controlAlign="right">
+					<FieldLabel />
+				</Element>
+				<Element name="employee_id" field="employee_id" type="TextEditor">
+					<FieldLabel />
+					<TextEditor>
+						<Events />
+					</TextEditor>
+				</Element>
+				<Element name="employee_name" field="employee_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="dept_name" field="dept_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="element2" type="Custom" showLabel="false">
+					<FieldLabel />
+				</Element>
+				<Element name="birthday" field="birthday" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="element3" type="Custom" showLabel="false">
+					<FieldLabel />
+				</Element>
+				<Element name="sex" type="RadioGroup">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+				<Element name="married" type="CheckBox">
+					<FieldLabel />
+					<CheckBox />
+				</Element>
+				<Element name="salary" field="salary" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="degree" field="degree" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="email" field="email" type="TextEditor">
+					<FieldLabel />
+					<TextEditor width="100%" />
+				</Element>
+				<Element name="element4" type="Renderer" showLabel="false" colSpan="2">
+					<FieldLabel />
+				</Element>
+			</FormGroup>
+			<FormGroup title="备注" columnCount="1" name="group2">
+				<Element name="web" field="web" type="TextEditor">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="50" />
+				</Element>
+				<Element name="cmnt" field="cmnt" type="TextEditor">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="50" />
+				</Element>
+			</FormGroup>
+			<FormGroup title="列表" columnCount="1" name="group3">
+				<Element name="element1" type="Custom" showLabel="false" controlId="tableGroupBox" colSpan="1">
+					<FieldLabel />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="pilotSubWindow" type="DataPilot" dataset="datasetEmployee" />
+		<Control id="tableSubWindow" type="DataTable" dataset="datasetEmployee" width="100%" readOnly="true" showHScrollBar="false">
+			<Column name="employee_id" field="employee_id" />
+			<Column name="employee_name" field="employee_name" width="160" />
+		</Control>
+		<Control id="formSubWindow" type="AutoForm" dataset="datasetEmployee" groupType="subwindow" width="80%">
+			<FormGroup title="主要信息 (请尝试单击此处)">
+				<Element name="element1" type="Custom" showLabel="false" controlId="pilotSubWindow" controlAlign="right" colSpan="2">
+					<FieldLabel />
+				</Element>
+				<Element name="employee_id" field="employee_id" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="employee_name" field="employee_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="dept_name" field="dept_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="element2" type="Custom" showLabel="false">
+					<FieldLabel />
+				</Element>
+				<Element name="birthday" field="birthday" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="element3" type="Custom" showLabel="false">
+					<FieldLabel />
+				</Element>
+				<Element name="sex" type="RadioGroup">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+				<Element name="married" type="CheckBox">
+					<FieldLabel />
+					<CheckBox />
+				</Element>
+				<Element name="salary" field="salary" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="degree" field="degree" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="email" field="email" type="TextEditor" colSpan="2">
+					<FieldLabel />
+					<TextEditor width="100%" />
+				</Element>
+			</FormGroup>
+			<FormGroup title="备注 (请尝试单击此处)" columnCount="1">
+				<Element name="web" field="web" type="TextEditor">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="50" />
+				</Element>
+				<Element name="cmnt" field="cmnt" type="TextEditor">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="50" />
+				</Element>
+			</FormGroup>
+			<FormGroup title="列表 (请尝试单击此处)" columnCount="1">
+				<Element name="element1" type="Custom" showLabel="false" controlId="tableSubWindow" colSpan="1">
+					<FieldLabel />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="button1" type="Button" value="按钮1" width="75" />
+		<Control id="button2" type="Button" value="按钮2" width="75" />
+		<Control id="button3" type="Button" value="按钮3" width="75" />
+	</Controls>
+	<Properties />
+	<Events />
+</view>
+

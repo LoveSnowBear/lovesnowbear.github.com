@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Wrapper" originTable="employee" keyFields="employee_id" wrappedType="AutoSql" pageSize="10">
+			<Fields>
+				<Field name="select" type="Dummy" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="employee_id" originField="employee_id" table="employee" group="false" label="${Resource.hr.employee_id}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" originField="employee_name" table="employee" group="false" label="${Resource.hr.employee_name}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_id" originField="dept_id" table="employee" group="false" label="${Resource.hr.dept_id}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_name" originField="dept_name" table="dept" group="false" label="${Resource.hr.dept_name}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" originField="sex" table="employee" group="false" label="${Resource.hr.sex}" dataType="boolean" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="married" group="false" originField="married" table="employee" label="${Resource.hr.married}" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" originField="birthday" table="employee" group="false" label="${Resource.hr.birthday}" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" originField="salary" table="employee" group="false" label="${Resource.hr.salary}" dataType="double" supportsSum="true">
+					<Properties />
+				</Field>
+				<Field name="degree" originField="degree" table="employee" group="false" label="${Resource.hr.degree}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" originField="email" table="employee" group="false" label="${Resource.hr.email}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" originField="web" table="employee" group="false" label="${Resource.hr.web}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" originField="cmnt" table="employee" group="false" label="${Resource.hr.cmnt}" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Joins>
+				<Join name="dept" originTable="dept" keyFields="dept_id" sourceTable="employee" sourceKeyFields="dept_id" />
+			</Joins>
+			<MatchRules>
+				<MatchRule table="employee" originField="dept_id" operator="=" value=":dept_id" dataType="string" escapeEnabled="true" />
+			</MatchRules>
+			<SortRules>
+				<SortRule table="employee" originField="dept_id" />
+			</SortRules>
+			<Parameters>
+				<Parameter name="dept_id" value="${Request.dept_id}" />
+			</Parameters>
+			<Properties />
+			<MasterLink />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="dropdownDataMode" type="ListDropDown" mapValue="true">
+			<DropDownItem value="server-all" label="服务端的全部数据" />
+			<DropDownItem value="server-current-page" label="服务端的当前页数据" />
+			<DropDownItem value="client-visible" label="客户端的所有可见数据" />
+			<DropDownItem value="client-selected" label="客户端被选中的数据" />
+		</Control>
+		<Control id="dropdownExportMode" type="ListDropDown" mapValue="true">
+			<DropDownItem value="output" label="直接输出" />
+			<DropDownItem value="download" label="按文件方式下载" />
+		</Control>
+		<Control id="dropdownTemplateFile" type="ListDropDown">
+			<DropDownItem value="classpath:com/bstek/dorado/report/excel/default-export-template.xls" />
+			<DropDownItem value="classpath:sample/report/excel/export-template1.xls" />
+			<DropDownItem value="classpath:sample/report/excel/export-template2.xls" />
+			<DropDownItem value="classpath:sample/report/excel/export-template3.xls" />
+		</Control>
+		<Control id="dropdownSex" type="ListDropDown" autoDropDown="true" mapValue="true" fixed="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+			<Events />
+		</Control>
+		<Control id="dropdownMarried" type="ListDropDown" autoDropDown="true" mapValue="true" fixed="true">
+			<DropDownItem value="true" label="已婚" />
+			<DropDownItem value="false" label="未婚" />
+			<Events />
+		</Control>
+		<Control id="pagepilotEmployee" type="PagePilot" dataset="datasetEmployee" />
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%" fixedColumn="1" showFooter="true">
+			<Column name="select" />
+			<Column name="employee_id" field="employee_id" />
+			<Column name="employee_name" field="employee_name" />
+			<Column name="dept_name" field="dept_name" />
+			<Column name="dept_id" field="dept_id" />
+			<ColumnGroup name="group1" label="组合列">
+				<Column name="married" field="married" />
+				<Column name="sex" field="sex" />
+				<Column name="birthday" field="birthday" />
+			</ColumnGroup>
+			<Column name="salary" field="salary" />
+			<Column name="degree" field="degree" />
+			<Column name="email" field="email" />
+			<Column name="web" field="web" />
+			<Column name="cmnt" field="cmnt" />
+		</Control>
+		<Control id="editorDataMode" type="RadioGroup" value="server-all" dropDown="dropdownDataMode" layout="flow">
+			<Events />
+		</Control>
+		<Control id="editorExportMode" type="RadioGroup" value="output" dropDown="dropdownExportMode" />
+		<Control id="editorTemplateFile" type="TextEditor" dropDown="dropdownTemplateFile" width="400" value="classpath:com/bstek/dorado/report/excel/default-export-template.xls" />
+		<Control id="buttonExcel" type="Button" value="导出到Excel..." command="commandExcel" />
+		<Control id="commandExcel" type="Export2ExcelCommand" dataset="datasetEmployee" templateTable="tableEmployee" fileName="导出的文件.xls">
+			<Frame target="_blank" height="400" width="600" resizable="true" />
+			<Parameters />
+			<Events>
+				<Event name="beforeExecute">command.setDataMode(editorDataMode.getValue());
+command.setTemplateFile(editorTemplateFile.getValue());
+
+var exportMode = editorExportMode.getValue();
+command.setExportMode(exportMode);
+command.getFrame().setTarget( (exportMode == "output") ? "_blank" : "_self" );</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

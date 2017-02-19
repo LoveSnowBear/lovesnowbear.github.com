@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="com.bstek.dorado.view.control.dropdown.CustomDropDownViewModel">
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee" readOnly="true" pageSize="20">
+			<MasterLink />
+			<Fields>
+				<Field name="select" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters>
+				<Parameter name="branch_id" value="D2" />
+			</Parameters>
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%" showHScrollBar="false" showIndicator="false">
+			<Column name="select" field="select" />
+			<Column name="employee_id" field="employee_id" />
+			<Column name="employee_name" field="employee_name" />
+			<Column name="sex" field="sex" editorType="checkbox" align="center" width="30" />
+			<Column name="birthday" field="birthday" />
+		</Control>
+		<Control id="buttonOK" type="Button" value="确定" width="80">
+			<Events>
+				<Event name="onClick">var records = new Array();
+var record = datasetEmployee.getFirstRecord();
+while (record != null) {
+  if (record.getValue("select")) {
+    records.push(record);
+  }
+  record = record.getNextRecord();
+}
+DropDown.closeFrame(records);</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Events />
+	<Properties />
+</view>
+

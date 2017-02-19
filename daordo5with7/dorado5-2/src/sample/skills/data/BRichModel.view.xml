@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee" pageSize="10">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_name" type="Lookup" lookupModule="sample.HR" lookupDataset="datasetDeptForLookup" lookupField="dept_name" keyFields="dept_id" lookupKeyFields="dept_id">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="beforeScroll">log("beforeScroll");</Event>
+				<Event name="afterScroll">log("afterScroll");</Event>
+				<Event name="beforeInsert">log("beforeInsert");</Event>
+				<Event name="afterInsert">log("afterInsert");</Event>
+				<Event name="beforeDelete">log("beforeDelete");</Event>
+				<Event name="afterDelete">log("afterDelete");</Event>
+				<Event name="beforePost">log("beforePost");</Event>
+				<Event name="afterPost">log("afterPost");</Event>
+				<Event name="beforeCancel">log("beforeCancel");</Event>
+				<Event name="afterCancel">log("afterCancel");</Event>
+				<Event name="beforeChange">log("beforeChange: " + field.getName() + "=" + value);</Event>
+				<Event name="afterChange">log("afterChange: " + field.getName());</Event>
+			</Events>
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="editorScript" type="TextEditor" editorType="textarea" width="100%" height="70" dropDown="dropdownScript" />
+		<Control id="dropdownScript" type="ListDropDown" autoDropDown="true">
+			<DropDownItem value="datasetEmployee.moveFirst();" />
+			<DropDownItem value="datasetEmployee.moveNext();" />
+			<DropDownItem value="datasetEmployee.insertRecord();" />
+			<DropDownItem value="alert(datasetEmployee.getString(&quot;employee_name&quot;));" />
+			<DropDownItem value="datasetEmployee.setValue(&quot;employee_name&quot;, &quot;&lt;&lt;已被修改&gt;&gt;&quot;);" />
+			<DropDownItem value="datasetEmployee.deleteRecord();" />
+			<DropDownItem value="alert(DoradoFactory);" />
+			<DropDownItem value="alert(datasetEmployee)" />
+			<DropDownItem value="alert(datasetEmployee.getCurrent())" />
+		</Control>
+		<Control id="buttonEvaluation" type="Button" value="执行">
+			<Events>
+				<Event name="onClick">eval(editorScript.value);</Event>
+			</Events>
+		</Control>
+		<Control id="editorLog" type="TextEditor" editorType="textarea" width="100%" height="100%" readOnly="true" />
+		<Control id="buttonClear" type="Button" value="清除日志">
+			<Events>
+				<Event name="onClick">editorLog.value = "";</Event>
+			</Events>
+		</Control>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%" />
+		<Control id="datapilotEmployee" type="DataPilot" dataset="datasetEmployee" />
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">function log(message) {
+  var tab = tabset1.getCurrentTab();
+  if (tab == null || tab.getName() != "event") return;
+  
+  var editor = editorLog;
+  if (editor != null) {
+    if (editor.value == "") {
+      editor.value = message;
+    }
+    else {
+      editor.value = editor.value + "\n" + message;
+    }
+  }
+}</Event>
+	</Events>
+</view>
+

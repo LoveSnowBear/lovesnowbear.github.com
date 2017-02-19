@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+org.eclipse.jdt.core.classpathVariable.JRE_LIB=E\:/ProgramFiles/Java/jdk1.6/jre/lib/rt.jar
+org.eclipse.jdt.core.classpathVariable.JRE_SRC=E\:/ProgramFiles/Java/jdk1.6/src.zip
+org.eclipse.jdt.core.classpathVariable.JRE_SRCROOT=
+org.eclipse.jdt.core.classpathVariable.TOMCAT_HOME=E\:/apache-tomcat-7.0.75

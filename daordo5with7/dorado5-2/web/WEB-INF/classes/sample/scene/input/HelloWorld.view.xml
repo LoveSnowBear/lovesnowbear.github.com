@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.scene.input.HelloWorldViewModel">
+	<Datasets>
+		<Dataset type="Custom" id="datasetEmployee" pageSize="10">
+			<MasterLink />
+			<Fields>
+				<Field name="EMPLOYEE_ID" dataType="" label="工号" readOnly="true">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="EMPLOYEE_NAME" dataType="" label="姓名">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" dataType="" label="部门id">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" type="Lookup" lookupModule="sample.HR" lookupDataset="datasetDeptForLookup" lookupField="dept_name" keyFields="DEPT_ID" lookupKeyFields="dept_id" label="部门" dropDown="dropdownDept_tree">
+					<Properties />
+				</Field>
+				<Field name="SEX" dataType="boolean" dropDown="dropdownSex" label="性别">
+					<Properties />
+				</Field>
+				<Field name="MARRIED" dataType="boolean" label="婚否">
+					<Properties />
+				</Field>
+				<Field name="BIRTHDAY" dataType="date" label="生日" format="yyyy年MM月dd日">
+					<Properties />
+				</Field>
+				<Field name="SALARY" dataType="float" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" dataType="" label="学历">
+					<Properties />
+				</Field>
+				<Field name="EMAIL" dataType="" label="邮件">
+					<Properties />
+				</Field>
+				<Field name="WEB" dataType="" label="网页">
+					<Properties />
+				</Field>
+				<Field name="CMNT" dataType="" label="备注">
+					<Properties />
+				</Field>
+				<Field name="raiseSalaryFlag" type="Dummy" dataType="boolean">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters>
+				<Parameter name="sex" value="${Request.sex}" />
+			</Parameters>
+			<Properties />
+			<Events>
+				<Event name="afterScroll">EmployeeBiz.manageMainButtonState(dataset);</Event>
+				<Event name="afterFlushData">EmployeeBiz.manageMainButtonState(dataset);</Event>
+				<Event name="afterChange">if(subWindowEmployee &amp;&amp; subWindowEmployee.getStatus()!="hidden"){
+  EmployeeBiz.managerDetailButtonState(dataset);
+}</Event>
+				<Event name="afterCancel">if(record.getState()!="delete" &amp;&amp; subWindowEmployee &amp;&amp; subWindowEmployee.getStatus()!="hidden"){
+  EmployeeBiz.managerDetailButtonState(dataset);
+}</Event>
+			</Events>
+		</Dataset>
+		<Dataset type="Form" id="datasetCondition">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_id" label="工号" toolTip="员工编号">
+					<Properties />
+				</Field>
+				<Field name="employee_name" label="姓名">
+					<Properties />
+				</Field>
+				<Field name="sex" label="性别" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="dept_id" label="部门" dropDown="dropdownDept">
+					<Properties />
+				</Field>
+				<Field name="dept_name" label="部门" dropDown="dropdownDept_dyn">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control type="AutoForm" dataset="datasetCondition" id="formCondition">
+			<FormGroup name="group0" labelWidth="50" title="员工查询">
+				<Element name="id" type="TextEditor" field="employee_id">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="name" type="TextEditor" field="employee_name">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="sex" type="TextEditor" field="sex">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="dept_name" type="TextEditor" name="dept_name">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control type="DataTable" showHScrollBar="false" dataset="datasetEmployee" height="100%" id="tableEmployee" width="100%" readOnly="true" marmotProfileKey="advice.HelloWorld.tableEmployee" showVScrollBar="false">
+			<Column field="EMPLOYEE_ID" name="EMPLOYEE_ID" />
+			<Column field="EMPLOYEE_NAME" name="EMPLOYEE_NAME" />
+			<Column field="DEPT_NAME" name="DEPT_NAME" />
+			<Column field="SEX" name="SEX" width="30" align="center" />
+			<Column field="MARRIED" name="MARRIED" editorType="checkbox" width="30" />
+			<Column field="BIRTHDAY" name="BIRTHDAY" align="center" />
+			<Column field="SALARY" name="SALARY" align="center">
+				<Events>
+					<Event name="onRefresh">EmployeeBiz.renderSalary(column,row,cell,value,record);
+return false;</Event>
+				</Events>
+			</Column>
+			<Events>
+				<Event name="onRecordDblClick">EmployeeBiz.editEmployee();</Event>
+			</Events>
+		</Control>
+		<Control id="commandQuery" queryDataset="datasetEmployee" type="QueryCommand" conditionDataset="datasetCondition">
+			<Parameters />
+		</Control>
+		<Control id="pagepilotEmployee" dataset="datasetEmployee" type="PagePilot" />
+		<Control id="buttonQuery" width="70" type="Button" value="查询Q">
+			<Events>
+				<Event name="onClick">EmployeeBiz.queryEmployee();</Event>
+			</Events>
+		</Control>
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true" fixed="true">
+			<DropDownItem />
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+		<Control id="subWindowEmployee" type="SubWindow" width="500" height="400" status="hidden" title="详细信息">
+			<Events>
+				<Event name="afterShow">EmployeeBiz.managerDetailButtonState(datasetEmployee);</Event>
+			</Events>
+		</Control>
+		<Control id="formEmployee" type="AutoForm" dataset="datasetEmployee">
+			<FormGroup name="group0" title="主要信息" labelWidth="60">
+				<Element name="EMPLOYEE_ID" field="EMPLOYEE_ID" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="EMPLOYEE_NAME" field="EMPLOYEE_NAME" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="DEPT_NAME" type="TextEditor" field="DEPT_NAME">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="SEX" type="TextEditor" field="SEX">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="MARRIED" field="MARRIED" type="CheckBox">
+					<FieldLabel />
+					<CheckBox />
+				</Element>
+				<Element name="BIRTHDAY" field="BIRTHDAY" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="SALARY" field="SALARY" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="DEGREE" field="DEGREE" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+			<FormGroup name="group1" title="附加信息" expanded="true" columnCount="1" labelWidth="60">
+				<Element name="EMAIL" field="EMAIL" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="WEB" field="WEB" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="CMNT" field="CMNT" type="TextEditor">
+					<FieldLabel />
+					<TextEditor height="100" editorType="textarea" />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="buttonCreateEmployee" width="80" type="Button" value="新增N">
+			<Events>
+				<Event name="onClick">EmployeeBiz.createEmployee();</Event>
+			</Events>
+		</Control>
+		<Control id="buttonRaiseSalary" type="Button" width="80" value="加薪500R">
+			<Events>
+				<Event name="onClick">return EmployeeBiz.raiseSalary(button);</Event>
+			</Events>
+		</Control>
+		<Control id="buttonEditEmployee" type="Button" value="编辑E" width="80">
+			<Events>
+				<Event name="onClick">EmployeeBiz.editEmployee();</Event>
+			</Events>
+		</Control>
+		<Control id="buttonSubmitCurrentEmployee" type="Button" value="保存" width="70">
+			<Events>
+				<Event name="onClick">EmployeeBiz.saveEmployee();</Event>
+			</Events>
+		</Control>
+		<Control id="buttonCancelCurrentEmployee" type="Button" value="关闭" width="70">
+			<Events>
+				<Event name="onClick">EmployeeBiz.recoverEmployee();</Event>
+			</Events>
+		</Control>
+		<Control id="buttonDeleteCurrentEmployee" type="Button" value="删除" width="70">
+			<Events>
+				<Event name="onClick">EmployeeBiz.deleteEmployee();</Event>
+			</Events>
+		</Control>
+		<Control id="commandUpdateCurrentEmployee" type="UpdateCommand" method="updateCurrentEmployee" async="true">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetEmployee" submitScope="current" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+		<Control id="commandDeleteCurrentEmployee" type="UpdateCommand" method="deleteCurrentEmployee" async="true">
+			<DatasetInfos>
+				<DatasetInfo submitScope="current" dataset="datasetEmployee" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+		<Control id="commandRaiseSalary" type="UpdateCommand" method="raiseSalary" showLoadingTip="true" async="true">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetEmployee" submitScope="current" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+		<Control id="commandHelpDocument" type="RequestCommand" path="help-document.jsp">
+			<Frame target="_modal_dialog" />
+			<Parameters />
+		</Control>
+		<Control id="dropdownDept_dyn" type="DynamicDropDown" startWithEmptyRecord="true" writeFields="dept_id,dept_name" readFields="dept_id,dept_name" filterParameter="dept_name" visibleFields="dept_name" fixed="true" autoDropDown="true" cachable="true" filterOnOpen="false">
+			<Dataset type="DropDown" sourceModule="sample.HR" sourceDataset="datasetDept">
+				<Fields />
+				<Parameters />
+				<Properties />
+			</Dataset>
+			<Parameters />
+		</Control>
+		<Control id="dropdownDept_tree" type="CustomDropDown" path="dept-tree.jsp" writeFields="dept_id,dept_name" readFields="dept_id,dept_name" />
+		<Control id="menu1" type="Menu">
+			<MenuItem name="createEmployee" label="新增" />
+			<MenuItem name="editEmployee" label="编辑" />
+			<MenuItem name="raiseSalary" label="加薪" />
+			<Events>
+				<Event name="onItemClick">MenuClickManager.doBiz(menu,item);</Event>
+			</Events>
+		</Control>
+		<Control id="menubar1" type="MenuBar" menu="menu1">
+			<Events>
+				<Event name="onActive">var panel=menuBar.getBlankPanel();
+panel.style.paddingRight="10px";
+panel.innerText="欢迎光临【员工维护】页面";</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">/**
+ * 员工信息的维护界面
+ * 1.查询功能：
+ *   1.四个查询字段:id,name,sex,dept
+ *   2.sex使用DropDown进行翻译；
+ *   2.其中dept要求使用DynamicDropDown，可以对dept_name进行过滤；
+ *   3.允许分页，每页10条记录；
+ *   4.id查询条件即需要模糊匹配，有要求即使用户输入小写字符也要按照大写的查询
+       (因为该字段数据库保存的都是大写字符)
+ * 2.DataTable显示员工信息(employee_id,employee_name,sex,dept_id,married,salary字段)
+ *   1.代码翻译：sex,dept_id,married
+ *   2.字段格式化:birthday(yyyy年MM月dd日)、salary(##,##.##元)
+ *   3.合计salary
+ *   4.cmnt使用TextArea编辑
+ * 3.员工信息的维护(增加、删除、修改、加薪)
+ *   1.显示
+ *     1.由于DataTable中没有显示employee的全部字段，
+ *       所以维护特定员工信息时使用subwindow，并且要求使用RequestCommand来实现；
+ *     2.Employee信息使用AutoForm显示全部字段，要求布局优美、合理；
+ *     3.dept_id字段的值要求使用2层树(第一层Branch，第二层Dept)选择；
+ *   2.增加、修改、删除
+ *     1.新增、修改Employee都使用上面的显示方式；
+ *     2.保存成功后subwindow自动关闭；
+ *     3.如果是新增操作，允许修改Employee_id字段，修改操作不允许修改；
+ *     4.删除按钮在subwindow中，并且删除前需要询问用户是否真的删除；
+ *   3.保存员工信息
+ *     1.如果是修改的员工信息，需要在控制台输出员工修改前的所有信息；
+ *     2.employee_id自动转换为大写字母；
+ *   4.加薪500
+ *     1.利用UpdateCommand，在服务端加薪并持久化到数据库，不允许执行dataset.flushData；
+ *     2.批量加薪，为所有选择的用户加薪；
+ */
+//常量
+var Constants={
+  Msg_DirtyEmployee4Salary:"请先保存员工信息，再为他增加薪水",
+  Msg_NoEmployee4Salary:"请选择您要增加薪水的员工",
+  Msg_NoEmployee4Edit:"请选择您要编辑的员工",  
+  Msg_NoneEmployee:"您还没有修改员工信息",
+  Msg_ConfirmDeleteNoneEmployee:"您要删除'name(id)'信息吗？",
+  Msg_ConfirmDeleteNewEmployee:"你还没有保存'name(id)'，确定要删除吗？",
+  Value_CloseButton:"关闭",
+  Value_CancelButton:"取消"
+};
+//----------------------Common-------------------------
+var CommonBiz={
+  ExceptionType_Server:"server",
+  ExceptionType_client:"client",
+  ExceptionType_AbortException:"abort",
+  ExceptionType_DoradoException:"dorado",
+  ExceptionType_Silence:"silence",
+  //异常处理
+  processException:function(exception,type){
+    var cz=window.CommonBiz;
+    if(!type){type=cz.ExceptionType_client}
+    switch(type){
+    case cz.ExceptionType_Server:
+    case cz.ExceptionType_client:
+      alert(exception);
+      return false;
+    case cz.ExceptionType_Silence:
+      Debugger.log(exception);
+      return;
+    case cz.ExceptionType_AbortException:
+      return new AbortException(exception);
+    case cz.ExceptionType_DoradoException:
+      return new DoradoException(exception);
+    }
+  }
+};
+//----------------------Employee-----------------------
+var EmployeeBiz={
+//查询员工
+  queryEmployee:function(){
+    commandQuery.execute();
+  },
+//新增员工
+  createEmployee:function(){
+    var employee=datasetEmployee.getCurrent();
+    if(employee &amp;&amp; !employee.post()){
+      return;
+    }else{
+      datasetEmployee.getField("employee_id").setReadOnly(false);
+      datasetEmployee.insertRecord();
+      subWindowEmployee.show(true, true);  
+    }
+  },
+//编辑员工
+  editEmployee:function(){
+    var datasetEmployee=window.datasetEmployee;
+    var employee=datasetEmployee.getCurrent();
+    if(employee){
+      var ef=datasetEmployee.getField("employee_id");
+      if(!ef.isReadOnly()){
+        ef.setReadOnly(true);
+        datasetEmployee.refreshControls();
+      }
+      subWindowEmployee.show(true, true);
+    }else{
+      return CommonBiz.processException(Constants.Msg_NoEmployee4Edit);
+    }
+  },
+//员工加薪
+  raiseSalary:function(){
+    var state,employee = datasetEmployee.getCurrent();
+    if(!employee){
+      return CommonBiz.processException(Constants.Msg_NoEmployee4Salary);
+    }else{
+      state = employee.getState();
+      if(state != "none"){
+        return CommonBiz.processException(Constants.Msg_DirtyEmployee4Salary);
+      }
+      setTimeout("commandRaiseSalary.execute()",0);
+    }
+  },
+//渲染员工薪水
+  salaryCells:[],
+  renderSalary:function(column,row,cell,value,record){
+    if(record.getValue("raiseSalaryFlag")){
+      cell.innerHTML="&lt;b&gt;"+value+"&lt;/b&gt;";
+      EmployeeBiz.salaryCells.push([cell,record,value]);
+      setTimeout(function(){
+        var r,v,c,a=EmployeeBiz.salaryCells.shift();
+        var datasetEmployee=window.datasetEmployee;
+        if(a){
+          c=a[0];r=a[1];v=a[2];
+          datasetEmployee.disableEvents();
+          datasetEmployee.disableControls();
+          try{
+            r.setValue("raiseSalaryFlag",false);
+            r.setDirty(false);
+          }catch(e){
+            CommonBiz.processException(e,CommonBiz.ExceptionType_Silence);
+          }finally{
+            datasetEmployee.enableControls();
+            datasetEmployee.enableEvents();        
+          }
+          c.innerHTML=v;
+        }
+      },2000);
+    }else{
+      cell.innerHTML = value;
+    }
+    return false;
+  },
+//提交员工信息
+  saveEmployee:function(){
+    var state,employee = datasetEmployee.getCurrent();
+    if(!employee){
+      return CommonBiz.processException(Constants.Msg_NoEmployee4Salary);
+    }else{
+      state = employee.getState();
+      if(state == "none" &amp;&amp; !employee.isDirty()){
+        return CommonBiz.processException(Constants.Msg_NoneEmployee);
+      }
+      commandUpdateCurrentEmployee.execute(
+        function(success,exception){
+          if(success){
+            subWindowEmployee.hide();
+          }
+        }
+      );
+    }
+  },
+//恢复员工信息
+  recoverEmployee:function(){
+    var state,employee = datasetEmployee.getCurrent();
+    if(employee){
+      if(employee.isDirty()){
+        employee.cancel();
+        state = employee.getState();
+        if(state == "delete"){
+          subWindowEmployee.hide();
+        }
+      }else{
+        subWindowEmployee.hide();
+      }
+    }
+  },
+//删除员工信息
+  deleteEmployee:function(){
+    var state,employee = datasetEmployee.getCurrent();
+    if(!employee){return;}
+    state=employee.getState();
+    if((state == "new")){
+      if(confirm(Constants.Msg_ConfirmDeleteNewEmployee
+      .replace("name",employee.getValue("EMPLOYEE_NAME"))
+      .replace("id",employee.getValue("EMPLOYEE_ID")))){
+        employee.cancel();
+        subWindowEmployee.hide();
+      }
+    }else if(state=='insert'){
+      if(confirm(Constants.Msg_ConfirmDeleteNewEmployee
+      .replace("name",employee.getValue("EMPLOYEE_NAME"))
+      .replace("id",employee.getValue("EMPLOYEE_ID")))){
+        datasetEmployee.deleteRecord(employee);
+        subWindowEmployee.hide();
+      }
+    }else if(confirm(Constants.Msg_ConfirmDeleteNoneEmployee
+    .replace("name",employee.getValue("EMPLOYEE_NAME"))
+    .replace("id",employee.getValue("EMPLOYEE_ID")))){
+      commandDeleteCurrentEmployee.execute(function(success,exception){
+        if(success){
+          subWindowEmployee.hide();
+        }else{
+          CommonBiz.processException(exception,CommonBiz.ExceptionType_Server);
+        }
+      });
+    }
+  },
+//维护主控按钮状态
+  manageMainButtonState:function(datasetEmployee){
+    var employee=datasetEmployee.getCurrent();
+    if(employee){
+      buttonEditEmployee.disabled=false;
+      buttonRaiseSalary.disabled=false;    
+    }else{
+      buttonEditEmployee.disabled=true;
+      buttonRaiseSalary.disabled=true;      
+    }
+  },
+//维护详细按钮状态
+  managerDetailButtonState:function(datasetEmployee){
+    var s,d,employee=datasetEmployee.getCurrent();
+    if(!employee){
+      buttonDeleteCurrentEmployee.disabled=true;
+      buttonSubmitCurrentEmployee.disabled=true;
+      buttonCancelCurrentEmployee.disabeld=true;
+    }else{
+      buttonCancelCurrentEmployee.setValue( (employee.isDirty())?Constants.Value_CancelButton:Constants.Value_CloseButton );
+    }
+  }
+};
+//-------------------------------------------------
+EmployeeBiz.documentListener={
+  init:function(){
+    EventManager.addSystemEvent(document,"onkeydown",this.recordOldValueHandler);
+    EventManager.addSystemEvent(document,"onkeyup",this.liveupCancelButtonStateHandler);
+    EventManager.addSystemEvent(document,"onhelp",this.showHelpDocumentHandler);
+  },
+  showHelpDocumentHandler:function(evt){
+    //----
+  },
+  recordOldValueHandler:function(evt){
+    evt=evt||window.event;
+    var el=evt.srcElement || evt.target;
+    var els=el.tagName + "$" + el.type;
+    var passstr="INPUT$text,TEXTAREA$textarea";
+    if(passstr.indexOf(els)&gt;=0 &amp;&amp; (typeof el.getDataset=="function")){
+      var ds=el.getDataset();
+      if(!el.readOnly &amp;&amp; ds &amp;&amp; ds.getId()=="datasetEmployee" ){
+        el._oldvalue=el.value;
+      }
+    }    
+  },
+//更新buttonCancelCurrentEmployee的状态
+  liveupCancelButtonStateHandler:function(evt){
+    evt=evt||window.event;
+    var el=evt.srcElement || evt.target;
+    var els=el.tagName + "$" + el.type;
+    var passstr="INPUT$text,TEXTAREA$textarea";
+    if(passstr.indexOf(els)&gt;=0 &amp;&amp; (typeof el.getDataset=="function")){
+      var ds=el.getDataset();
+      var r=el.getRecord();
+      if(evt.keyCode==27 &amp;&amp; browserType==BROWSER_IE){
+        if(r.isDirty()){
+          buttonCancelCurrentEmployee.setValue(Constants.Value_CancelButton);
+        }else{
+          buttonCancelCurrentEmployee.setValue(Constants.Value_CloseButton);
+        }
+      }else{
+        if(!el.readOnly &amp;&amp; ds &amp;&amp; ds.getId()=="datasetEmployee" ){
+          var v=Constants.Value_CancelButton;
+          if((el.value != el._oldvalue) &amp;&amp; (buttonCancelCurrentEmployee.value != v)){
+            buttonCancelCurrentEmployee.setValue(v);
+          }
+        }
+      }
+    }
+  }
+}
+EmployeeBiz.documentListener.init();
+
+//---------------------------------------------------------------
+/**
+ * 快捷键资源的抽象
+ * @param cfg {altKey:false,ctrlKey:false,shiftKey:false,key:8}
+ *            {altKey:false,ctrlKey:true,shiftKey:false,key:'n'}
+ */
+function ShortcutKey(cfg){
+  this.ctrlKey=cfg.ctrlKey;
+  this.shiftKey=cfg.shiftKey;
+  this.altKey=cfg.altKey;
+  var key=cfg.key;
+  if(typeof key=='number' || !isNaN(key)){
+    this.keyCode=key;
+  }else{
+    this.keyCode=key.toUpperCase().charCodeAt(0);
+  }
+}
+//按键动作的JavaScript类
+function KeyAction(shortupkey,fn){
+  this.shortupkey=shortupkey;
+  this.fn=fn;
+};
+//获得唯一码
+KeyAction.getHashCode=function(ka){
+  var a=["@"],ce=ka.shortupkey || ka;
+  a.push((ce.altKey)?"1":"0");
+  a.push((ce.ctrlKey)?"1":"0");
+  a.push((ce.shiftKey)?"1":"0");
+  a.push(ce.keyCode);
+  //Debugger.log("Config:{altKey:"+ce.altKey+";ctrlKey:"+ce.ctrlKey+";shiftKey:"+ce.shiftKey+";keyCode:"+ce.keyCode+"}");
+  return a.join("");
+};
+//禁止历史后退键
+KeyAction.forbidHistoryBack=function(evt){
+  var evt=evt||window.event;
+  var el=evt.srcElement||evt.target;
+  var els=el.tagName + "$" + el.type;
+  var passstr="INPUT$text,TEXTAREA$textarea";
+  if(passstr.indexOf(els)&gt;=0){
+    throw {EvtGoon:true,msg:"EvtGoon."};
+  }
+};
+//停止时间冒泡和默认动作
+KeyAction.stopEvent=function(evt){
+  if(evt.preventDefault){
+    evt.preventDefault();
+    evt.stopPropagation();
+  }else{
+    evt.returnValue=false;
+    evt.cancelBubble=true;
+  }
+};
+KeyAction.kaMap={};
+//初始化
+KeyAction.init=function(kaTable){
+  var ka,kach,map=KeyAction.kaMap;
+  for(var i=0,l=kaTable.length; i&lt;l ;i++){
+    ka=kaTable[i];
+    kahc=KeyAction.getHashCode(ka);
+    map[kahc]=ka;
+  }
+  EventManager.removeSystemEvent(document,"onkeydown",KeyAction.onkeydownHandler);
+  EventManager.addSystemEvent(document,"onkeydown",KeyAction.onkeydownHandler);    
+};
+//获得已经注册的KeyAction
+KeyAction.getAction=function(evt){
+  var kahc=KeyAction.getHashCode(evt);
+  return KeyAction.kaMap[kahc];
+};
+/**
+ * 调用快捷键的方法执行后， 默认会停止事件。
+ * 如果需要禁止这种行为，需要快捷键方法throw一个异常，
+ * 并且异常的EvtGoon属性为true，否则该异常会被继续抛出。
+ */
+KeyAction.onkeydownHandler=function(evt){
+  var evt=evt||window.event;
+  var ka=KeyAction.getAction(evt);
+  var isStop=true;
+  if(ka){
+    try{ ka.fn(evt); }
+    catch(ex){
+      if(ex.EvtGoon){isStop=false}else{throw ex};
+    }finally{
+      if(isStop){KeyAction.stopEvent(evt);}
+    }
+  }
+}
+//------------------------------------初始化快捷键-----------------------------------
+//按键动作列表
+var KeyActionTable=[
+  new KeyAction(new ShortcutKey({altKey:false,ctrlKey:false,shiftKey:false,key:8}),
+                KeyAction.forbidHistoryBack),
+  new KeyAction(new ShortcutKey({altKey:false,ctrlKey:true,shiftKey:false,key:'q'}),
+                EmployeeBiz.queryEmployee),
+  new KeyAction(new ShortcutKey({altKey:false,ctrlKey:true,shiftKey:false,key:'n'}),
+                EmployeeBiz.createEmployee),
+  new KeyAction(new ShortcutKey({altKey:false,ctrlKey:true,shiftKey:false,key:'e'}),
+                EmployeeBiz.editEmployee),
+  new KeyAction(new ShortcutKey({altKey:false,ctrlKey:true,shiftKey:false,key:'r'}),
+                EmployeeBiz.raiseSalary)
+];
+
+KeyAction.init(KeyActionTable);
+
+//------------------------------ 菜单动作 ---------------------------
+var MenuClickManager={
+  bizs:{
+    "createEmployee":EmployeeBiz.createEmployee,
+    "editEmployee":EmployeeBiz.editEmployee,
+    "queryEmployee":EmployeeBiz.queryEmployee,
+    "raiseSalary":EmployeeBiz.raiseSalary
+  },
+  doBiz:function(menu,item){
+    var name=item.getName();
+    var bizFunction=this.bizs[name];
+    if(bizFunction){
+      bizFunction();
+    }
+  }
+}</Event>
+	</Events>
+</view>
+

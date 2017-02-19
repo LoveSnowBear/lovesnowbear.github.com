@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetDept" type="Reference" sourceModule="sample.HR" sourceDataset="datasetDept">
+			<MasterLink />
+			<Fields>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="branch_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_name" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters>
+				<Parameter name="branch_id" value="D2" />
+			</Parameters>
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee" pageSize="5" autoLoadPage="false">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string" dropDown="dropdownEmployee">
+					<Properties />
+				</Field>
+				<Field name="dept_id" dataType="string" dropDown="dropdownDept_full">
+					<Properties />
+				</Field>
+				<Field name="sex" dropDown="dropdownSex" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters>
+				<Parameter name="branch_id" value="D2" />
+			</Parameters>
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDept_dic" type="Reference" sourceModule="sample.HR" sourceDataset="datasetDept">
+			<MasterLink />
+			<Fields>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="branch_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_name" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters>
+				<Parameter name="branch_id" />
+			</Parameters>
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="dropdownSex" type="ListDropDown" autoDropDown="true" mapValue="true" fixed="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+			<Events />
+		</Control>
+		<Control id="editorSex" type="TextEditor" dataset="datasetEmployee" field="sex" />
+		<Control id="radioGroupSex" type="RadioGroup" dataset="datasetEmployee" field="sex" />
+		<Control id="dropdownDept" type="DatasetDropDown" dataset="datasetDept" labelField="dept_name" valueField="dept_id" mapValue="true" autoDropDown="true" startWithEmptyRecord="true">
+			<Events />
+		</Control>
+		<Control id="dropdownDept_full" type="DatasetDropDown" dataset="datasetDept_dic" labelField="dept_name" valueField="dept_id" mapValue="true" autoDropDown="true" startWithEmptyRecord="true">
+			<Events />
+		</Control>
+		<Control id="editorDept" type="TextEditor" dataset="datasetEmployee" field="dept_id" dropDown="dropdownDept" />
+		<Control id="radioGroupDept" type="RadioGroup" field="dept_id" dataset="datasetEmployee" dropDown="dropdownDept" />
+		<Control id="dropdownEmployee" type="DynamicDropDown" filterParameter="employee_name" readFields="employee_id,employee_name" writeFields="employee_id,employee_name" visibleFields="employee_name" fixed="true" width="200" startWithEmptyRecord="true">
+			<Dataset type="DropDown" sourceModule="sample.HR" sourceDataset="datasetEmployee" pageSize="20">
+				<Fields>
+					<Field name="employee_id" dataType="string">
+						<Properties />
+					</Field>
+					<Field name="employee_name" dataType="string">
+						<Properties />
+					</Field>
+				</Fields>
+				<Parameters />
+				<Properties />
+			</Dataset>
+			<Parameters />
+			<Events />
+		</Control>
+		<Control id="editorEmployee" type="TextEditor" dataset="datasetEmployee" field="employee_name" />
+		<Control id="dropdownCustom" type="CustomDropDown" path="dropdown-employee-tree.jsp" readFields="employee_id,employee_name" writeFields="employee_id,employee_name" width="200" height="250" fixed="true" warmUpDelay="20">
+			<Events />
+		</Control>
+		<Control id="editorCustom" type="TextEditor" dropDown="dropdownCustom" dataset="datasetEmployee" field="employee_name" />
+		<Control id="dropdownDegreeMultiSel" type="CustomDropDown" path="dropdown-degree-multisel.jsp" width="200" height="200" warmUpDelay="30" tag="15">
+			<Events>
+				<Event name="onSelect">var text = "";
+var records = selectedObject;
+for (var i = 0; i &lt; records.length; i++) {
+  var record = records[i];
+  if (i &gt; 0) text += ",";
+  text += record.getValue("degree");
+}
+datasetEmployee.setValue("degree", text);
+return false;</Event>
+			</Events>
+		</Control>
+		<Control id="editorDegreeMultiSel" type="TextEditor" dropDown="dropdownDegreeMultiSel" dataset="datasetEmployee" field="degree" />
+		<Control id="dropdownEmployeeMultiSel1" type="CustomDropDown" path="dropdown-employee-multisel.jsp" width="350" height="200" warmUpDelay="40" fixed="true">
+			<Events>
+				<Event name="onSelect">var records = selectedObject;
+datasetEmployee.disableControls();
+for (var i = 0; i &lt; records.length; i++) {
+  var record = records[i];
+  datasetEmployee.insertRecord();
+  datasetEmployee.copyRecord(record);
+  datasetEmployee.postRecord();
+}
+datasetEmployee.enableControls();
+datasetEmployee.refreshControls();
+
+editor.setValue("选择了" + records.length + "位员工!");
+return false;</Event>
+			</Events>
+		</Control>
+		<Control id="editorEmployeeMultiSel1" type="TextEditor" dropDown="dropdownEmployeeMultiSel1" value="批量添加员工" />
+		<Control id="dropdownEmployeeMultiSel2" type="CustomDropDown" path="dropdown-employee-multisel.jsp" fixed="true" width="350" height="350" openMode="subwindow">
+			<Events>
+				<Event name="onSelect">var map = new HashList();
+var record = datasetEmployee.getFirstRecord();
+while (record != null) {
+  map.put(record.getValue("employee_id"), record);
+  record = record.getNextRecord();
+}
+
+var count = 0;
+var records = selectedObject;
+datasetEmployee.disableControls();
+for (var i = 0; i &lt; records.length; i++) {
+  var record = records[i];
+  if (map.get(record.getValue("employee_id")) == null) {
+    datasetEmployee.insertRecord();
+    datasetEmployee.copyRecord(record);
+    datasetEmployee.postRecord();
+    count++;    
+  }
+}
+datasetEmployee.enableControls();
+datasetEmployee.refreshControls();
+
+editor.setValue("添加了" + count + "位员工!");
+return false;</Event>
+			</Events>
+		</Control>
+		<Control id="editorEmployeeMultiSel2" type="TextEditor" dropDown="dropdownEmployeeMultiSel2" value="批量添加员工" />
+		<Control id="dropdownEmployeeMultiSel3" type="CustomDropDown" path="dropdown-left2right.jsp" fixed="true" width="600" height="350" openMode="subwindow">
+			<Events>
+				<Event name="onSelect">var map = new HashList();
+var record = datasetEmployee.getFirstRecord();
+while (record != null) {
+  map.put(record.getValue("employee_id"), record);
+  record = record.getNextRecord();
+}
+
+var count = 0;
+var records = selectedObject;
+datasetEmployee.disableControls();
+for (var i = 0; i &lt; records.length; i++) {
+  var record = records[i];
+  if (map.get(record.getValue("employee_id")) == null) {
+    datasetEmployee.insertRecord();
+    datasetEmployee.copyRecord(record);
+    datasetEmployee.postRecord();
+    count++;    
+  }
+}
+datasetEmployee.enableControls();
+datasetEmployee.refreshControls();
+
+editor.setValue("添加了" + count + "位员工!");
+return false;</Event>
+			</Events>
+		</Control>
+		<Control id="editorEmployeeMultiSel3" type="TextEditor" value="批量添加员工" dropDown="dropdownEmployeeMultiSel3" />
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%">
+			<Column name="employee_id" field="employee_id" width="100" />
+			<Column name="employee_name" field="employee_name" width="60" />
+			<Column name="dept_id" field="dept_id" width="140" />
+			<Column name="sex" field="sex" width="40" />
+			<Column name="married" field="married" width="40" />
+			<Column name="birthday" field="birthday" />
+			<Column name="salary" field="salary" />
+			<Column name="degree" field="degree" />
+			<Column name="email" field="email" />
+			<Column name="web" field="web" />
+			<Column name="cmnt" field="cmnt" />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

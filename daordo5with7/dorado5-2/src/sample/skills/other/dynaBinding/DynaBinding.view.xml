@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets />
+	<Controls>
+		<Control id="datapilot" type="DataPilot" />
+		<Control id="tabset" type="TabSet">
+			<FrameTab name="tab1" path="dyna-binding-frame1.jsp" label="员工信息维护" />
+			<FrameTab name="tab2" path="dyna-binding-frame2.jsp" label="部门信息维护" />
+			<Events>
+				<Event name="afterTabChange">var frame = tab.getFrame();
+if (typeof(frame.contentWindow.registerMe) == "function") {
+  frame.contentWindow.registerMe();
+}</Event>
+			</Events>
+			<FrameTab name="tab3" path="dyna-binding-frame3.jsp" label="分公司信息维护" />
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">function establishBinding(dataset) {
+  datapilot.setDataset(dataset);
+}</Event>
+	</Events>
+</view>
+

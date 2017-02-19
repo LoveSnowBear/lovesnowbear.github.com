@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.scene.validate.UniqueValidateBeforeSaveViewModel">
+	<Datasets>
+		<Dataset type="Wrapper" keyFields="EMPLOYEE_ID" id="datasetEmployee" originTable="EMPLOYEE" dataSource="doradosample" pageSize="10" wrappedType="AutoSql">
+			<MasterLink />
+			<Fields>
+				<Field group="false" dataType="string" table="EMPLOYEE" originField="EMPLOYEE_ID" name="EMPLOYEE_ID">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="string" table="EMPLOYEE" originField="DEPT_ID" name="DEPT_ID">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="string" table="EMPLOYEE" originField="EMPLOYEE_NAME" name="EMPLOYEE_NAME">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="" table="EMPLOYEE" originField="SEX" name="SEX">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="date" table="EMPLOYEE" originField="BIRTHDAY" name="BIRTHDAY">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="" table="EMPLOYEE" originField="MARRIED" name="MARRIED">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="double" table="EMPLOYEE" originField="SALARY" name="SALARY">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="string" table="EMPLOYEE" originField="DEGREE" name="DEGREE">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="string" table="EMPLOYEE" originField="EMAIL" name="EMAIL">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="string" table="EMPLOYEE" originField="WEB" name="WEB">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="string" table="EMPLOYEE" originField="CMNT" name="CMNT">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="string" table="EMPLOYEE" originField="IMAGE" name="IMAGE">
+					<Properties />
+				</Field>
+				<Field name="ID" type="Dummy">
+					<Properties />
+				</Field>
+			</Fields>
+			<Joins />
+			<MatchRules />
+			<SortRules />
+			<Parameters />
+			<Properties />
+			<Events />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control type="AutoForm" dataset="datasetEmployee" id="formEmployee" width="100%">
+			<FormGroup name="group" title="员工信息">
+				<Element name="EMPLOYEE_ID" type="TextEditor" field="EMPLOYEE_ID">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="EMPLOYEE_NAME" type="TextEditor" field="EMPLOYEE_NAME">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="EMAIL" type="TextEditor" field="EMAIL">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control type="DataTable" dataset="datasetEmployee" height="100%" id="tableEmployee" width="100%" showHScrollBar="false" readOnly="true">
+			<Column field="EMPLOYEE_ID" name="EMPLOYEE_ID" />
+			<Column field="EMPLOYEE_NAME" name="EMPLOYEE_NAME" />
+			<Column field="EMAIL" name="EMAIL" />
+			<Column field="WEB" name="WEB" />
+		</Control>
+		<Control id="pagepilotEmployee" dataset="datasetEmployee" type="PagePilot" />
+		<Control id="commandSave" type="UpdateCommand" method="updateRecord">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetEmployee" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+		<Control id="buttonSave" type="Button" width="80" value="保存" command="commandSave" />
+	</Controls>
+	<Properties />
+</view>
+

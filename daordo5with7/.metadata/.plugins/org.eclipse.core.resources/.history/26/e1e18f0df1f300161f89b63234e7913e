@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.performance.TestPerformance2">
+	<Datasets>
+		<Dataset id="dataset1" type="Custom">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date" format="yyyy年MM月dd日">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="table1" type="DataTable" dataset="dataset1" width="100%" height="100%" />
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="onLoad">setTimeout("Debugger.show(\"log\", true);", 200);</Event>
+	</Events>
+</view>
+

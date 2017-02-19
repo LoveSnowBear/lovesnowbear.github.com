@@ -1,0 +1,14 @@
+#Dorado Project
+sourcePath=${project.root}/src
+autoCheckUpgrade=true
+webRoot=${project.root}/web
+defaultURI=
+port=8080
+server=localhost
+archivePath=
+autoBuildProject=true
+webApp=dorado5-2
+autoBrowse=true
+service.autoLogin=true
+javaSourceEncoding=UTF-8
+localHome=${project.root}/home

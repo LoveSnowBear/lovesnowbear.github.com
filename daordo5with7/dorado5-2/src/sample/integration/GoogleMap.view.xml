@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetCondition" type="Form" insertOnEmpty="true">
+			<MasterLink />
+			<Fields>
+				<Field name="companyId" label="编号">
+					<Properties />
+				</Field>
+				<Field name="name" label="名称">
+					<Properties />
+				</Field>
+				<Field name="address" label="地址">
+					<Properties />
+				</Field>
+				<Field name="fax" label="传真">
+					<Properties />
+				</Field>
+				<Field name="phone" label="电话">
+					<Properties />
+				</Field>
+				<Field name="web" label="网址">
+					<Properties />
+				</Field>
+				<Field name="province" label="省份">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetCompany" type="Wrapper" wrappedType="AutoSql" originTable="mis_company" keyFields="companyId" readOnly="true" pageSize="5">
+			<Joins />
+			<Fields>
+				<Field name="select" type="Dummy" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="companyId" originField="companyId" table="mis_company" dataType="string" group="false" label="编号">
+					<Properties />
+				</Field>
+				<Field name="name" originField="name" table="mis_company" dataType="string" group="false" label="名称">
+					<Properties />
+				</Field>
+				<Field name="address" originField="address" table="mis_company" dataType="string" group="false" label="地址">
+					<Properties />
+				</Field>
+				<Field name="fax" originField="fax" table="mis_company" dataType="string" group="false" label="传真">
+					<Properties />
+				</Field>
+				<Field name="phone" originField="phone" table="mis_company" dataType="string" group="false" label="电话">
+					<Properties />
+				</Field>
+				<Field name="web" originField="web" table="mis_company" dataType="string" group="false" label="网址">
+					<Properties />
+				</Field>
+				<Field name="province" label="省份" dataType="string" table="mis_company">
+					<Properties />
+				</Field>
+				<Field name="city" label="城市" dataType="string" table="mis_company">
+					<Properties />
+				</Field>
+				<Field name="content" originField="content" table="mis_company" dataType="string" group="false" label="备注">
+					<Properties />
+				</Field>
+				<Field name="companyLevel" label="重要性" dataType="string" table="mis_company">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":companyId" escapeEnabled="true" table="mis_company" originField="companyId" operator="like" />
+				<MatchRule level="1" dataType="string" value=":name" escapeEnabled="true" table="mis_company" originField="name" operator="like" />
+				<MatchRule level="1" dataType="string" value=":address" escapeEnabled="true" table="mis_company" originField="address" operator="like" />
+				<MatchRule level="1" dataType="string" value=":fax" escapeEnabled="true" table="mis_company" originField="fax" operator="=" />
+				<MatchRule level="1" dataType="string" value=":phone" escapeEnabled="true" table="mis_company" originField="phone" operator="=" />
+				<MatchRule level="1" dataType="string" value=":web" escapeEnabled="true" table="mis_company" originField="web" operator="like" />
+				<MatchRule level="1" dataType="string" value=":province" escapeEnabled="true" table="mis_company" operator="like" originField="province" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+			<Events />
+		</Dataset>
+		<Dataset id="datasetInfo" type="Wrapper" wrappedType="AutoSql" originTable="mis_company" keyFields="companyId" readOnly="true" pageSize="20">
+			<Joins />
+			<Fields>
+				<Field name="select" type="Dummy" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="companyId" originField="companyId" table="mis_company" dataType="string" group="false" label="编号">
+					<Properties />
+				</Field>
+				<Field name="name" originField="name" table="mis_company" dataType="string" group="false" label="名称">
+					<Properties />
+				</Field>
+				<Field name="address" originField="address" table="mis_company" dataType="string" group="false" label="地址">
+					<Properties />
+				</Field>
+				<Field name="fax" originField="fax" table="mis_company" dataType="string" group="false" label="传真">
+					<Properties />
+				</Field>
+				<Field name="phone" originField="phone" table="mis_company" dataType="string" group="false" label="电话">
+					<Properties />
+				</Field>
+				<Field name="web" originField="web" table="mis_company" dataType="string" group="false" label="网址">
+					<Properties />
+				</Field>
+				<Field name="province" label="省份" dataType="string" table="mis_company">
+					<Properties />
+				</Field>
+				<Field name="city" label="城市" dataType="string" table="mis_company">
+					<Properties />
+				</Field>
+				<Field name="content" originField="content" table="mis_company" dataType="string" group="false" label="备注">
+					<Properties />
+				</Field>
+				<Field name="companyLevel" label="重要性" dataType="string" table="mis_company">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":companyId" escapeEnabled="true" table="mis_company" originField="companyId" operator="like" />
+				<MatchRule level="1" dataType="string" value=":name" escapeEnabled="true" table="mis_company" originField="name" operator="like" />
+				<MatchRule level="1" dataType="string" value=":address" escapeEnabled="true" table="mis_company" originField="address" operator="like" />
+				<MatchRule level="1" dataType="string" value=":fax" escapeEnabled="true" table="mis_company" originField="fax" operator="=" />
+				<MatchRule level="1" dataType="string" value=":phone" escapeEnabled="true" table="mis_company" originField="phone" operator="=" />
+				<MatchRule level="1" dataType="string" value=":web" escapeEnabled="true" table="mis_company" originField="web" operator="like" />
+				<MatchRule level="1" dataType="string" value=":province" escapeEnabled="true" table="mis_company" operator="like" originField="province" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="onFilterRecord">if (filterValue!="")
+return (record.getString("province")==filterValue);
+else
+return true;</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="datasetMarker" type="Custom" listener="sample.integration.GoogleMap_datasetMarkerListener">
+			<MasterLink />
+			<Fields>
+				<Field name="xpoint" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="ypoint" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="name">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="formQuery" type="AutoForm" dataset="datasetCondition" width="300">
+			<FormGroup title="查询条件" columnCount="1" labelWidth="50">
+				<Element name="companyId" field="companyId" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="name" field="name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="address" field="address" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="fax" field="fax" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="phone" field="phone" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="web" field="web" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="province" field="province" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="elementButtonQuery" type="Custom" showLabel="false" controlId="buttonQuery">
+					<FieldLabel />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="tableCompany" type="DataTable" dataset="datasetCompany" width="100%" height="100%" fixedColumn="2">
+			<Column name="select" field="select" />
+			<Column name="companyId" field="companyId" width="50" />
+			<Column name="name" field="name" width="160" />
+			<Column name="province" field="province" />
+			<Column name="city" field="city" />
+			<Column name="fax" field="fax" width="100" />
+			<Column name="phone" field="phone" width="100" />
+			<Column name="web" field="web" width="200" />
+			<Column name="address" field="address" width="200" />
+			<Events>
+				<Event name="onRecordDblClick">buttonEdit.click();</Event>
+			</Events>
+		</Control>
+		<Control id="buttonQuery" type="Button" command="commandQuery" value="查询" />
+		<Control id="commandQuery" type="QueryCommand" conditionDataset="datasetCondition" queryDataset="datasetCompany" async="true">
+			<Parameters />
+			<Events>
+				<Event name="beforeExecute">//清空公司记录集的所有参数信息
+datasetCompany.parameters().clear();
+
+var ps = command.parameters();
+//清空查询命令的所有参数信息
+ps.clear();
+//判断查询条件中是否有当前记录
+if (datasetCondition.getCurrent()) {
+  var companyId = datasetCondition.getString("companyId");
+  if (companyId!="") ps.setValue("companyId", "%"+companyId+"%");
+  var name = datasetCondition.getString("name");
+  if (name!="") ps.setValue("name", "%"+name+"%");
+  var address = datasetCondition.getString("address");
+  if (address!="") ps.setValue("address", "%"+address+"%");
+  var fax = datasetCondition.getString("fax");
+  if (fax!="") ps.setValue("fax", fax);
+  var phone = datasetCondition.getString("phone");
+  if (phone!="") ps.setValue("phone", phone);
+  var web = datasetCondition.getString("web");
+  if (web!="") ps.setValue("web", "%"+web+"%");
+}</Event>
+			</Events>
+		</Control>
+		<Control id="buttonAdd" type="Button" value="新增">
+			<Events>
+				<Event name="onClick">showCompany("");</Event>
+			</Events>
+		</Control>
+		<Control id="buttonEdit" type="Button" value="修改">
+			<Events>
+				<Event name="onClick">showCompany(datasetCompany.getValue("companyId"));</Event>
+			</Events>
+		</Control>
+		<Control id="buttonDelete" type="Button" value="删除" command="commandDelete" />
+		<Control id="commandDelete" type="UpdateCommand">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetCompany" submitScope="selected" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+		<Control id="pagepilotCompany" type="PagePilot" dataset="datasetCompany" />
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="onUnload">unload();</Event>
+		<Event name="onLoad">setTimeout(load, 100);</Event>
+		<Event name="functions">var filterValue="";
+
+function load() {
+  if (GBrowserIsCompatible()) {
+    var map = new GMap2(document.getElementById("map"));        
+    map.clearOverlays();
+    map.setCenter(new GLatLng(39.095962936305476, 104.765625), 3);
+    map.addControl(new GMapTypeControl());
+    map.addControl(new GLargeMapControl()); 
+      
+    // map.openInfoWindow(map.getCenter(), document.createTextNode("客户分布图"));
+    
+    // Creates a marker at the given point with the given number label
+    function createMarker(point, number) {
+      var marker = new GMarker(point);
+      GEvent.addListener(marker, "click", function() {  
+        filterValue = number;          
+        showCompanys(marker, number);
+        makeDoradoInfo(number);
+        filterValue = "";            
+      });
+      return marker;
+    }
+    
+    // Add province markers to the map at locations
+    var dataset = datasetMarker;
+    dataset.disableControls();
+    try {
+      dataset.moveFirst();
+      while (!dataset.isLast()) {
+        var point = new GLatLng(dataset.getValue("xpoint"), dataset.getValue("ypoint"));
+        map.addOverlay(createMarker(point, dataset.getValue("name")));
+        
+        dataset.moveNext();
+      }
+    }
+    finally {
+      dataset.enableControls();
+    }
+  }
+}
+
+function unload() {
+  GUnload();
+}
+
+function makeDoradoInfo(number){
+  datasetCondition.setValue("province", number);
+}
+
+function showCompanys(marker, number){
+  if (number){
+    var innerHTML = "";
+    innerHTML += "&lt;br&gt;&lt;br&gt;&lt;font color='red'&gt;重点客户：&lt;/font&gt;";
+    var i=0;
+    var dataset = datasetInfo;
+    dataset.disableControls();
+    try {
+      dataset.moveFirst();
+      while (!dataset.isLast()) {
+        i++;
+        innerHTML += "&lt;br&gt;&lt;a href='javascript:showCompany(\""+dataset.getValue("companyId")+"\")'&gt;"+dataset.getValue("name")+"&lt;/a&gt;";
+        dataset.moveNext();
+      }
+    }
+    finally {
+      dataset.enableControls();
+    }
+    innerHTML = "《"+number+"》共有客户 &lt;b&gt;"+i+" 家&lt;/b&gt;"+innerHTML;
+    marker.openInfoWindowHtml(innerHTML);
+  }
+}
+
+function showCompany(companyId){
+  openPage("company.jsp?companyId="+companyId);
+  subwindow1.show(false,true);
+}
+
+function hideCovering() {
+  // hide the covering
+  var frameCovering = document.getElementById("frameCovering");
+  frameCovering.style.display = "none";
+}
+
+function openPage(path) {
+  // show the covering
+  var frameCovering = document.getElementById("frameCovering");
+  frameCovering.style.display = "";
+  
+  var frameSample = document.getElementById("frameSample");
+  setTimeout("document.getElementById(\"frameSample\").contentWindow.location.href = unescape(\"" +
+    escape(path) + "\")", 0);
+}</Event>
+	</Events>
+</view>
+

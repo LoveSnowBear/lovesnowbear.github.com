@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view safe="false">
+	<Datasets>
+		<Dataset id="datasetStyle" type="Custom" readOnly="true">
+			<MasterLink />
+			<Fields>
+				<Field name="name">
+					<Properties />
+				</Field>
+				<Field name="path">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableStyle" type="DataTable" dataset="datasetStyle" showIndicator="false" showHScrollBar="false" showHeader="false" width="100%" height="100%" rowHeight="80">
+			<Column name="name" field="name">
+				<Events>
+					<Event name="onRefresh">var HTML = "&lt;table height=\"100%\" cellpadding=\"4\"&gt;&lt;tr&gt;&lt;td rowspan=\"2\"&gt;";
+HTML += "&lt;img src=\"images/" + value.toLowerCase() + "-preview.jpg\" style=\"border: 1px gray dotted\"&gt;";
+HTML += "&lt;/td&gt;&lt;td valign=\"bottom\" style=\"font-size: 11pt; font-weight: bold\"&gt;";
+HTML += value + "&lt;/td&gt;&lt;/tr&gt;";
+var path = record.getValue("path");
+HTML += "&lt;/tr&gt;&lt;td valign=\"top\" style=\"color: gray\"&gt;" + path + "&lt;/td&gt;";
+HTML += "&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;";
+cell.innerHTML = HTML;
+cell.style.cursor = "hand";
+return false;</Event>
+				</Events>
+			</Column>
+			<Events>
+				<Event name="onRecordDblClick">commandOK.execute();</Event>
+			</Events>
+		</Control>
+		<Control id="buttonOK" type="Button" value="OK" width="70" command="commandOK" />
+		<Control id="commandOK" type="RequestCommand">
+			<Frame />
+			<Parameters />
+			<Events>
+				<Event name="beforeExecute">command.setPath(datasetStyle.getValue("path") + ".jsp");</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="onDatasetsPrepared">datasetStyle.insertRecord();
+datasetStyle.setValue("name", "Style1");
+datasetStyle.setValue("path", "/scene/main/style1");
+datasetStyle.postRecord();
+
+datasetStyle.insertRecord();
+datasetStyle.setValue("name", "Style2");
+datasetStyle.setValue("path", "/scene/main/style2");
+datasetStyle.postRecord();
+
+datasetStyle.insertRecord();
+datasetStyle.setValue("name", "Style3");
+datasetStyle.setValue("path", "/scene/main/style3");
+datasetStyle.postRecord();
+
+datasetStyle.moveFirst();</Event>
+	</Events>
+</view>
+

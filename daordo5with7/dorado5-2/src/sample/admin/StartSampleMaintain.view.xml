@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view safe="true">
+	<Datasets>
+		<Dataset id="datasetStartSample" type="Wrapper" wrappedType="AutoSql" originTable="START_SAMPLE" keyFields="SAMPLE_ID">
+			<Joins />
+			<Fields>
+				<Field name="SAMPLE_ID" originField="SAMPLE_ID" table="START_SAMPLE" dataType="string" group="false" label="示例" dropDown="dropdownSample">
+					<Properties />
+				</Field>
+				<Field name="SORT_ORDER" originField="SORT_ORDER" table="START_SAMPLE" dataType="int" group="false" label="顺序号">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules>
+				<SortRule originField="SORT_ORDER" table="START_SAMPLE" descent="false" />
+			</SortRules>
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetSample" type="Wrapper" wrappedType="AutoSql" originTable="SAMPLE">
+			<Joins />
+			<Fields>
+				<Field name="SAMPLE_ID" originField="SAMPLE_ID" table="SAMPLE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="SAMPLE_NAME" originField="SAMPLE_NAME" table="SAMPLE" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="int" value="0" escapeEnabled="false" table="SAMPLE" originField="NODE_TYPE" operator="=" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="dropdownSample" type="DatasetDropDown" dataset="datasetSample" valueField="SAMPLE_ID" mapValue="true" labelField="SAMPLE_NAME" fixed="true" />
+		<Control id="datapilotStartSample" type="DataPilot" dataset="datasetStartSample" buttonMoveFirst="hidden" buttonMoveLast="hidden" buttonMoveNext="hidden" buttonMovePrev="hidden" />
+		<Control id="tableStartSample" type="DataTable" dataset="datasetStartSample" width="100%" height="100%" showHScrollBar="false">
+			<Column name="SAMPLE_ID" field="SAMPLE_ID" width="80" />
+			<Column name="SORT_ORDER" field="SORT_ORDER" width="20" />
+		</Control>
+		<Control id="buttonSave" type="Button" command="commandSave" value="保存" width="70" />
+		<Control id="commandSave" type="UpdateCommand" async="true">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetStartSample" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

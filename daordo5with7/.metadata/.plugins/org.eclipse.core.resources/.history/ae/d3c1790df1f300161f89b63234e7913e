@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="dsEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee" pageSize="0" autoLoadPage="false">
+			<MasterLink />
+			<Fields>
+				<Field name="select" type="Dummy">
+					<Properties />
+				</Field>
+				<Field name="employee_id" dataType="string" label="员工编号" readOnly="true">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string" dropDown="dropdownEmployee" label="员工姓名" readOnly="true">
+					<Properties />
+				</Field>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="dsEmployee2" type="Custom">
+			<MasterLink />
+			<Fields>
+				<Field name="select" type="Dummy">
+					<Properties />
+				</Field>
+				<Field name="employee_id" dataType="string" label="员工编号" readOnly="true">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string" dropDown="dropdownEmployee" label="员工姓名" readOnly="true">
+					<Properties />
+				</Field>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="table1" type="DataTable" dataset="dsEmployee" width="100%" height="100%" showHScrollBar="false">
+			<Column name="select" field="select" />
+			<Column name="employee_id" field="employee_id" />
+			<Column name="employee_name" field="employee_name" />
+		</Control>
+		<Control id="table2" type="DataTable" dataset="dsEmployee2" width="100%" rowDraggable="true" height="100%" showHScrollBar="false">
+			<Column name="select" field="select" />
+			<Column name="employee_id" field="employee_id" />
+			<Column name="employee_name" field="employee_name" />
+		</Control>
+		<Control id="button1" type="Button" value="&gt;&gt;&gt;" width="100%">
+			<Events>
+				<Event name="onClick">left2right()</Event>
+			</Events>
+		</Control>
+		<Control id="button2" type="Button" value="&lt;&lt;&lt;&lt;" width="100%">
+			<Events>
+				<Event name="onClick">right2left()</Event>
+			</Events>
+		</Control>
+		<Control id="buttonSubmit" type="Button" value="确定" width="70">
+			<Events>
+				<Event name="onClick">var records = new Array();
+var record = dsEmployee2.getFirstRecord();
+while (record != null) {
+  records.push(record);
+  record = record.getNextRecord();
+}
+DropDown.closeFrame(records);</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">var dsLeft;
+var dsRight;
+//Event
+var toAppandToRight = {};
+var leftSelected = {};
+
+function leftChange(dataset, record, field, oldValue){
+  if(record.getValue("select")){
+    leftSelected[record.getValue("employee_id")] = record;
+    var rightRecord = new Record(dsRight);
+    rightRecord.copyRecord(record);
+    rightRecord.setValue("select",false);
+    toAppandToRight[record.getValue("employee_id")] = rightRecord;
+  }else{
+    delete (leftSelected[record.getValue("employee_id")]);
+    delete (toAppandToRight[record.getValue("employee_id")]);
+  }
+}
+
+function left2right(){
+  var outStart = new Date();
+  setTimeout( 
+    function(){
+      var start = new Date();
+      dsLeft.disableControls();
+      for(var i in leftSelected){
+        var leftRecord;
+        if(i &amp;&amp; i != "_hashCode" &amp;&amp; (leftRecord=leftSelected[i]) ){
+          dsLeft.deleteRecord(leftRecord);
+        }
+      }
+      dsLeft.enableControls();
+      dsLeft.refreshControls();
+      leftSelected = {};
+      var end = new Date();
+      Debugger.log("deleteLeft:" + ((end-start)*0.001) + " sec" );
+    },0);
+  
+  setTimeout(
+    function(){
+      var start = new Date();
+      
+      dsRight.disableControls();
+      var rightRecordArray = [];
+      for(var i in toAppandToRight){
+        var rightRecord;
+        if(i &amp;&amp; i != "_hashCode" &amp;&amp; (rightRecord=toAppandToRight[i])){
+          rightRecordArray.push(rightRecord);
+        }
+      }
+      toAppandToRight = {};
+      dsRight.insertRecords(rightRecordArray);
+      if(dsRight.getCurrent()){
+        dsRight.postRecord();
+      }
+      dsRight.enableControls();
+      dsRight.refreshControls();
+      
+      var end = new Date();
+      Debugger.log("insertRight:" + ((end-start)*0.001) + " sec" );
+    },5
+  ); 
+  
+  var outEnd = new Date();
+  Debugger.log("left2right:" + ((outEnd-outStart)*0.001) + " sec" );
+}
+
+
+var rightSelected = {};
+var toAppandToLeft = {};
+
+function rightChange(dataset, record, field, oldValue){
+  if(record.getValue("select")){
+    rightSelected[record.getValue("employee_id")] = record;
+    var leftRecord = new Record(dsLeft);
+    leftRecord.copyRecord(record);
+    leftRecord.setValue("select",false);
+    toAppandToLeft[record.getValue("employee_id")] = leftRecord;
+  }else{
+    delete (rightSelected[record.getValue("employee_id")]);
+    delete (toAppandToLeft[record.getValue("employee_id")]);
+  }
+}
+
+function right2left(){
+  var outStart = new Date();
+  
+  setTimeout( 
+    function(){
+      var start = new Date();
+      
+      dsRight.disableControls();
+      for(var i in rightSelected){
+        var rightRecord;
+        if(i &amp;&amp; i != "_hashCode" &amp;&amp; (rightRecord=rightSelected[i]) ){
+          dsRight.deleteRecord(rightRecord);
+        }
+      }
+      dsRight.enableControls();
+      dsRight.refreshControls();
+      rightSelected = {};
+      
+      var end = new Date();
+      Debugger.log("deleteRight:" + ((end-start)*0.001) + " sec" );
+    },0);
+  
+  setTimeout(
+    function(){
+      var start = new Date();
+      
+      dsLeft.disableControls();
+      var leftRecordArray = [];
+      for(var i in toAppandToLeft){
+        var leftRecord;
+        if(i &amp;&amp; i != "_hashCode" &amp;&amp; (leftRecord=toAppandToLeft[i])){
+          leftRecordArray.push(leftRecord);
+        }
+      }
+      dsLeft.insertRecords(leftRecordArray);
+      if(dsLeft.getCurrent()){
+        dsLeft.postRecord();
+      }
+      toAppandToLeft = {};
+      dsLeft.enableControls();
+      dsLeft.refreshControls();
+      
+      var end = new Date();
+      Debugger.log("insertLeft:" + ((end-start)*0.001) + " sec" );
+    },5
+  ); 
+  
+  var outEnd = new Date();
+   Debugger.log("right2left:" + ((outEnd-outStart)*0.001) + " sec" );
+}</Event>
+		<Event name="onDatasetsPrepared">dsLeft = dsEmployee;
+dsRight = dsEmployee2;
+
+EventManager.addDoradoEvent(dsLeft, "afterChange", leftChange);
+EventManager.addDoradoEvent(dsRight, "afterChange", rightChange);</Event>
+	</Events>
+</view>
+

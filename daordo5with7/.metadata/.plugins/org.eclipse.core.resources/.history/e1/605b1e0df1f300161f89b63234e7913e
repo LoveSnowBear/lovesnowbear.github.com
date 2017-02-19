@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetBranch" type="Reference" sourceModule="sample.HR" sourceDataset="datasetBranch">
+			<MasterLink />
+			<Fields>
+				<Field name="branch_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="branch_name" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDept" type="Reference" sourceModule="sample.HR" sourceDataset="datasetDept">
+			<MasterLink />
+			<Fields>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="branch_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_name" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters>
+				<Parameter name="branch_id" value="D1" />
+			</Parameters>
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee" autoLoadPage="true">
+			<MasterLink masterDataset="datasetDept" masterKeyFields="dept_id" detailKeyFields="dept_id" detailKeyParameters="dept_id" />
+			<Fields>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="editorBranch" type="TextEditor" dataset="datasetBranch" field="branch_name" dropDown="dropdownBranch" />
+		<Control id="dropdownBranch" type="DatasetDropDown" dataset="datasetBranch" fixed="true" autoDropDown="true" visibleFields="branch_name" />
+		<Control id="buttonQuery" type="Button" value="查询并刷新数据树">
+			<Events>
+				<Event name="onClick">datasetDept.parameters().setValue("branch_id", datasetBranch.getValue("branch_id"));
+datasetDept.setShowLoadingTip(true);
+datasetDept.flushDataAsync(function(succeed) {
+  if (!succeed) return;
+
+  datasetDept.disableControls();
+  try {
+    datasetDept.moveFirst();
+    while (!datasetDept.isLast()) {
+      var node = new RecordTreeNode(datasetDept.getCurrent(), treeEmployee.getTreeLevel("dept"));
+      treeEmployee.addRootNode(node);
+      datasetDept.moveNext();
+    }
+  }
+  finally {
+    datasetDept.enableControls();
+  }
+});</Event>
+			</Events>
+		</Control>
+		<Control id="treeEmployee" type="DataTree" width="100%" height="100%">
+			<TreeLevel name="dept" type="Simple" dataset="datasetDept" labelField="dept_name" expandedIcon="../../images/folder-opened.gif" icon="../../images/folder-closed.gif">
+				<TreeLevel name="employee" type="Simple" dataset="datasetEmployee" labelField="employee_name" icon="../../images/person.gif" hasChild="false" />
+			</TreeLevel>
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

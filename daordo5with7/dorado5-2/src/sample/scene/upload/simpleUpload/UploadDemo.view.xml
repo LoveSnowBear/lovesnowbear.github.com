@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.scene.upload.simpleUpload.UploadDemoViewModel">
+	<Datasets>
+		<Dataset id="dsFiles" type="Custom" insertOnEmpty="true">
+			<MasterLink />
+			<Fields>
+				<Field name="fileName" label="文件名">
+					<Properties />
+				</Field>
+				<Field name="path" label="文件上传路径" readOnly="true">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="formFiles" type="AutoForm" dataset="dsFiles">
+			<FormGroup name="group1" title="文件基本信息">
+				<Element name="fileName" type="TextEditor" field="fileName">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="path" field="path" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="cmdShowUpload" type="RequestCommand" path="do-upload.jsp">
+			<Frame width="400" height="120" center="true" target="_subwindow" />
+			<Parameters />
+		</Control>
+		<Control id="cmdRemoveFile" type="RPCCommand" method="removeFile">
+			<Parameters />
+			<Events>
+				<Event name="beforeExecute">var dataset = dsFiles;
+var record = dataset.getCurrent();
+if(record &amp;&amp; record.getValue("path")){
+  var filePath = record.getValue("path");
+  command.parameters().setValue("filePath",filePath);
+}else{
+  alert("没有可删除的文件。");
+  return new AbortException();
+}</Event>
+				<Event name="onSuccess">var dataset = dsFiles;
+dataset.deleteRecord();
+alert("删除成功。");</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">/**
+ * 上传成功后重置文件名和路径
+ * @param fileName 文件名
+ * @param path 路径
+ */
+function uploadSuccess(fileName,path){
+  dsFiles.clearData();
+  dsFiles.insertRecord();
+  dsFiles.setValue("fileName",fileName);
+  dsFiles.setValue("path",path);
+}
+
+/**
+ * 设置元素的float属性
+ * @param element 要设置float属性的元素
+ * @param value float的值
+ */
+function setStyleFloat(element,value){
+  if(document.all){
+    element.style.styleFloat = value;
+  }else{
+    element.style.cssFloat = value;
+  }
+}
+
+/**
+ * 初始化文件上传Editor。
+ * 该方法会在editor后面添加两个Button。
+ * @param editor 要初始化的TextEditor，注意该Editor需要在AutoForm中。
+ */
+function initFileEditor(editor){
+  editor.style.width = "64%";
+  setStyleFloat(editor,"left");
+  
+  var cell = editor.parentNode;
+  var container = document.createElement("div");
+  
+  var btnAddFile = document.createElement("button");
+  btnAddFile.appendChild(document.createTextNode("上传"));
+  btnAddFile.className = "Button";
+  btnAddFile.style.width = "15%";
+  btnAddFile.style.marginRight = "5px";
+  btnAddFile.onclick = function(){
+     cmdShowUpload.execute();
+  }
+  setStyleFloat(btnAddFile,"right");
+  
+  var btnRemoveFile = document.createElement("button");
+  btnRemoveFile.appendChild(document.createTextNode("删除"));
+  btnRemoveFile.className = "Button";
+  btnRemoveFile.style.width = "15%";
+  btnRemoveFile.onclick = function(){
+     cmdRemoveFile.execute();
+  }
+  setStyleFloat(btnRemoveFile,"right");
+  
+  container.appendChild(editor);
+  container.appendChild(btnRemoveFile);
+  container.appendChild(btnAddFile);
+  
+  cell.appendChild(container);
+}</Event>
+		<Event name="onLoad">initFileEditor(formFiles_editor_fileName);</Event>
+	</Events>
+</view>
+

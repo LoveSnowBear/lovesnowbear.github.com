@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.scene.upload.multiUpload2.UploadDemoViewModel">
+	<Datasets>
+		<Dataset id="dsUploadResult" type="Custom" objectClazz="sample.scene.upload.multiUpload2.UploadResult" autoLoadData="false">
+			<MasterLink />
+			<Fields>
+				<Field name="fileName" dataType="string" label="文件名">
+					<Properties />
+				</Field>
+				<Field name="fileFormat" dataType="string" label="文件格式">
+					<Properties />
+				</Field>
+				<Field name="serverStoreDir" dataType="string" label="服务器端存储路径">
+					<Properties />
+				</Field>
+				<Field name="size" dataType="int" label="文件大小">
+					<Properties />
+				</Field>
+				<Field name="status" dataType="string" label="上传状态" dropDown="ddStatus">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="afterFlushData">var record = dataset.getFirstRecord();
+while (record) {
+  dsUploadedFiles.insertRecord();
+  dsUploadedFiles.copyRecord(record);
+  record = record.getNextRecord();
+}</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="dsUploadFiles" type="Custom" autoLoadData="false">
+			<MasterLink />
+			<Fields>
+				<Field name="fileName" label="文件名">
+					<Properties />
+				</Field>
+				<Field name="fileId">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="dsUploadedFiles" type="Custom">
+			<MasterLink />
+			<Fields>
+				<Field name="fileName" dataType="string" label="文件名">
+					<Properties />
+				</Field>
+				<Field name="fileFormat" dataType="string" label="文件格式">
+					<Properties />
+				</Field>
+				<Field name="serverStoreDir" dataType="string" label="服务器端存储路径">
+					<Properties />
+				</Field>
+				<Field name="size" dataType="int" label="文件大小">
+					<Properties />
+				</Field>
+				<Field name="status" dataType="string" label="上传状态" dropDown="ddStatus">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="commandGetUploadInfo" type="RPCCommand" method="getUploadInfo" showLoadingTip="false">
+			<Parameters />
+			<Events>
+				<Event name="onSuccess">if(!started){
+  /**
+   * 第一次去执行该command的时候要做以下事情：
+   * 1.初始化进度条位置为0。
+   * 2.设置500毫秒后重新去服务器取得数据
+   * 3.设置开始上传状态标识为true。
+   */
+  progressbar.setPosition(0);
+  timeId = setInterval("commandGetUploadInfo.execute();",500);
+  started =true;
+}
+var out = command.outParameters();
+if(out.getValue("status") == "progress") {
+    updateMsg(out);
+} else if(out.getValue("status") == "done"&amp;&amp;started){
+    /**
+     * 上传结束后要做以下事情：
+     * 1.设置进度条为100%。
+     * 2.clearInterval。
+     * 3.重新初始化Form。
+     * 4.取回上传结果。
+     * 5.隐藏上传对话框。
+     * 6.设置开始上传状态标识为false。
+     */
+    updateMsg(out);
+    progressbar.setPosition(100);
+    clearInterval(timeId);
+    clearForm();
+    swUpload.hide();
+    started = false;
+    dsUploadResult.flushData();
+}</Event>
+			</Events>
+		</Control>
+		<Control id="commandRemoveFile" type="RPCCommand" method="removeFile" async="true">
+			<Parameters />
+			<Events>
+				<Event name="beforeExecute">var dataset = dsUploadedFiles;
+var record = dataset.getCurrent();
+if(record){
+  var filePath = record.getValue("serverStoreDir");
+  command.parameters().setValue("filePath",filePath);
+}else{
+  alert("没有可删除的文件。");
+  return new AbortException();
+}</Event>
+				<Event name="onSuccess">var dataset = dsUploadedFiles;
+dataset.deleteRecord();
+alert("删除成功。");</Event>
+			</Events>
+		</Control>
+		<Control id="progressbar" type="ProgressBar" min="0" max="100" width="200" textPattern="\${position}%" />
+		<Control id="tableUploadFiles" type="DataTable" dataset="dsUploadFiles" showHScrollBar="false" width="100%" readOnly="true" showIndicator="false" showHeader="false" height="100%">
+			<Column name="fileName" field="fileName" />
+		</Control>
+		<Control id="tableUploadedFiles" type="DataTable" dataset="dsUploadedFiles" width="100%" readOnly="true" showHScrollBar="false">
+			<Column name="fileName" field="fileName" width="200" />
+			<Column name="serverStoreDir" field="serverStoreDir" width="300" />
+			<Column name="fileFormat" field="fileFormat" width="100" align="center" />
+			<Column name="size" field="size" width="100" align="center">
+				<Events>
+					<Event name="onRefresh">cell.innerText = formatFileSize(value);
+return false;</Event>
+				</Events>
+			</Column>
+			<Column name="status" field="status" width="100" align="center" />
+		</Control>
+		<Control id="ddStatus" type="ListDropDown" mapValue="true" fixed="true" autoDropDown="true">
+			<DropDownItem value="exceedMaxFileSize" label="超过大小限制" />
+			<DropDownItem value="done" label="完成" />
+		</Control>
+		<Control id="swUpload" type="SubWindow" status="hidden" height="400" width="600" showCloseButton="true" title="文件上传" />
+		<Control id="buttonAdd" type="Button" value="上传文件" width="70" height="25">
+			<Events>
+				<Event name="onClick">toggleMsg(false);
+initMsg();
+swUpload.show(true,true);</Event>
+			</Events>
+		</Control>
+		<Control id="buttonRemove" type="Button" width="70" value="移除文件" height="25" command="commandRemoveFile" />
+		<Control id="browseButton" type="Button" value="浏览" height="25" width="70" />
+		<Control id="removeFileButton" type="Button" width="70" height="25" value="移除" />
+		<Control id="uploadButton" type="Button" value="上传" width="70" height="25" />
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">//启动去服务器端取数据的timeId
+var timeId = 0;
+//用来标识是否已经开始上传。
+var started = false;
+//添加的文件数目
+var count = 1;
+/**
+ * document.getElementById的缩写。
+ */
+function $(elementStr){
+  return document.getElementById(elementStr);
+}
+/**
+ * document.createElement的缩写
+ */
+function $c(elementStr){
+  return document.createElement(elementStr);
+}
+/**
+ * 为dataset添加一个新文件。&lt;br/&gt;
+ * 同时会在uploadForm上添加一个file input。
+ */
+function addNewFile(){
+  dsUploadFiles.insertRecord();
+  dsUploadFiles.setValue("fileName",this.value);
+  dsUploadFiles.setValue("fileId","file" + count);
+  addFileField("uploadForm");
+}
+/**
+ * 移除用户选择的文件。
+ * 若dsUploadFiles存在当前记录，则删除该记录。
+ * 同时删除uploadForm中对应的file input。
+ */
+function removeFile(){
+  if(dsUploadFiles.getCurrent()){
+    var fileId = dsUploadFiles.getValue("fileId");
+    if(fileId){
+      var file = $(fileId);
+      if(file){
+        file.parentNode.removeChild(file);
+      }
+    }
+    dsUploadFiles.deleteRecord();
+  }
+}
+/**
+ * 根据count的值来创建一个file input。
+ * 该file input的className为hiddenFile。
+ */
+function addFileField(formId){
+  var form = $(formId);
+  var file = $c("input");
+  file.type = "file";
+  file.name = "file" + ++count;
+  file.id = file.name;
+  file.className = "hiddenFile";
+  file.onchange = addNewFile;
+  form.appendChild(file);
+}
+/**
+ * 清空uploadForm中的file input。
+ * 上传成功后调用此方法。
+ */
+function clearForm(){
+  for(var i = 1; i &lt;= count; i ++){
+    var file = $("file" + i);
+    if(file){
+      file.parentNode.removeChild(file);
+    }
+  }
+  count = 0;
+  addFileField("uploadForm");
+  dsUploadFiles.clearData();
+  dsUploadFiles.refreshControls();
+}
+/**
+ * 切换进度信息的显示与不显示。
+ * @param param 若param为true，则显示进度信息，否则隐藏进度信息
+ */
+function toggleMsg(param){
+  if(param){
+    tableUploadFiles.style.display = "none";
+    msg.style.display = "block";
+  }else{
+    tableUploadFiles.style.display = "block";
+    msg.style.display = "none";
+  }
+}
+/**
+ * 重新初始化进度信息的数据。
+ * 默认全部为0。
+ */
+function initMsg(){
+  $("fileIndex").innerText = "0";
+  $("elapsedTime").innerText = "0";
+  $("totalRead").innerText = "0";
+  $("totalFileSize").innerText = "0";
+}
+/**
+ * 根据commandGetUploadInfo中的传出参数更新进度信息。
+ * @param outParams commandGetUploadInfo的传出参数
+ */
+function updateMsg(outParams){
+    var out = outParams;
+    var totalFileSize = parseInt(parseInt(out.getValue("totalFileSize")) / 1000);
+    var totalRead =  parseInt(parseInt(out.getValue("totalRead")) / 1000);
+    var fileIndex = out.getValue("fileIndex");
+    var elapsedTime = parseInt(parseInt(out.getValue("elapsedTime")) / 1000);
+    progressbar.setPosition(parseInt(totalRead * 100/totalFileSize));
+    $("fileIndex").innerText = fileIndex;
+    $("elapsedTime").innerText = elapsedTime;
+    $("totalRead").innerText = totalRead;
+    $("totalFileSize").innerText = totalFileSize;
+}
+/**
+ * 对文件大小进行格式化
+ * @param size 文件大小
+ * @return 格式化后的字符串
+ */
+function formatFileSize(size){
+  var sizeUnit =["B","KB","MB","GB"];
+  var count = 0;
+  while(size &gt; 1000){
+    size = size / 1000;
+    count++;
+  }
+  return size.toFixed(2) + sizeUnit[count];
+}</Event>
+		<Event name="onLoad">//初始化file1、removeFileButton、uploadButton的事件。
+var hiddenFileInput = $("file1");
+hiddenFileInput.onchange = addNewFile;
+var removeFileButton = $("removeFileButton");
+removeFileButton.onclick = removeFile;
+var uploadButton = $("uploadButton");
+uploadButton.onclick = function(){
+  uploadForm.submit();
+  commandGetUploadInfo.execute();
+  toggleMsg(true);
+}</Event>
+	</Events>
+</view>
+

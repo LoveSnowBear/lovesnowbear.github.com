@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clientType="smartweb2">
+	<Datasets>
+		<Dataset id="datasetCondition" type="Form">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_name" label="姓名(Like)">
+					<Properties />
+				</Field>
+				<Field name="dept_id">
+					<Properties />
+				</Field>
+				<Field name="dept_name" label="部门(=)" dropDown="dropdownDept">
+					<Properties />
+				</Field>
+				<Field name="sex" label="性别(=)">
+					<Properties />
+				</Field>
+				<Field name="married" label="婚否(=)">
+					<Properties />
+				</Field>
+				<Field name="salary1" label="薪水(&gt;=)" dataType="int">
+					<Properties />
+				</Field>
+				<Field name="salary2" label="薪水(&lt;=)" dataType="int">
+					<Properties />
+				</Field>
+				<Field name="birthday1" label="生日(&gt;=)" dataType="date" format="yyyyMMdd">
+					<Properties />
+				</Field>
+				<Field name="birthday2" label="生日(&lt;=)" dataType="date" format="yyyyMMdd">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee" conditionDataset="datasetCondition" pageSize="10" showLoadingTip="true" readOnly="true">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="dept_name" type="Lookup" lookupModule="sample.HR" lookupField="dept_name" keyFields="dept_id" lookupKeyFields="dept_id" label="${Resource.hr.dept_name}" lookupDataset="datasetDeptForLookup">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Events />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="dropdownDept" type="DynamicDropDown" readFields="dept_id,dept_name" writeFields="dept_id,dept_name" visibleFields="dept_name" filterParameter="dept_name" width="200">
+			<Dataset type="DropDown" sourceModule="sample.HR" sourceDataset="datasetDept" pageSize="100">
+				<Fields />
+				<Parameters />
+				<Properties />
+			</Dataset>
+			<Parameters />
+		</Control>
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true" fixed="true">
+			<DropDownItem label="&lt;忽略&gt;" />
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+		<Control id="dropdownMarried" type="ListDropDown" mapValue="true" autoDropDown="true" fixed="true">
+			<DropDownItem label="&lt;忽略&gt;" />
+			<DropDownItem value="true" label="已婚" />
+			<DropDownItem value="false" label="未婚" />
+		</Control>
+		<Control id="buttonQuery" type="Button" value="查询" command="commandQuery" width="100" />
+		<Control id="commandQuery" type="QueryCommand" queryDataset="datasetEmployee" conditionDataset="datasetCondition" async="true">
+			<Parameters />
+			<Events>
+				<Event name="beforeExecute">var employee_name = datasetCondition.getValue("employee_name");
+if (employee_name) {
+  command.parameters().setValue("employee_name", "%" + employee_name + "%");
+}
+else {
+  command.parameters().setValue("employee_name", "");
+}</Event>
+			</Events>
+		</Control>
+		<Control id="formCondition" type="AutoForm" dataset="datasetCondition" width="100%">
+			<FormGroup label="group1" title="查询条件">
+				<Element name="dept_name" type="TextEditor" field="dept_name">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="employee_name" type="TextEditor" field="employee_name">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="sex" type="TextEditor" field="sex">
+					<FieldLabel />
+					<TextEditor dropDown="dropdownSex" />
+				</Element>
+				<Element name="married" type="TextEditor" field="married">
+					<FieldLabel />
+					<TextEditor dropDown="dropdownMarried" />
+				</Element>
+				<Element name="salary1" type="TextEditor" field="salary1">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="salary2" type="TextEditor" field="salary2">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="birthday1" type="TextEditor" field="birthday1">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="birthday2" type="TextEditor" field="birthday2">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="element1" type="Custom" showLabel="false" colSpan="2" controlAlign="right" controlId="buttonQuery">
+					<FieldLabel />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="pilotEmployee" type="PagePilot" dataset="datasetEmployee" maxLink="10" />
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%">
+			<Column name="employee_id" field="employee_id" />
+			<Column name="employee_name" field="employee_name" />
+			<Column name="dept_name" field="dept_name" width="150" />
+			<Column name="sex" field="sex" />
+			<Column name="married" field="married" />
+			<Column name="birthday" field="birthday" width="120" />
+			<Column name="salary" field="salary" />
+			<Events />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

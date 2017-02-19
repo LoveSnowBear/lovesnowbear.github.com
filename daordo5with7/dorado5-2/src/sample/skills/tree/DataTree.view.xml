@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetBranch" type="Reference" sourceModule="sample.HR" sourceDataset="datasetBranch">
+			<MasterLink />
+			<Fields>
+				<Field name="branch_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="branch_name" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDept" type="Reference" sourceModule="sample.HR" sourceDataset="datasetDept" autoLoadPage="true">
+			<MasterLink masterKeyFields="branch_id" detailKeyFields="branch_id" detailKeyParameters="branch_id" masterDataset="datasetBranch" />
+			<Fields>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="branch_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_name" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee" autoLoadPage="true">
+			<MasterLink masterDataset="datasetDept" masterKeyFields="dept_id" detailKeyFields="dept_id" detailKeyParameters="dept_id" />
+			<Fields>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetCategory" type="Reference" sourceModule="sample.Product" sourceDataset="datasetCategory" autoLoadPage="true">
+			<MasterLink />
+			<Fields>
+				<Field name="category_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="category_name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="parent_id" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters>
+				<Parameter name="parent_id" value="$null" />
+			</Parameters>
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="treeHR" type="DataTree" width="100%" height="100%">
+			<TreeLevel name="branch" type="Simple" dataset="datasetBranch" labelField="branch_name" expanded="true">
+				<TreeLevel name="dept" type="Simple" dataset="datasetDept" labelField="dept_name">
+					<TreeLevel name="employee" type="Simple" dataset="datasetEmployee" labelField="employee_name" hasChild="false" checkedField="sex" checkable="true" />
+				</TreeLevel>
+			</TreeLevel>
+			<Events>
+				<Event name="onInitNode">node.setIcon("../../images/folder-closed.gif");
+node.setExpandedIcon("../../images/folder-opened.gif");</Event>
+				<Event name="onActive">var current = datasetDept.getCurrent();
+if (current != null) {
+  var node = treeHR.findNodeByRecord(current);
+  if (node != null) treeHR.expandNode(node);
+}</Event>
+				<Event name="onRefreshNode">if (node.getLevel() &gt; 2) { 
+  if (node.getRecord().getValue("sex")) {
+    node.setIcon("../../images/man.gif");
+  }
+  else {
+    node.setIcon("../../images/woman.gif");
+  }
+}
+return true;</Event>
+			</Events>
+		</Control>
+		<Control id="treeCategory" type="DataTree" width="100%" height="100%">
+			<TreeLevel name="category" type="Recursive" dataset="datasetCategory" recursiveKeyParameters="parent_id" recursiveKeyFields="category_id" labelField="category_name" expandLevel="1" icon="../../images/folder-closed.gif" expandedIcon="../../images/folder-opened.gif" />
+			<Events>
+				<Event name="onClick">var node = tree.getCurrentNode();
+if (node.getNodes().size() &gt; 0 ){
+  var iter = node.getNodes().iterator();       
+  while (iter.hasNext()){         
+     var childNode = iter.next(); 
+     alert(childNode);
+   }
+ }</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+	<Events />
+</view>
+

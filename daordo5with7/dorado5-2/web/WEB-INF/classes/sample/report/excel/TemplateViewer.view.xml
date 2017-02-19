@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets />
+	<Controls>
+		<Control id="labelTemplate" type="Label" text="报表模版: ${Request.template}" />
+		<Control id="buttonShowReport" type="Button" value="显示可打印报表(支持多实例)">
+			<Events>
+				<Event name="onClick">open(getMutilInstanceReportURL(templatePath), "_blank");</Event>
+			</Events>
+		</Control>
+		<Control id="buttonGetTemplate" type="Button" value="下载模版">
+			<Events>
+				<Event name="onClick">open(templatePath + "?op=getTemplate", "_self");</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">var templatePath = __CONTEXT_PATH + "${Request.template}";</Event>
+		<Event name="onLoad">open(templatePath, "frameReport");</Event>
+	</Events>
+</view>
+

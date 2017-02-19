@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     www.BSTEK.com                                                                
+     ====================================================================== -->
+<project name="DoradoProject" default="package">
+
+	<property file="${basedir}/build.properties" />
+
+	<!-- ================================================================== -->
+	<!-- Clean Dorado build file                                   			-->
+	<!-- ================================================================== -->
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="init" depends="clean">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.dir}/doradohome" />
+		<copy todir="${build.dir}/doradohome">
+			<fileset dir="../home">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		<mkdir dir="${build.dir}/web" />
+		<copy todir="${build.dir}/web">
+			<fileset dir="${web.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		
+		<delete file="${build.dir}/web/WEB-INF/dorado.properties" />
+		<copy file="prod-dorado.properties" tofile="${build.dir}/web/WEB-INF/dorado.properties" />
+	</target>
+
+
+	<!-- ================================================================== -->
+	<!-- Make Dorado Web Project war file                                   -->
+	<!-- ================================================================== -->
+	<target name="war" depends="init">
+		<war destfile="${build.dir}/${final.name}.war" webxml="${build.dir}/web/WEB-INF/web.xml">
+			<fileset dir="${build.dir}/web" />
+			<zipfileset prefix="WEB-INF/classes/doradohome" dir="${build.dir}/doradohome" />
+		</war>
+	</target>
+
+	<!-- ================================================================== -->
+	<!-- Make Dorado Web Project ear file                                   -->
+	<!-- ================================================================== -->
+	<target name="ear" depends="war">
+		<ear earfile="${build.dir}/${final.name}.ear"
+        	 appxml="${build.dir}/web/META-INF/application.xml"
+            update="yes">
+			<fileset dir="${build.dir}">
+				<include name="*.war"/>
+			</fileset>
+
+		</ear>
+	</target>
+
+	<target name="package" depends="clean,init,war">
+	</target>
+
+</project>

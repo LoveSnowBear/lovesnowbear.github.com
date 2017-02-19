@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetSample" type="Wrapper" dataSource="doradosample" originTable="SAMPLE" keyFields="SAMPLE_ID" wrappedType="AutoSql" listener="sample.SampleCenter_datasetSampleListener">
+			<Joins />
+			<Fields>
+				<Field name="SAMPLE_ID" originField="SAMPLE_ID" table="SAMPLE" dataType="string" group="false">
+					<Properties>
+						<Property name="keyGenerator" />
+					</Properties>
+				</Field>
+				<Field name="SAMPLE_NAME" originField="SAMPLE_NAME" table="SAMPLE" dataType="string" group="false" label="示例标题">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="NODE_TYPE" originField="NODE_TYPE" table="SAMPLE" dataType="int" group="false">
+					<Properties />
+				</Field>
+				<Field name="PATH" originField="PATH" table="SAMPLE" dataType="string" group="false" label="路径">
+					<Properties />
+				</Field>
+				<Field name="HIGH_LIGHT" originField="HIGH_LIGHT" table="SAMPLE" group="false" label="是否高亮" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="CHILD_NUM" dataType="int" sql="(SELECT COUNT(1) FROM SAMPLE S WHERE S.PARENT_SAMPLE_ID=SAMPLE.SAMPLE_ID) CHILD_NUM" updatable="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":PARENT_SAMPLE_ID" escapeEnabled="true" table="SAMPLE" originField="PARENT_SAMPLE_ID" operator="=" />
+				<MatchRule level="1" operator="=" originField="HIGH_LIGHT" table="SAMPLE" value=":HIGH_LIGHT" dataType="boolean" escapeEnabled="true" />
+			</MatchRules>
+			<SortRules>
+				<SortRule originField="SORT_ORDER" table="SAMPLE" descent="false" />
+			</SortRules>
+			<MasterLink />
+			<Parameters>
+				<Parameter name="PARENT_SAMPLE_ID" value="$null" />
+			</Parameters>
+			<Properties />
+			<Events>
+				<Event name="afterPost">commandUpdate.execute();</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="datasetDescription" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="SAMPLE" autoLoadData="false" async="true">
+			<Joins />
+			<Fields>
+				<Field name="DESCRIPTION" originField="DESCRIPTION" table="SAMPLE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="ARCHIEVE_PATH" originField="ARCHIEVE_PATH" table="SAMPLE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="AUTHOR" originField="AUTHOR" table="SAMPLE" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":SAMPLE_ID" escapeEnabled="false" table="SAMPLE" originField="SAMPLE_ID" operator="=" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetSearchResult" type="Custom" listener="sample.SampleCenter_datasetSearchResultListener" autoLoadData="false" readOnly="true">
+			<MasterLink />
+			<Fields>
+				<Field name="SAMPLE_ID" dataType="string">
+					<Properties>
+						<Property name="keyGenerator" />
+					</Properties>
+				</Field>
+				<Field name="SAMPLE_NAME" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="NODE_TYPE" dataType="int">
+					<Properties />
+				</Field>
+				<Field name="PATH" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="HIGH_LIGHT" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="CHILD_NUM" dataType="int">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="outlookbarNav" type="OutlookBar">
+			<Group name="groupTree" label="示例浏览" />
+			<Group name="groupSearch" label="示例搜索" />
+		</Control>
+		<Control id="treeSample" type="DataTree" width="100%" height="100%">
+			<Events>
+				<Event name="onInitNode">var record = node.getRecord();
+if (record) {
+  if (record.getValue("node_type") == 1) {
+    node.setIcon("images/folder-closed.gif");
+    node.setExpandedIcon("images/folder-opened.gif");
+  }
+  else {
+    node.setIcon("images/leaf.gif");    
+  }
+  
+  if (!node.isExpanded()) {
+    node.setHasChild(record.getValue("child_num") &gt; 0);
+  }
+}</Event>
+				<Event name="onRefreshNode">var record = node.getRecord();
+var highlight = record.getValue("high_light");
+var childnum = record.getValue("child_num");
+if (childnum == 0 &amp;&amp; !highlight) {
+  return true;
+}
+else {
+  var HTML = value;
+  if (childnum &gt; 0) {
+    HTML += "&amp;nbsp;&lt;FONT color=\"#A0A0A0\"&gt;[" + childnum + "]&lt;/FONT&gt;";
+  }
+  if (highlight) {
+    HTML += "&lt;IMG src=\"images/highlight.gif\" style=\"margin-left: 4\"&gt;";
+  }
+  cell.innerHTML = HTML;
+  return false;
+}</Event>
+				<Event name="onClick">nodeChanged();</Event>
+				<Event name="onActive">treeSample.style.borderStyle = "none";</Event>
+			</Events>
+			<TreeLevel name="sample" type="Recursive" dataset="datasetSample" labelField="SAMPLE_NAME" recursiveKeyParameters="PARENT_SAMPLE_ID" recursiveKeyFields="SAMPLE_ID" expandLevel="1" />
+		</Control>
+		<Control id="treeSearchResult" type="DataTree" width="100%" height="100%">
+			<TreeLevel name="searchResult" type="Simple" labelField="SAMPLE_NAME" dataset="datasetSearchResult">
+				<TreeLevel name="sample" type="Recursive" dataset="datasetSample" labelField="SAMPLE_NAME" recursiveKeyParameters="PARENT_SAMPLE_ID" recursiveKeyFields="SAMPLE_ID" expandLevel="1" masterKeyFields="SAMPLE_ID" detailKeyParameters="PARENT_SAMPLE_ID" />
+			</TreeLevel>
+			<Events>
+				<Event name="onInitNode">var record = node.getRecord();
+if (record) {
+  if (record.getValue("node_type") == 1) {
+    node.setIcon("images/folder-closed.gif");
+    node.setExpandedIcon("images/folder-opened.gif");
+  }
+  else {
+    node.setIcon("images/leaf.gif");    
+  }
+  
+  if (!node.isExpanded()) {
+    node.setHasChild(record.getValue("child_num") &gt; 0);
+  }
+}</Event>
+				<Event name="onRefreshNode">var record = node.getRecord();
+var highlight = record.getValue("high_light");
+var childnum = record.getValue("child_num");
+if (childnum == 0 &amp;&amp; !highlight) {
+  return true;
+}
+else {
+  var HTML = value;
+  if (childnum &gt; 0) {
+    HTML += "&amp;nbsp;&lt;FONT color=\"#A0A0A0\"&gt;[" + childnum + "]&lt;/FONT&gt;";
+  }
+  if (highlight) {
+    HTML += "&lt;IMG src=\"images/highlight.gif\" style=\"margin-left: 4\"&gt;";
+  }
+  cell.innerHTML = HTML;
+  return false;
+}</Event>
+				<Event name="onClick">var node = tree.getCurrentNode();
+if (node) {
+  var record = node.getRecord();
+  showDescription(record.getValue("sample_id"));
+  openSample(record);
+}</Event>
+			</Events>
+		</Control>
+		<Control id="editorSearch" type="TextEditor" width="100%" />
+		<Control id="buttonSearch" type="Button" value="搜索" command="commandSearch" />
+		<Control id="commandSearch" type="QueryCommand" queryDataset="datasetSearchResult" async="true" showLoadingTip="true">
+			<Parameters />
+			<Events>
+				<Event name="beforeExecute">var searchCondition = editorSearch.getValue();
+if (searchCondition) {
+  command.parameters().setValue("searchCondition", searchCondition);
+}
+else {
+  throw new DoradoException("请输入搜索条件.");
+}</Event>
+				<Event name="onSuccess">var record = datasetSearchResult.getFirstRecord();
+while (record) {
+  var node = new RecordTreeNode(record, treeSearchResult.getTreeLevel("searchResult"));
+  treeSearchResult.addRootNode(node);
+  record = record.getNextRecord();
+}</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">function showCovering() {
+  var frameCovering = document.getElementById("frameCovering");
+  frameCovering.style.display = "";
+}
+  
+function hideCovering() {
+  var frameCovering = document.getElementById("frameCovering");
+  frameCovering.style.display = "none";
+}
+
+function openPage(path) {
+  showCovering();
+  
+  var frameSample = document.getElementById("frameSample");
+  setTimeout("document.getElementById(\"frameSample\").src = unescape(\"" +
+    escape(path) + "\")", 0);
+}
+
+function nodeChanged() {
+  var node = treeSample.getCurrentNode();
+  if (node != null) {
+    var record = node.getRecord();
+    openSample(record);
+    showDescription(record.getValue("sample_id"));
+  }
+}
+
+function openSample(record) {
+  var path = record.getValue("path");
+  if (path) {
+    openPage(path);
+  }
+  else {      
+    openPage("welcome.html");
+  }
+  windowSample.setTitle(record.getValue("sample_name")); 
+}
+
+function showDescription(sampleId) {
+  datasetDescription.parameters().setValue("sample_id", sampleId);
+  datasetDescription.flushDataAsync(function(succeed) {
+    var description, author;
+    if (succeed &amp;&amp; datasetDescription.getCurrent()) {
+      description = datasetDescription.getValue("description");
+      author = datasetDescription.getValue("author");
+    }
+    var innerHTML;
+    innerHTML = (author) ? "作者:&lt;a href=\"mailto:" + author + "\"&gt;" + author + "&lt;/a&gt;&lt;hr&gt;" : "";
+    innerHTML += (description) ? description : "无";
+    divDescription.innerHTML = innerHTML;
+  });
+}</Event>
+		<Event name="onLoad">nodeChanged();
+setTimeout("splitpanel1.setPosition(220)", 250);</Event>
+	</Events>
+</view>
+

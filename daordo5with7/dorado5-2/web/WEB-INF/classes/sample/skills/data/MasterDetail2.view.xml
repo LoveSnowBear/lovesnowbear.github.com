@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.skills.data.MasterDetail2ViewModel">
+	<Datasets>
+		<Dataset id="datasetMaster" type="Wrapper" wrappedType="AutoSql" originTable="test_master" keyFields="id">
+			<MasterLink />
+			<Joins />
+			<Fields>
+				<Field name="id" originField="id" table="test_master" dataType="long" group="false" readOnly="true" label="自动主键" toolTip="该字段的数值由数据库自动生成">
+					<Properties />
+				</Field>
+				<Field name="field1" originField="field1" table="test_master" dataType="string" group="false" label="可输入字段">
+					<Properties />
+				</Field>
+				<Field name="field2" originField="field2" table="test_master" dataType="double" group="false" readOnly="true" label="自动数字" toolTip="该字段的数值由ViewModel中的逻辑代码自动产生">
+					<Properties />
+				</Field>
+				<Field name="field3" originField="field3" table="test_master" dataType="datetime" group="false" readOnly="true" label="自动日期" toolTip="该字段的数值由ViewModel中的逻辑代码自动产生">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDetail" type="Wrapper" wrappedType="AutoSql" originTable="test_detail" keyFields="id">
+			<MasterLink masterDataset="datasetMaster" masterKeyFields="id" detailKeyFields="fk_id" detailKeyParameters="fk_id" />
+			<Joins />
+			<Fields>
+				<Field name="id" originField="id" table="test_detail" group="false" dataType="long" readOnly="true" label="自动主键" toolTip="该字段的数值由数据库自动生成">
+					<Properties />
+				</Field>
+				<Field name="fk_id" originField="fk_id" table="test_detail" group="false" dataType="long" readOnly="true" label="外键" toolTip="外键关系可由dorado自动维护">
+					<Properties />
+				</Field>
+				<Field name="field1" originField="field1" table="test_detail" group="false" dataType="string" label="可输入字段">
+					<Properties />
+				</Field>
+				<Field name="field2" originField="field2" table="test_detail" dataType="double" group="false" readOnly="true" label="自动数字" toolTip="该字段的数值由ViewModel中的逻辑代码自动产生">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="int" value=":fk_id" escapeEnabled="false" table="test_detail" originField="fk_id" operator="=" />
+			</MatchRules>
+			<SortRules />
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="buttonUpdate" type="Button" value="主从表同时提交并更新" command="commandUpdate" />
+		<Control id="commandUpdate" type="UpdateCommand">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetMaster" />
+				<DatasetInfo dataset="datasetDetail" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+		<Control id="datapilotMaster" type="DataPilot" dataset="datasetMaster" buttonMoveFirst="hidden" buttonMoveLast="hidden" buttonMoveNext="hidden" buttonMovePrev="hidden" buttonNextPage="hidden" buttonPrevPage="hidden" />
+		<Control id="tableMaster" type="DataTable" dataset="datasetMaster" height="100%" width="100%" confirmDelete="false">
+			<Column name="id" field="id" />
+			<Column name="field1" field="field1" width="160">
+				<Events />
+			</Column>
+			<Column name="field2" field="field2" />
+			<Column name="field3" field="field3" width="160" />
+		</Control>
+		<Control id="datapilotDetail" type="DataPilot" dataset="datasetDetail" buttonMoveFirst="hidden" buttonMoveNext="hidden" buttonMoveLast="hidden" buttonMovePrev="hidden" buttonNextPage="hidden" buttonPrevPage="hidden" />
+		<Control id="tableDetail" type="DataTable" dataset="datasetDetail" height="100%" width="100%" confirmDelete="false">
+			<Column name="id" field="id" />
+			<Column name="fk_id" field="fk_id" />
+			<Column name="field1" field="field1" width="160">
+				<Events />
+			</Column>
+			<Column name="field2" field="field2" />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

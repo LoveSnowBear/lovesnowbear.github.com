@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.scene.query.TreeQueryViewModel">
+	<Datasets>
+		<Dataset type="Form" id="datasetCondition">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_id" label="工号" toolTip="员工编号">
+					<Properties />
+				</Field>
+				<Field name="employee_name" label="姓名">
+					<Properties />
+				</Field>
+				<Field name="sex" label="性别" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="dept_id" label="部门" dropDown="dropdownDept">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetEmployee" type="Wrapper" dataSource="doradosample" originTable="EMPLOYEE" pageSize="20" wrappedType="AutoSql">
+			<Joins>
+				<Join name="DEPT" originTable="DEPT" keyFields="DEPT_ID" sourceTable="EMPLOYEE" sourceKeyFields="DEPT_ID" />
+				<Join name="BRANCH" originTable="BRANCH" keyFields="BRANCH_ID" sourceTable="DEPT" sourceKeyFields="BRANCH_ID" />
+			</Joins>
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="工号">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="姓名">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false" label="部门" dropDown="dropdownDept">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" label="性别" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="BIRTHDAY" originField="BIRTHDAY" table="EMPLOYEE" dataType="date" group="false" label="出生日期">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="BRANCH_ID" originField="BRANCH_ID" table="BRANCH" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="EMAIL" originField="EMAIL" table="EMPLOYEE" dataType="string" group="false" label="邮箱">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":EMPLOYEE_ID" escapeEnabled="true" table="EMPLOYEE" originField="EMPLOYEE_ID" operator="like" />
+				<MatchRule level="1" dataType="string" value=":EMPLOYEE_NAME" escapeEnabled="true" table="EMPLOYEE" originField="EMPLOYEE_NAME" operator="like" />
+				<MatchRule level="1" dataType="string" value=":DEPT_ID" escapeEnabled="true" table="EMPLOYEE" originField="DEPT_ID" operator="=" />
+				<MatchRule level="1" value=":SEX" escapeEnabled="true" table="EMPLOYEE" originField="SEX" operator="=" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetBranch_tree" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="BRANCH">
+			<Joins />
+			<Fields>
+				<Field name="BRANCH_ID" originField="BRANCH_ID" table="BRANCH" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="BRANCH_NAME" originField="BRANCH_NAME" table="BRANCH" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDept_tree" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="DEPT" autoLoadData="false">
+			<Joins />
+			<Fields>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="BRANCH_ID" originField="BRANCH_ID" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":BRANCH_ID" escapeEnabled="false" table="DEPT" originField="BRANCH_ID" operator="=" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetEmployee_tree" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="EMPLOYEE" autoLoadData="false">
+			<Joins />
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":DEPT_ID" escapeEnabled="false" table="EMPLOYEE" originField="DEPT_ID" operator="=" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDept_dic" type="Wrapper" dataSource="doradosample" originTable="DEPT" wrappedType="AutoSql">
+			<Joins />
+			<Fields>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetRoot_tree" type="Custom" listener="sample.scene.query.ProductTree_datasetRootListener">
+			<MasterLink />
+			<Fields>
+				<Field name="category_id">
+					<Properties />
+				</Field>
+				<Field name="category_name">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetCategory_tree" type="Reference" sourceModule="sample.Product" sourceDataset="datasetCategory" autoLoadData="false">
+			<MasterLink />
+			<Fields>
+				<Field name="category_id" dataType="string" valueProtected="true">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="parent_id" dataType="string" readOnly="true">
+					<Properties />
+				</Field>
+				<Field name="category_name" dataType="string" defaultValue="&lt;新分类&gt;">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events />
+		</Dataset>
+		<Dataset id="datasetProduct_tree" type="Reference" sourceModule="sample.Product" sourceDataset="datasetProduct" autoLoadData="false">
+			<MasterLink />
+			<Fields>
+				<Field name="product_id" dataType="string" valueProtected="true">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="category_id" dataType="string" readOnly="true">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="product_name" dataType="string" defaultValue="&lt;新产品&gt;">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="spec" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="brand" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="weight" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="size" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetProduct" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="PRODUCT" keyFields="PRODUCT_ID">
+			<Joins />
+			<Fields>
+				<Field name="PRODUCT_ID" originField="PRODUCT_ID" table="PRODUCT" dataType="string" group="false" label="产品编号">
+					<Properties />
+				</Field>
+				<Field name="PRODUCT_NAME" originField="PRODUCT_NAME" table="PRODUCT" dataType="string" group="false" label="产品名称">
+					<Properties />
+				</Field>
+				<Field name="CATEGORY_ID" originField="CATEGORY_ID" table="PRODUCT" dataType="string" group="false" label="分类ID">
+					<Properties />
+				</Field>
+				<Field name="SPEC" originField="SPEC" table="PRODUCT" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="BRAND" originField="BRAND" table="PRODUCT" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="WEIGHT" originField="WEIGHT" table="PRODUCT" dataType="double" group="false" label="重量">
+					<Properties />
+				</Field>
+				<Field name="SIZE" originField="SIZE" table="PRODUCT" dataType="double" group="false" label="尺寸">
+					<Properties />
+				</Field>
+				<Field name="CMNT" originField="CMNT" table="PRODUCT" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="nodePath" type="Dummy">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="formCondition" type="AutoForm" dataset="datasetCondition" defaultLabelWidth="60">
+			<FormGroup name="group1" title="员工查询">
+				<Element field="employee_id" type="TextEditor" name="employee_id">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="employee_name" type="TextEditor" name="employee_name">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="sex" type="TextEditor" name="sex">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="dept_id" type="TextEditor" name="dept_id">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="buttonGoSimpleNode" type="Button" value="定位树节点" width="150">
+			<Events>
+				<Event name="onClick">TreeQuery.simpleQuery();</Event>
+			</Events>
+		</Control>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%" showHScrollBar="false" readOnly="true">
+			<Column name="EMPLOYEE_ID" field="EMPLOYEE_ID" width="120" />
+			<Column name="EMPLOYEE_NAME" field="EMPLOYEE_NAME" />
+			<Column name="SEX" field="SEX" width="50" />
+			<Column name="BIRTHDAY" field="BIRTHDAY" />
+			<Column name="SALARY" field="SALARY" width="50" />
+			<Events>
+				<Event name="onRecordDblClick">TreeQuery.simpleQuery();</Event>
+			</Events>
+			<Column name="DEGREE" field="DEGREE" width="50" />
+			<Column name="EMAIL" field="EMAIL" width="150" />
+		</Control>
+		<Control id="treeEmployee" type="DataTree" width="200" height="100%">
+			<TreeLevel name="levelBranch" type="Simple" dataset="datasetBranch_tree" labelField="BRANCH_NAME" expanded="true">
+				<TreeLevel name="levelDept" type="Simple" dataset="datasetDept_tree" labelField="DEPT_NAME" detailKeyParameters="BRANCH_ID" masterKeyFields="BRANCH_ID">
+					<TreeLevel name="levelEmployee" type="Simple" dataset="datasetEmployee_tree" labelField="EMPLOYEE_NAME" detailKeyParameters="DEPT_ID" masterKeyFields="DEPT_ID" hasChild="false" />
+				</TreeLevel>
+			</TreeLevel>
+		</Control>
+		<Control id="pagepilotEmployee" type="PagePilot" dataset="datasetEmployee" />
+		<Control id="dropdownDept" type="DatasetDropDown" dataset="datasetDept_dic" mapValue="true" labelField="DEPT_NAME" valueField="DEPT_ID" startWithEmptyRecord="true" autoDropDown="true" />
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true">
+			<DropDownItem />
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+		<Control id="commandQuery" type="QueryCommand" conditionDataset="datasetCondition" queryDataset="datasetEmployee">
+			<Parameters />
+			<Events>
+				<Event name="beforeExecute">var employeeId=datasetCondition.getValue("employee_id");
+var employeeName=datasetCondition.getValue("employee_name");
+if(employeeId){
+  command.parameters().setValue("employee_id","%"+employeeId+"%");
+}else{
+  command.parameters().setValue("employee_id",null);
+}
+
+if(employeeName){
+  command.parameters().setValue("employee_name","%"+employeeName+"%");
+}else{
+  command.parameters().setValue("employee_name",null);
+}</Event>
+			</Events>
+		</Control>
+		<Control id="buttonQuery" type="Button" width="70" value="查询" command="commandQuery" />
+		<Control id="tabset1" type="TabSet" height="100%" width="100%">
+			<Tab name="tab1" label="定位简单树节点" />
+			<Tab name="tab2" label="定位迭代树节点" autoScroll="true" />
+			<Tab name="tab3" label="应对大体积树的方案" />
+		</Control>
+		<Control id="treeProduct" type="DataTree" width="200" height="100%" draggable="true">
+			<Events />
+			<TreeLevel name="root" type="Simple" dataset="datasetRoot_tree" labelField="category_name" expanded="true">
+				<TreeLevel name="category" type="Recursive" dataset="datasetCategory_tree" recursiveKeyFields="category_id" recursiveKeyParameters="parent_id" labelField="category_name" detailKeyParameters="parent_id" masterKeyFields="category_id" expandLevel="1">
+					<TreeLevel name="product" type="Simple" dataset="datasetProduct_tree" masterKeyFields="category_id" detailKeyParameters="category_id" labelField="product_name" hasChild="false" />
+				</TreeLevel>
+			</TreeLevel>
+		</Control>
+		<Control id="tableProduct" type="DataTable" dataset="datasetProduct" height="100%" width="100%" readOnly="true" showHScrollBar="false">
+			<Column name="PRODUCT_ID" field="PRODUCT_ID" />
+			<Column name="PRODUCT_NAME" field="PRODUCT_NAME" />
+			<Column name="WEIGHT" field="WEIGHT" />
+			<Column name="SIZE" field="SIZE" />
+			<Events>
+				<Event name="onRecordDblClick">TreeQuery.rescurseQuery();</Event>
+			</Events>
+		</Control>
+		<Control id="commandGetNodePath" type="RPCCommand" method="getNodePath" async="true" showLoadingTip="false">
+			<Parameters />
+			<Events>
+				<Event name="onFailure">TreeQuery.getNodePath_ExceptionHandler(command,exception);
+return false;</Event>
+				<Event name="onSuccess">TreeQuery.getNodePath_Callback(command);</Event>
+			</Events>
+		</Control>
+		<Control id="buttonGoRescursiveNode" type="Button" value="定位树节点" width="150">
+			<Events>
+				<Event name="onClick">TreeQuery.rescurseQuery();</Event>
+			</Events>
+		</Control>
+		<Control id="commandDeleteProduct" type="UpdateCommand" method="deleteProduct" async="false">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetProduct" submitScope="current" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">var TreeQuery={
+  /**
+   * 在treeEmployee中定位与datasetEmployee的当前记录信息相同的树节点
+   */
+  simpleQuery:function(){
+    var branchId,deptId,employeeId,emp = datasetEmployee.getCurrent();
+    var branch,dept,employee,branchNode,deptNode,employeeNode;
+    if(emp){
+      employeeId=emp.getValue("employee_id");
+      branchId=emp.getValue("branch_id");
+      deptId=emp.getValue("dept_id");
+      branch = datasetBranch_tree.find(["branch_id"],[branchId]);
+      if(branch){
+        branchNode = treeEmployee.findNodeByRecord(branch);
+        if(branchNode){
+          branchNode.setExpanded(true);
+          dept = datasetDept_tree.find(["dept_id"],[deptId]);
+          if(dept){
+            deptNode = treeEmployee.findNodeByRecord(dept);
+            if(deptNode){
+              deptNode.setExpanded(true);
+              employee = datasetEmployee_tree.find(["employee_id"],[employeeId]);
+              if(employee){
+                employeeNode = treeEmployee.findNodeByRecord(employee);
+                if(employeeNode){treeEmployee.setCurrentNode(employeeNode);}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  /**
+   * 在treeProduct中定位与datasetProduct的当前记录信息相同的树节点
+   */
+  rescurseQuery:function(){
+    var product = datasetProduct.getCurrent();
+    if(!product){return;}
+    var nodePath=product._nodePath;
+    if(nodePath){
+      TreeQuery.goProductNode(nodePath);
+    }else{
+      var cmd=commandGetNodePath;
+      datasetProduct._currentRecord=product;
+      cmd.parameters().setValue("productId",product.getValue("product_id"));
+      cmd.parameters().setValue("categoryId",product.getValue("category_id"));
+      cmd.execute();
+    }
+  },
+  getNodePath_Callback:function(command){
+    var nodePath=command.outParameters().getValue("nodePath");
+    if(datasetProduct._currentRecord &amp;&amp; datasetProduct._currentRecord.getValue("product_id")==command.outParameters().getValue("productId")) {
+      datasetProduct._currentRecord._nodePath=nodePath;
+      datasetProduct._currentRecord=null;
+    }
+    TreeQuery.goProductNode(nodePath);
+  },
+  getNodePath_ExceptionHandler:function(command,exception){
+    if(confirm(exception+"\n是否要删除该记录？")){
+      commandDeleteProduct.execute();
+    }
+  },
+  /**
+   * 根据nodePath定位treeProduct的节点
+   * @param {String}nodePath ','分割的ID串，最后一个是product_id，其余为category_id
+   */
+  goProductNode:function(nodePath){
+    var pathArray = nodePath.split(",");
+    var productId = pathArray.pop();
+    for(var i=0,l=pathArray.length; i&lt;l; i++){
+      var dategory = datasetCategory_tree.find(['category_id'],[pathArray[i]]);
+      treeProduct.findNodeByRecord(dategory).setExpanded(true);
+    }
+    product = datasetProduct_tree.find(['product_id'],[productId]);
+    var productNode=treeProduct.findNodeByRecord(product);
+    treeProduct.setCurrentNode(productNode);
+  }
+}</Event>
+	</Events>
+</view>
+

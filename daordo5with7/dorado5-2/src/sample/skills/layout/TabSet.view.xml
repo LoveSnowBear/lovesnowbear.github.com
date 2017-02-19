@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.skills.layout.TabSetViewModel">
+	<Datasets>
+		<Dataset id="datasetTab" type="Custom">
+			<MasterLink />
+			<Fields>
+				<Field name="name">
+					<Properties />
+				</Field>
+				<Field name="label" label="标签页">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="afterScroll">if (isDoradoComponent(tabset3)) {
+  tabset3.setCurrentTab(dataset.getString("name"));
+}</Event>
+			</Events>
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tabset1" type="TabSet">
+			<Tab name="tab1" label="动态标签页" />
+			<Tab name="tab2" label="隐藏按钮的标签页" />
+			<Tab name="tab3" label="标签3" />
+			<Tab name="tab4" label="标签4" />
+			<Tab name="tab5" label="标签5" />
+			<FrameTab name="tab6" label="Google" path="http://www.google.com" />
+			<FrameTab name="tab7" label="Baidu" path="http://www.baidu.com" />
+			<FrameTab name="tab8" path="http://www.bstek.com" label="锐道网站" />
+			<FrameTab name="tab9" label="dorado控制台" path="/dorado/console.d" />
+			<Events />
+		</Control>
+		<Control id="tabset2" type="TabSet" tabPlacement="bottom" />
+		<Control id="buttonAddTab" type="Button" value="添加标签">
+			<Events>
+				<Event name="onClick">serialNumber++;
+var newTab = new Tab("tab" + serialNumber, "标签" + serialNumber);
+newTab.setAutoCreateDiv(true);
+tabset2.addTab(newTab);
+tabset2.setCurrentTab(newTab);
+
+var color = Math.round(Math.random() * Math.pow(16, 6)).toString(16);
+if (color.length &lt; 6) {
+  for (var i = color.length; i &lt; 6; i++) color += "0";
+}
+newTab.getDiv().innerHTML = "&lt;TABLE width=\"100%\" height=\"100%\"&gt;&lt;TR&gt;&lt;TD align=\"center\"&gt;" +
+  "&lt;DIV style=\"width: 150; height: 100; background-color: #" + color + ";\"&gt;&lt;/DIV&gt;" + 
+  "&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;";</Event>
+			</Events>
+		</Control>
+		<Control id="buttonDisableCurrent" type="Button" value="禁用当前标签">
+			<Events>
+				<Event name="onClick">var tab = tabset2.getCurrentTab();
+if (tab != null) tab.setDisabled(true);</Event>
+			</Events>
+		</Control>
+		<Control id="buttonRemoveCurrent" type="Button" value="移除当前标签">
+			<Events>
+				<Event name="onClick">var tab = tabset2.getCurrentTab();
+if (tab != null) tabset2.removeTab(tab);</Event>
+			</Events>
+		</Control>
+		<Control id="buttonRemoveAll" type="Button" value="移除所有标签">
+			<Events>
+				<Event name="onClick">tabset2.removeAllTabs();</Event>
+			</Events>
+		</Control>
+		<Control id="buttonHideTabs" type="Button" value="隐藏标签按钮" allowPushDown="true" down="true">
+			<Events>
+				<Event name="onClick">var visible = !button.isDown();
+var count = tabset3.getTabCount();
+for (var i = count - 1; i &gt;= 0; i--) {
+  var tab = tabset3.getTab(i);
+  tab.setVisible(visible);
+}</Event>
+			</Events>
+		</Control>
+		<Control id="tabset3" type="TabSet">
+			<Tab name="tab1" label="标签1" visible="false" />
+			<Tab name="tab2" label="标签2" visible="false" />
+			<Tab name="tab3" label="标签3" visible="false" />
+			<Tab name="tab4" label="标签4" visible="false" />
+			<Tab name="tab5" label="标签5" visible="false" />
+			<Events>
+				<Event name="onActive">tabset3.setCurrentTab(datasetTab.getString("name"));</Event>
+			</Events>
+		</Control>
+		<Control id="tableTab" type="DataTable" dataset="datasetTab" showIndicator="false" showHScrollBar="false" readOnly="true" height="100%" width="180" scrollMode="simple">
+			<Column name="label" field="label" />
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">var serialNumber = 0;</Event>
+	</Events>
+</view>
+

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+	<Datasets>
+		<Dataset id="datasetContract" type="AutoSql" originTable="contract" keyFields="contract_no" retrieveAfterUpdate="true">
+			<Joins>
+				<Join name="employee" originTable="employee" keyFields="employee_id" sourceTable="contract" sourceKeyFields="owner" joinMode="select_expression" />
+			</Joins>
+			<Fields>
+				<Field name="contract_no" originField="contract_no" table="contract" group="false" label="合同号">
+					<Properties />
+				</Field>
+				<Field name="owner" originField="owner" table="contract" group="false">
+					<Properties />
+				</Field>
+				<Field name="owner_name" originField="employee_name" table="employee" group="false" label="业务员">
+					<Properties />
+				</Field>
+				<Field name="customer" originField="customer" table="contract" group="false" label="客户">
+					<Properties />
+				</Field>
+				<Field name="sign_date" originField="sign_date" table="contract" group="false" label="合同日期">
+					<Properties />
+				</Field>
+				<Field name="delivery_date" originField="delivery_date" table="contract" group="false" label="交货日期">
+					<Properties />
+				</Field>
+				<Field name="delivery_place" originField="delivery_place" table="contract" group="false" label="交货地点">
+					<Properties />
+				</Field>
+				<Field name="terms" originField="terms" table="contract" group="false" label="合同条款">
+					<Properties />
+				</Field>
+				<Field name="cmnt" originField="cmnt" table="contract" group="false" label="备注">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":contract_no" escapeEnabled="true" table="contract" originField="contract_no" operator="like" />
+				<MatchRule level="1" dataType="string" value=":owner" escapeEnabled="true" table="contract" originField="owner" operator="=" />
+				<MatchRule level="1" dataType="string" value=":customer" escapeEnabled="true" table="contract" originField="customer" operator="=" />
+				<MatchRule level="1" dataType="date" value=":sign_date1" escapeEnabled="true" table="contract" originField="sign_date" operator="&gt;=" />
+				<MatchRule level="1" dataType="date" value=":sign_date2" escapeEnabled="true" table="contract" originField="sign_date" operator="&lt;=" />
+			</MatchRules>
+			<SortRules />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetContractItems" type="AutoSql" originTable="contract_items" keyFields="item_id" retrieveAfterUpdate="true" listener="sample.Contract_datasetContractListener">
+			<Joins>
+				<Join name="product" originTable="product" keyFields="product_id" sourceTable="contract_items" sourceKeyFields="product_id" />
+			</Joins>
+			<Fields>
+				<Field name="item_id" originField="item_id" table="contract_items" dataType="int" group="false">
+					<Properties />
+				</Field>
+				<Field name="contract_no" originField="contract_no" table="contract_items" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="product_id" originField="product_id" table="contract_items" dataType="string" group="false" label="产品编码">
+					<Properties />
+				</Field>
+				<Field name="product_name" originField="product_name" table="product" dataType="string" group="false" label="产品名">
+					<Properties />
+				</Field>
+				<Field name="num" originField="num" table="contract_items" dataType="double" group="false" label="数量">
+					<Properties />
+				</Field>
+				<Field name="price" originField="price" table="contract_items" dataType="double" group="false" label="成交价">
+					<Properties />
+				</Field>
+				<Field name="cost" originField="cost" table="contract_items" dataType="double" group="false" label="成本价">
+					<Properties />
+				</Field>
+				<Field name="cmnt" originField="cmnt" table="contract_items" dataType="string" group="false" label="备注">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":contract_no" escapeEnabled="false" table="contract_items" originField="contract_no" operator="=" />
+			</MatchRules>
+			<SortRules />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetCustomer" type="AutoSql" originTable="customer" keyFields="custom_id">
+			<Joins />
+			<Fields>
+				<Field name="custom_id" originField="custom_id" table="customer" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="custom_name" originField="custom_name" table="customer" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+</module>
+

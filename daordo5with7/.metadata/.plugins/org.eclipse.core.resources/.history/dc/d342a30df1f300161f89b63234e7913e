@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.admin.SampleTreeMaintainViewModel" safe="true">
+	<Datasets>
+		<Dataset id="datasetSample" type="Wrapper" originTable="SAMPLE" wrappedType="AutoSql" keyFields="SAMPLE_ID">
+			<Joins />
+			<Fields>
+				<Field name="SAMPLE_ID" originField="SAMPLE_ID" table="SAMPLE" dataType="string" group="false" readOnly="true" label="ID">
+					<Properties>
+						<Property name="keyGenerator" />
+					</Properties>
+				</Field>
+				<Field name="SAMPLE_NAME" originField="SAMPLE_NAME" table="SAMPLE" dataType="string" group="false" label="示例标题">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="PARENT_SAMPLE_ID" originField="PARENT_SAMPLE_ID" table="SAMPLE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="NODE_TYPE" originField="NODE_TYPE" table="SAMPLE" dataType="int" group="false">
+					<Properties />
+				</Field>
+				<Field name="PATH" originField="PATH" table="SAMPLE" dataType="string" group="false" label="路径">
+					<Properties />
+				</Field>
+				<Field name="HIGH_LIGHT" originField="HIGH_LIGHT" table="SAMPLE" group="false" label="是否高亮" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="KEY_WORD" originField="KEY_WORD" table="SAMPLE" dataType="string" group="false" label="搜索关键字">
+					<Properties />
+				</Field>
+				<Field name="SORT_ORDER" originField="SORT_ORDER" table="SAMPLE" dataType="int" group="false" label="排序序号">
+					<Properties />
+				</Field>
+				<Field name="ARCHIEVE_PATH" originField="ARCHIEVE_PATH" table="SAMPLE" dataType="string" group="false" label="代码包路径">
+					<Properties />
+				</Field>
+				<Field name="AUTHOR" dataType="string" label="作者">
+					<Properties />
+				</Field>
+				<Field name="DESCRIPTION" originField="DESCRIPTION" table="SAMPLE" dataType="string" group="false" label="描述">
+					<Properties />
+				</Field>
+				<Field name="CHILD_NUM" dataType="int" sql="(SELECT COUNT(1) FROM SAMPLE S WHERE S.PARENT_SAMPLE_ID=SAMPLE.SAMPLE_ID) CHILD_NUM" updatable="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":PARENT_SAMPLE_ID" escapeEnabled="false" table="SAMPLE" originField="PARENT_SAMPLE_ID" operator="=" />
+			</MatchRules>
+			<SortRules>
+				<SortRule originField="SORT_ORDER" table="SAMPLE" descent="false" />
+			</SortRules>
+			<MasterLink />
+			<Parameters>
+				<Parameter name="PARENT_SAMPLE_ID" value="$null" />
+			</Parameters>
+			<Properties />
+			<Events>
+				<Event name="afterPost">commandUpdate.execute();</Event>
+			</Events>
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="treeSample" type="DataTree" width="100%" height="100%" draggable="true">
+			<Events>
+				<Event name="afterCurrentChange">if (node != null) {
+  var record = node.getRecord();
+  tabsetForm.setCurrentTab(
+    (record.getValue("node_type") == 1) ? "tabCategory" : "tabSample" );
+}</Event>
+				<Event name="onInitNode">var record = node.getRecord();
+if (record) {
+  if (record.getValue("node_type") == 1) {
+    node.setIcon("images/folder-closed.gif");
+    node.setExpandedIcon("images/folder-opened.gif");
+  }
+  else {
+    node.setIcon("images/leaf.gif");    
+  }
+  
+  if (!node.isExpanded()) {
+    node.setHasChild(record.getValue("child_num") &gt; 0);
+  }
+}</Event>
+				<Event name="onRefreshNode">var record = node.getRecord();
+var highlight = record.getValue("high_light");
+var HTML = (value) ? value : "&lt;FONT color='gray'&gt;&amp;lt;请输入节点名称&amp;gt;&lt;/FONT&gt;";
+if (highlight) {
+  HTML += "&lt;IMG src=\"../images/highlight.gif\" style=\"margin-left: 4\"&gt;";
+}
+cell.innerHTML = HTML;
+return false;</Event>
+				<Event name="beforeCurrentChange">if (!tree.skipUpdate) {
+  if (!datasetSample.postRecord()) {
+    throw new AbortException();
+  }
+}
+tree.skipUpdate = false;</Event>
+				<Event name="onDragEnd">var draggingRecord = draggingObject.getRecord();
+var targetRecord = targetObject.getRecord();
+var targetType = targetRecord.getValue("node_type");
+if (targetType == 1) {
+  if (!targetObject.hasExpanded()) targetObject.setExpanded(true);
+  draggingRecord.setValue("parent_sample_id", targetRecord.getValue("sample_id"));
+  return true;
+}
+else {
+  return false;
+}</Event>
+				<Event name="onDragOver">var targetType = targetObject.getRecord().getValue("node_type");
+return (targetType == 1);</Event>
+				<Event name="onDragStart">return (draggingObject.getLevel() &gt; 1);</Event>
+			</Events>
+			<TreeLevel name="sample" type="Recursive" dataset="datasetSample" labelField="SAMPLE_NAME" recursiveKeyParameters="PARENT_SAMPLE_ID" recursiveKeyFields="SAMPLE_ID" expandLevel="1" />
+		</Control>
+		<Control id="menuTree" type="Menu" popupContainer="treeSample">
+			<MenuItem name="addCategory" label="添加类别" icon="images/folder-closed.gif" disableIcon="images/folder-disabled.gif" />
+			<MenuItem name="addSample" label="添加示例" icon="images/leaf.gif" disableIcon="images/leaf-disabled.gif" />
+			<MenuItem label="删除" name="remove" icon="images/delete.gif" disableIcon="images/delete-disabled.gif" />
+			<Events>
+				<Event name="onItemClick">function addChildNode(nodeType) {
+  if (!datasetSample.postRecord()) return;
+
+  var currentNode = treeSample.getCurrentNode();
+  treeSample.expandNode(currentNode);
+  
+  var record = datasetSample.insertRecord();
+  record.setValue("node_type", nodeType);
+  var parentRecord = currentNode.getRecord();
+  record.setValue("parent_sample_id", parentRecord.getValue("sample_id"));
+  var node = new RecordTreeNode(record, currentNode.getTreeLevel());
+  node.setHasChild(false);
+  currentNode.addNode(node);
+  
+  treeSample.skipUpdate = true;
+  treeSample.setCurrentNode(node);
+}
+  
+switch (item.getName()) {
+  case "addCategory": {
+    addChildNode(1);
+    break;
+  }
+   
+  case "addSample": {
+    addChildNode(0);
+    break;
+  }
+  
+  case "remove": {
+    commandRemove.execute();
+    break;
+  }
+}</Event>
+				<Event name="onRefreshItem">var node = treeSample.getCurrentNode();
+if (node) {
+  switch (item.getName()) {
+    case "addCategory":
+    case "addSample":
+      var record = node.getRecord();
+      item.setDisabled(record.getValue("node_type") == 0);
+      break;
+    case "remove":
+      item.setDisabled(node.getLevel() &lt;= 1);
+      break;
+  }
+}
+else {
+  node.setDisabled(true);
+}
+return true;</Event>
+			</Events>
+		</Control>
+		<Control id="tabsetForm" type="TabSet" showFrame="false">
+			<Tab name="tabCategory" visible="false" />
+			<Tab name="tabSample" visible="false" />
+		</Control>
+		<Control id="formCategory" type="AutoForm" dataset="datasetSample">
+			<FormGroup columnCount="2" showBevel="false">
+				<Element name="SAMPLE_ID" field="SAMPLE_ID" type="TextEditor" colSpan="2">
+					<FieldLabel />
+					<TextEditor width="60%" />
+				</Element>
+				<Element name="SAMPLE_NAME" field="SAMPLE_NAME" type="TextEditor" colSpan="2">
+					<FieldLabel />
+					<TextEditor width="60%" />
+				</Element>
+				<Element name="SORT_ORDER" field="SORT_ORDER" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="HIGH_LIGHT" type="CheckBox" field="HIGH_LIGHT">
+					<FieldLabel />
+					<CheckBox />
+				</Element>
+				<Element name="PATH" field="PATH" type="TextEditor" colSpan="2">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="40" />
+				</Element>
+				<Element name="ARCHIEVE_PATH" field="ARCHIEVE_PATH" type="TextEditor" colSpan="2">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="40" />
+				</Element>
+				<Element name="AUTHOR" field="AUTHOR" type="TextEditor" colSpan="2">
+					<FieldLabel />
+					<TextEditor width="60%" />
+				</Element>
+				<Element name="KEY_WORD" field="KEY_WORD" type="TextEditor" colSpan="2">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="40" />
+				</Element>
+				<Element name="DESCRIPTION" field="DESCRIPTION" type="TextEditor" colSpan="2">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="150" />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="formSample" type="AutoForm" dataset="datasetSample">
+			<FormGroup showBevel="false" columnCount="2">
+				<Element name="SAMPLE_ID" field="SAMPLE_ID" type="TextEditor" colSpan="2">
+					<FieldLabel />
+					<TextEditor width="60%" />
+				</Element>
+				<Element name="SAMPLE_NAME" field="SAMPLE_NAME" type="TextEditor" colSpan="2">
+					<FieldLabel />
+					<TextEditor width="60%" />
+				</Element>
+				<Element name="SORT_ORDER" field="SORT_ORDER" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="HIGH_LIGHT" type="CheckBox" field="HIGH_LIGHT">
+					<FieldLabel />
+					<CheckBox />
+				</Element>
+				<Element name="PATH" field="PATH" type="TextEditor" colSpan="2">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="40" />
+				</Element>
+				<Element name="ARCHIEVE_PATH" field="ARCHIEVE_PATH" type="TextEditor" colSpan="2">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="40" />
+				</Element>
+				<Element name="AUTHOR" field="AUTHOR" type="TextEditor" colSpan="2">
+					<FieldLabel />
+					<TextEditor width="60%" />
+				</Element>
+				<Element name="KEY_WORD" field="KEY_WORD" type="TextEditor" colSpan="2">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="40" />
+				</Element>
+				<Element name="DESCRIPTION" field="DESCRIPTION" type="TextEditor" colSpan="2">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="150" />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="buttonUpdate" type="Button" value="保存" width="70">
+			<Events>
+				<Event name="onClick">datasetSample.postRecord();</Event>
+			</Events>
+		</Control>
+		<Control id="buttonCancel" type="Button" value="取消" width="60">
+			<Events>
+				<Event name="onClick">datasetSample.cancelRecord();</Event>
+			</Events>
+		</Control>
+		<Control id="commandUpdate" type="UpdateCommand" method="updateNode" showLoadingTip="false">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetSample" submitScope="current" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+		<Control id="commandRemove" type="UpdateCommand" method="removeNode" showLoadingTip="false">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetSample" submitScope="current" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

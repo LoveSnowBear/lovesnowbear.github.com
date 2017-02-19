@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="MainViewModel">
+	<Datasets />
+	<Controls>
+		<Control id="menuMain" type="Menu">
+			<MenuItem name="sample-center" label="示例中心" />
+			<MenuItemSeperator />
+			<MenuItem name="language" label="语种">
+				<MenuItem name="language-english" label="English" disabled="true" />
+				<MenuItem name="language-chinese" label="中文" />
+			</MenuItem>
+			<MenuItem name="skin" label="皮肤">
+				<MenuItem name="skin-default" label="默认" />
+				<MenuItem name="skin-simple" label="简洁" />
+			</MenuItem>
+			<MenuItem name="admin" label="管理">
+				<MenuItem label="示例结构维护" name="sample-maintain" path="javascript:openPage(&quot;admin/sampleMaintain.d&quot;)" />
+				<MenuItem name="dorado-console" label="dorado控制台" path="javascript:openPage(&quot;console.d&quot;)" />
+			</MenuItem>
+			<MenuItem name="resource" label="网络资源">
+				<MenuItem label="dorado产品下载" name="download-dorado" path="ftp://www.bstek.com/dorado/dorado5.zip" />
+				<MenuItem label="marmot下载" name="download-marmot" path="ftp://www.bstek.com/marmot/marmot.zip" />
+				<MenuItem label="dorado5砂箱" name="download-sandbox" path="ftp://www.bstek.com/sandbox" />
+				<MenuItemSeperator />
+				<MenuItem label="文档中心" name="doccenter" path="javascript:openPage(&quot;http://www.bstek.com/bbs/forums/show/8.page&quot;)" />
+				<MenuItem label="dorado论坛" name="bbs" path="javascript:openPage(&quot;http://www.bstek.com/bbs&quot;)" />
+				<MenuItem name="homepage" label="BSTEK主页" />
+			</MenuItem>
+			<Events>
+				<Event name="onItemClick">switch (item.getName()) {
+  case "sample-center": {
+    openPage("sample-center.jsp");
+    break;
+  }
+  case "language-chinese": {
+    commandChangeLanguage.parameters().setValue("language", "cn");
+    commandChangeLanguage.parameters().setValue("country", "ZH");
+    commandChangeLanguage.execute();
+    break; 
+  }
+  case "language-english": {
+    commandChangeLanguage.parameters().setValue("language", "en");
+    commandChangeLanguage.parameters().setValue("country", "US");
+    commandChangeLanguage.execute();
+    break;
+  }
+  case "skin-default": {
+    commandChangeSkin.parameters().setValue("skin", "default");
+    commandChangeSkin.execute();
+    break;
+  }
+  case "skin-simple": {
+    commandChangeSkin.parameters().setValue("skin", "simple");
+    commandChangeSkin.execute();
+    break;
+  }
+  case "homepage": {
+    open("http://www.bstek.com", "_blank");
+    break;
+  }
+}</Event>
+			</Events>
+		</Control>
+		<Control id="menubarMain" type="MenuBar" menu="menuMain" />
+		<Control id="commandChangeSkin" type="RPCCommand" method="changeSkin" async="true">
+			<Parameters />
+			<Events>
+				<Event name="onSuccess">window.location.reload();</Event>
+			</Events>
+		</Control>
+		<Control id="commandChangeLanguage" type="RPCCommand" method="changeLanguage" async="true">
+			<Parameters />
+			<Events>
+				<Event name="onSuccess">window.location.reload();</Event>
+			</Events>
+		</Control>
+		<Control id="commandMaintainLogin" type="RequestCommand" path="admin/login.jsp">
+			<Frame target="_exclusive_subwindow" width="350" height="150" />
+			<Parameters />
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">function showCovering() {
+  var frameCovering = document.getElementById("frameCovering");
+  frameCovering.style.display = "";
+}
+  
+function hideCovering() {
+  var frameCovering = document.getElementById("frameCovering");
+  frameCovering.style.display = "none";
+}
+
+function openPage(path) {
+  showCovering();
+  
+  var frameSample = document.getElementById("frameContent");
+  setTimeout("document.getElementById(\"frameContent\").src = unescape(\"" +
+    escape(path) + "\")", 0);
+}</Event>
+		<Event name="onLoad">var panel = menubarMain.getBlankPanel();
+panel.style.paddingTop = "2px";
+panel.style.paddingRight = "4px";
+panel.innerHTML =
+  "&lt;a href=\"http://www.bstek.com\"&gt;&lt;img src=\"images/bstek.gif\" style=\"border: 1px #E0E0E0 solid\"&gt;&lt;/a&gt;";
+openPage("sample-center.jsp");</Event>
+	</Events>
+</view>
+

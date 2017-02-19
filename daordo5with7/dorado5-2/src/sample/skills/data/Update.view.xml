@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.skills.data.UpdateViewModel">
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee" pageSize="15">
+			<MasterLink />
+			<Fields>
+				<Field name="select" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="employee_name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double" nullable="true">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events />
+		</Dataset>
+		<Dataset id="datasetLog" type="Wrapper" wrappedType="AutoSql" originTable="log" keyFields="no" readOnly="true">
+			<MasterLink />
+			<Fields>
+				<Field name="msg" originField="msg" table="log" group="false" label="日志消息" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="msg_time" originField="msg_time" table="log" group="false" label="时间" dataType="datetime">
+					<Properties />
+				</Field>
+			</Fields>
+			<Joins />
+			<MatchRules />
+			<SortRules>
+				<SortRule originField="msg_time" table="log" descent="true" />
+			</SortRules>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="buttonSave" type="Button" value="保存" command="commandSave" />
+		<Control id="commandSave" type="UpdateCommand">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetEmployee" />
+			</DatasetInfos>
+			<Parameters />
+			<Events />
+		</Control>
+		<Control id="buttonDeleteSelection" type="Button" value="删除选中记录" command="commandDeleteSelection" />
+		<Control id="commandDeleteSelection" type="UpdateCommand" method="deleteSelection">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetEmployee" submitScope="selected" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+		<Control id="buttonRaiseSalary" type="Button" value="为当前员工加薪" command="commandRaiseSalary" />
+		<Control id="commandRaiseSalary" type="UpdateCommand" method="raiseSalary">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetEmployee" submitScope="current" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+		<Control id="buttonSaveAndLog" type="Button" value="保存并记录日志" command="commandSaveAndLog" />
+		<Control id="commandSaveAndLog" type="UpdateCommand" method="saveAndLog">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetEmployee" />
+			</DatasetInfos>
+			<Parameters />
+			<Events>
+				<Event name="onSuccess">datasetLog.flushData();</Event>
+			</Events>
+		</Control>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%" fixedColumn="2">
+			<Column name="select" />
+			<Column name="employee_id" field="employee_id" width="100" />
+			<Column name="employee_name" field="employee_name" />
+			<Column name="sex" field="sex" rendererType="radiogroup" dropDown="dropdownSex" />
+			<Column name="married" field="married" rendererType="checkbox" />
+			<Column name="birthday" field="birthday" />
+			<Column name="salary" field="salary" />
+			<Column name="cmnt" field="cmnt" width="200" editorType="textarea" />
+		</Control>
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true" fixed="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+		<Control id="tableLog" type="DataTable" dataset="datasetLog" width="100%" height="100%" showHScrollBar="false">
+			<Column name="msg" field="msg" />
+			<Column name="msg_time" field="msg_time" />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

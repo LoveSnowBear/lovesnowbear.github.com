@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Wrapper" originTable="employee" keyFields="employee_id" wrappedType="AutoSql">
+			<Fields>
+				<Field name="employee_id" originField="employee_id" table="employee" group="false" label="${Resource.hr.employee_id}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" originField="employee_name" table="employee" group="false" label="${Resource.hr.employee_name}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_id" originField="dept_id" table="employee" group="false" label="${Resource.hr.dept_id}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_name" originField="dept_name" table="dept" group="false" label="${Resource.hr.dept_name}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="branch_id" dataType="string" group="false" label="${Resource.hr.branch_id}" originField="branch_id" table="dept">
+					<Properties />
+				</Field>
+				<Field name="branch_name" dataType="string" group="false" label="${Resource.hr.branch_name}" originField="branch_name" table="branch">
+					<Properties />
+				</Field>
+				<Field name="sex" originField="sex" table="employee" group="false" label="${Resource.hr.sex}" dataType="boolean" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="married" group="false" originField="married" table="employee" label="${Resource.hr.married}" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" originField="birthday" table="employee" group="false" label="${Resource.hr.birthday}" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" originField="salary" table="employee" group="false" label="${Resource.hr.salary}" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" originField="degree" table="employee" group="false" label="${Resource.hr.degree}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" originField="email" table="employee" group="false" label="${Resource.hr.email}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" originField="web" table="employee" group="false" label="${Resource.hr.web}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" originField="cmnt" table="employee" group="false" label="${Resource.hr.cmnt}" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Joins>
+				<Join name="dept" originTable="dept" keyFields="dept_id" sourceTable="employee" sourceKeyFields="dept_id" />
+				<Join name="branch" originTable="branch" sourceKeyFields="branch_id" sourceTable="dept" keyFields="branch_id" />
+			</Joins>
+			<MatchRules>
+				<MatchRule table="employee" originField="dept_id" operator="=" value=":dept_id" dataType="string" escapeEnabled="true" />
+			</MatchRules>
+			<SortRules>
+				<SortRule table="dept" originField="branch_id" />
+				<SortRule table="employee" originField="dept_id" />
+			</SortRules>
+			<Parameters>
+				<Parameter name="dept_id" value="${Request.dept_id}" />
+			</Parameters>
+			<Properties />
+			<MasterLink />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="dropdownSex" type="ListDropDown" autoDropDown="true" mapValue="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

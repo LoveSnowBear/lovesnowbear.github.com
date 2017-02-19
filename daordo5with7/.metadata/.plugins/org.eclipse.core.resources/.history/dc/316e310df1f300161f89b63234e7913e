@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Wrapper" originTable="employee" keyFields="employee_id" retrieveAfterUpdate="true" wrappedType="AutoSql">
+			<Fields>
+				<Field name="employee_id" originField="employee_id" table="employee" group="false" label="${Resource.hr.employee_id}" dataType="string" valueProtected="true">
+					<Properties />
+				</Field>
+				<Field name="employee_name" originField="employee_name" table="employee" group="false" label="${Resource.hr.employee_name}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" originField="sex" table="employee" group="false" label="${Resource.hr.sex}" dataType="boolean" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="married" group="false" originField="married" table="employee" label="${Resource.hr.married}" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" originField="birthday" table="employee" group="false" label="${Resource.hr.birthday}" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" originField="salary" table="employee" group="false" label="${Resource.hr.salary}" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" originField="degree" table="employee" group="false" label="${Resource.hr.degree}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" originField="email" table="employee" group="false" label="${Resource.hr.email}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" originField="web" table="employee" group="false" label="${Resource.hr.web}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" originField="cmnt" table="employee" group="false" label="${Resource.hr.cmnt}" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Joins />
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value="$null" escapeEnabled="false" table="employee" originField="image" operator="&lt;&gt;" />
+			</MatchRules>
+			<SortRules />
+			<Parameters />
+			<Properties />
+			<MasterLink />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+		<Control id="datapilot1" type="DataPilot" dataset="datasetEmployee" buttonAppend="hidden" buttonCancel="hidden" buttonPost="hidden" buttonInsert="hidden" buttonDelete="hidden" />
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%" rowHeight="106" showHScrollBar="false">
+			<Column name="image" field="employee_id" readOnly="true" align="center" label="肖像" width="120">
+				<Events>
+					<Event name="onRefresh">cell.innerHTML = "&lt;IMG src=\"${request.getContextPath()}/picture.output.d?employee_id=" +
+  value + "&amp;" + new Date().getTime() + "\"&gt;";
+cell.onclick = showUploadDialog;;
+return false;</Event>
+				</Events>
+			</Column>
+			<Column name="employee_name" field="employee_name" width="60" readOnly="true" />
+			<Column name="birthday" field="birthday" width="80" />
+			<Column name="email" field="email" width="120" readOnly="true">
+				<Events>
+					<Event name="onRefresh">cell.innerHTML = "&lt;a href=\"mailto:" + value + "\"&gt;" + value + "&lt;/a&gt;";
+return false;</Event>
+				</Events>
+			</Column>
+			<Column name="cmnt" field="cmnt" width="120" editorType="textarea" />
+		</Control>
+		<Control id="formEmployee" type="AutoForm" dataset="datasetEmployee" width="600">
+			<FormGroup title="员工信息">
+				<Element name="employee_id" field="employee_id" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="image" type="Label" field="employee_id" rowSpan="4">
+					<FieldLabel ignored="true">
+						<Events />
+					</FieldLabel>
+					<DataLabel>
+						<Events>
+							<Event name="onRefresh">label.innerHTML = "&lt;IMG src=\"${request.getContextPath()}/picture.output.d?employee_id=" +
+  value + "\" style=\"border: 1px black solid\"&gt;";
+label.onclick = showUploadDialog;
+return false;</Event>
+						</Events>
+					</DataLabel>
+				</Element>
+				<Element name="employee_name" field="employee_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="sex" type="RadioGroup" field="sex">
+					<FieldLabel />
+					<RadioGroup />
+				</Element>
+				<Element name="married" field="married" type="CheckBox">
+					<FieldLabel />
+					<CheckBox />
+				</Element>
+				<Element name="birthday" field="birthday" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="salary" field="salary" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="degree" field="degree" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="email" field="email" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="web" field="web" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="cmnt" field="cmnt" type="TextEditor" colSpan="2">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="50" width="260" />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="commandUpload" type="RequestCommand" path="picture-upload.jsp" dataset="datasetEmployee" parameterFields="employee_id">
+			<Frame target="_subwindow" center="true" width="400" height="120" />
+			<Parameters />
+		</Control>
+		<Control id="commandDownload" type="RequestCommand" dataset="datasetEmployee" parameterFields="employee_id" path="/picture.download.d">
+			<Frame />
+			<Parameters />
+		</Control>
+		<Control id="buttonUpload" type="Button" value="上传肖像" command="commandUpload" />
+		<Control id="buttonDownload" type="Button" value="下载肖像" command="commandDownload" />
+		<Control id="datapilot2" type="DataPilot" dataset="datasetEmployee" buttonAppend="hidden" buttonCancel="hidden" buttonDelete="hidden" buttonInsert="hidden" buttonPost="hidden" />
+		<Control id="buttonZoomIn" type="Button" value="放大" width="60">
+			<Events>
+				<Event name="onClick">var image = labelImage.firstChild;
+var width = image.offsetWidth;
+var height = image.offsetHeight;
+image.style.width = width * 2;
+image.style.height = height * 2;</Event>
+			</Events>
+		</Control>
+		<Control id="buttonZoomOut" type="Button" value="缩小" width="60">
+			<Events>
+				<Event name="onClick">var image = labelImage.firstChild;
+var width = image.offsetWidth;
+var height = image.offsetHeight;
+image.style.width = width * 0.5;
+image.style.height = height * 0.5;</Event>
+			</Events>
+		</Control>
+		<Control id="buttonReset" type="Button" value="还原" width="60">
+			<Events>
+				<Event name="onClick">var image = labelImage.firstChild;
+image.style.width = "";
+image.style.height = "";</Event>
+			</Events>
+		</Control>
+		<Control id="labelImage" type="DataLabel" dataset="datasetEmployee" field="employee_id">
+			<Events>
+				<Event name="onRefresh">label.innerHTML = "&lt;IMG src=\"${request.getContextPath()}/picture.output.d?employee_id=" +
+  value + "\" style=\"border: 1px black solid\"&gt;";
+return false;</Event>
+			</Events>
+		</Control>
+		<Control id="labelEmployeeName" type="DataLabel" dataset="datasetEmployee" field="employee_name" />
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">function refreshCurrentImage() {
+  datasetEmployee.setValue("employee_id", datasetEmployee.getValue("employee_id"));
+}
+
+function showUploadDialog() {
+  commandUpload.execute();
+}</Event>
+	</Events>
+</view>
+

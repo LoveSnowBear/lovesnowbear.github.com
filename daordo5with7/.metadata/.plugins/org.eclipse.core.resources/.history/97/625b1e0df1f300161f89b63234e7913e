@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.skills.tree.ProductTreeViewModel">
+	<Datasets>
+		<Dataset id="datasetRoot" type="Custom" listener="sample.skills.tree.ProductTree_datasetRootListener">
+			<MasterLink />
+			<Fields>
+				<Field name="category_id">
+					<Properties />
+				</Field>
+				<Field name="category_name">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetCategory" type="Reference" sourceModule="sample.Product" sourceDataset="datasetCategory" autoLoadData="false">
+			<MasterLink />
+			<Fields>
+				<Field name="category_id" dataType="string" valueProtected="true">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="parent_id" dataType="string" readOnly="true">
+					<Properties />
+				</Field>
+				<Field name="category_name" dataType="string" defaultValue="&lt;新分类&gt;">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="beforeDelete">var category_id = parseInt(record.getValue("category_id"));
+if (record.getString("parent_id") == "" &amp;&amp; 
+   (category_id == 1 || category_id == 2 || category_id == 3)) {
+  return "处于演示数据的安全考虑,本例不允许您删除顶层的分类!";
+}</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="datasetProduct" type="Reference" sourceModule="sample.Product" sourceDataset="datasetProduct" autoLoadData="false">
+			<MasterLink />
+			<Fields>
+				<Field name="product_id" dataType="string" valueProtected="true">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="category_id" dataType="string" readOnly="true">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="product_name" dataType="string" defaultValue="&lt;新产品&gt;">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="spec" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="brand" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="weight" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="size" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="treeProduct" type="DataTree" width="100%" height="100%" draggable="true">
+			<Events>
+				<Event name="afterCurrentChange">if (node == null) return;
+
+if (node.getTreeLevel().getName() == "category") {
+  tabsetDetail.setCurrentTab("category");
+}
+else {
+  tabsetDetail.setCurrentTab("product");
+}</Event>
+				<Event name="onDragOver">var draggingLevel = draggingObject.getTreeLevel().getName();
+var targetLevel = targetObject.getTreeLevel().getName();
+if (draggingLevel == "category") {
+  return (targetLevel == "root" || targetLevel == "category");
+}
+else if (draggingLevel == "product") {
+  return (targetLevel == "category");
+}</Event>
+				<Event name="onDragEnd">var draggingLevel = draggingObject.getTreeLevel().getName();
+var targetLevel = targetObject.getTreeLevel().getName();
+var draggingRecord = draggingObject.getRecord();
+var targetRecord = targetObject.getRecord();
+if (draggingLevel == "category") {
+  if (targetLevel == "root") {
+    draggingRecord.setValue("parent_id", null);
+  }
+  else {
+    draggingRecord.setValue("parent_id", targetRecord.getValue("category_id"));
+  }
+}
+else if (draggingLevel == "product") {
+  draggingRecord.setValue("category_id", targetRecord.getValue("category_id"));
+}
+return true;</Event>
+				<Event name="beforeCurrentChange">if (node.getLevel() == 1) {
+  return new AbortException();
+}</Event>
+			</Events>
+			<TreeLevel name="root" type="Simple" dataset="datasetRoot" labelField="category_name" icon="../../images/folder-closed.gif" expandedIcon="../../images/folder-opened.gif" expanded="true">
+				<TreeLevel name="category" type="Recursive" dataset="datasetCategory" recursiveKeyFields="category_id" recursiveKeyParameters="parent_id" labelField="category_name" icon="../../images/folder-closed.gif" expandedIcon="../../images/folder-opened.gif" detailKeyParameters="parent_id" masterKeyFields="category_id">
+					<TreeLevel name="product" type="Simple" dataset="datasetProduct" masterKeyFields="category_id" detailKeyParameters="category_id" labelField="product_name" icon="../../images/product.gif" hasChild="false" />
+				</TreeLevel>
+			</TreeLevel>
+		</Control>
+		<Control id="buttonAddCategory" type="Button" value="添加分类">
+			<Events>
+				<Event name="onClick">if (!validateCurrentRecord()) return;
+
+var record = datasetCategory.insertRecord();
+var currentNode = treeProduct.getCurrentNode();
+var parentNode = currentNode.getParent();
+if (parentNode.getLevel() &gt; 0) {
+  var parentRecord = parentNode.getRecord();
+  var parent_id = parentRecord.getValue("category_id");
+  if (parent_id == "$null") parent_id = null;
+  record.setValue("parent_id", parent_id);
+}
+var node = new RecordTreeNode(record, currentNode.getTreeLevel());
+parentNode.addNode(node);
+treeProduct.setCurrentNode(node);</Event>
+			</Events>
+		</Control>
+		<Control id="buttonAddChildCategory" type="Button" value="添加子分类">
+			<Events>
+				<Event name="onClick">if (!validateCurrentRecord()) return;
+
+var currentNode = treeProduct.getCurrentNode();
+treeProduct.expandNode(currentNode);
+
+var record = datasetCategory.insertRecord();
+var parentRecord = currentNode.getRecord();
+record.setValue("parent_id", parentRecord.getValue("category_id"));
+var node = new RecordTreeNode(record, currentNode.getTreeLevel());
+currentNode.addNode(node);
+treeProduct.setCurrentNode(node);</Event>
+			</Events>
+		</Control>
+		<Control id="buttonDelCategory" type="Button" value="删除分类">
+			<Events>
+				<Event name="onClick">if (confirm("确定要删除此产品分类以及其中的所有子分类和产品吗?")) {
+  datasetCategory.deleteRecord();
+}</Event>
+			</Events>
+		</Control>
+		<Control id="buttonAddChildProduct" type="Button" value="添加子产品">
+			<Events>
+				<Event name="onClick">if (!validateCurrentRecord()) return;
+
+var currentNode = treeProduct.getCurrentNode();
+treeProduct.expandNode(currentNode);
+
+var record = datasetProduct.insertRecord();
+var parentRecord = currentNode.getRecord();
+record.setValue("category_id", parentRecord.getValue("category_id"));
+var node = new RecordTreeNode(record, currentNode.getTreeLevel().getTreeLevel("product"));
+currentNode.addNode(node);
+treeProduct.setCurrentNode(node);</Event>
+			</Events>
+		</Control>
+		<Control id="formCategory" type="AutoForm" dataset="datasetCategory" defaultControlWidth="200">
+			<FormGroup title="产品分类" columnCount="1">
+				<Element name="category_id" field="category_id" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="parent_id" field="parent_id" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="category_name" field="category_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="buttonAddProduct" type="Button" value="添加产品">
+			<Events>
+				<Event name="onClick">if (!validateCurrentRecord()) return;
+
+var record = datasetProduct.insertRecord();
+var currentNode = treeProduct.getCurrentNode();
+var parentNode = currentNode.getParent();
+var parentRecord = parentNode.getRecord();
+record.setValue("category_id", parentRecord.getValue("category_id"));
+var node = new RecordTreeNode(record, currentNode.getTreeLevel());
+parentNode.addNode(node);
+treeProduct.setCurrentNode(node);</Event>
+			</Events>
+		</Control>
+		<Control id="buttonDelProduct" type="Button" value="删除产品">
+			<Events>
+				<Event name="onClick">if (confirm("确定要删除此产品吗?")) {
+  datasetProduct.deleteRecord();
+}</Event>
+			</Events>
+		</Control>
+		<Control id="formProduct" type="AutoForm" dataset="datasetProduct" defaultControlWidth="200">
+			<FormGroup title="产品信息" columnCount="1">
+				<Element name="category_id" field="category_id" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="product_id" field="product_id" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="product_name" field="product_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="spec" field="spec" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="brand" field="brand" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="weight" field="weight" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="size" field="size" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="cmnt" field="cmnt" type="TextEditor">
+					<FieldLabel />
+					<TextEditor editorType="textarea" width="240" height="60" />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="buttonSave" type="Button" command="commandSave" value="保存所有修改" />
+		<Control id="commandSave" type="UpdateCommand">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetCategory" />
+				<DatasetInfo dataset="datasetProduct" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="onUnload">if (commandSave.isDirty()) {
+  if (confirm("本页面中有未保存的数据.\n您希望在离开之前对这些数据进行保存吗?")) {
+    commandSave.execute();
+  }
+}</Event>
+		<Event name="onLoad">var current = datasetCategory.getCurrent();
+if (current != null) {
+  var node = treeProduct.findNodeByRecord(current);
+  if (node != null) treeProduct.setCurrentNode(node);
+}</Event>
+		<Event name="functions">function validateCurrentRecord() {
+  if (tabsetDetail.getCurrentTab().getName() == "category") {
+    return datasetCategory.postRecord();
+  }
+  else {
+    return datasetProduct.postRecord();
+  }
+}</Event>
+	</Events>
+</view>
+

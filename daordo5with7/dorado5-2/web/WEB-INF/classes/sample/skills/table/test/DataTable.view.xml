@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Wrapper" dataSource="doradosample" originTable="EMPLOYEE" wrappedType="AutoSql" autoLoadPage="true" pageSize="15">
+			<Joins />
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="工号">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false" label="部门编号">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="姓名">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" label="性别" dataType="boolean" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="BIRTHDAY" originField="BIRTHDAY" table="EMPLOYEE" dataType="date" group="false" label="生日">
+					<Properties />
+				</Field>
+				<Field name="MARRIED" originField="MARRIED" table="EMPLOYEE" group="false" label="婚否" dataType="boolean" dropDown="dropdownBoolean">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="EMAIL" originField="EMAIL" table="EMPLOYEE" dataType="string" group="false" label="邮件">
+					<Properties />
+				</Field>
+				<Field name="WEB" originField="WEB" table="EMPLOYEE" dataType="string" group="false" label="网址">
+					<Properties />
+				</Field>
+				<Field name="CMNT" originField="CMNT" table="EMPLOYEE" dataType="string" group="false" label="备注">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%" fixedColumn="1" showFooter="true">
+			<Column name="EMPLOYEE_NAME" field="EMPLOYEE_NAME" headerClickable="true" readOnly="true" width="60" sortable="false">
+				<Events />
+			</Column>
+			<Column name="SALARY" field="SALARY" headerClickable="true" sortable="false">
+				<Events />
+			</Column>
+			<Column name="SEX" field="SEX" headerClickable="true" width="50" sortable="false">
+				<Events />
+			</Column>
+			<Column name="BIRTHDAY" field="BIRTHDAY" headerClickable="true" sortable="false" />
+			<Column name="MARRIED" field="MARRIED" headerClickable="true" rendererType="checkbox" width="50" sortable="false" />
+			<Column name="DEGREE" field="DEGREE" headerClickable="true" sortable="false" />
+			<Column name="EMAIL" field="EMAIL" headerClickable="true" sortable="false" />
+			<Column name="WEB" field="WEB" headerClickable="true" sortable="false">
+				<Events />
+			</Column>
+		</Control>
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="onLoad">tableEmployee.refresh();</Event>
+	</Events>
+</view>
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetUser" type="Custom" insertOnEmpty="true">
+			<MasterLink />
+			<Fields>
+				<Field name="user" defaultValue="user1">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="editorUser" type="RadioGroup" dataset="datasetUser" field="user" dropDown="dropdownRole" layout="vertical" width="200" />
+		<Control id="dropdownRole" type="ListDropDown" mapValue="true" autoDropDown="true" fixed="true">
+			<DropDownItem value="user1" label="用户甲 (只能查看只读报表)" />
+			<DropDownItem value="user2" label="用户乙 (可编辑报表)" />
+		</Control>
+		<Control id="buttonRefreshReport" type="Button" value="刷新报表">
+			<Events>
+				<Event name="onClick">frameDiv.innerHTML = 
+  "&lt;iframe name=\"frameReport\" frameborder=\"0\" style=\"width: 100%; height: 100%\"&gt;&lt;/iframe&gt;"
+
+var templatePath = "readonly-report.report?user=" + datasetUser.getValue("user");
+open(getMutilInstanceReportURL(templatePath), "frameReport");</Event>
+			</Events>
+		</Control>
+		<Control id="buttonShowReport" type="Button" value="在新窗口打开报表">
+			<Events>
+				<Event name="onClick">var templatePath = "readonly-report.report?user=" + datasetUser.getValue("user");
+open(getMutilInstanceReportURL(templatePath), "_blank");</Event>
+			</Events>
+		</Control>
+		<Control id="buttonGetTemplate" type="Button" value="下载模版">
+			<Events>
+				<Event name="onClick">open("readonly-report.report?op=getTemplate");</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="onLoad">buttonRefreshReport.click();</Event>
+	</Events>
+</view>
+

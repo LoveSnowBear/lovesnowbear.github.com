@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.complex.contract.ContractQueryViewModel">
+	<Datasets>
+		<Dataset id="datasetCondition" type="Form">
+			<MasterLink />
+			<Fields>
+				<Field name="contract_no" label="合同号">
+					<Properties />
+				</Field>
+				<Field name="owner">
+					<Properties />
+				</Field>
+				<Field name="owner_name" label="业务员" dropDown="dropdownEmployee">
+					<Properties />
+				</Field>
+				<Field name="customer" label="客户" dropDown="dropdownCustomer">
+					<Properties />
+				</Field>
+				<Field name="sign_date1" label="合同时间(从)" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="sign_date2" label="合同时间(到)" dataType="date">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetContract" type="Reference" sourceModule="sample.Contract" sourceDataset="datasetContract" readOnly="true">
+			<MasterLink />
+			<Fields>
+				<Field name="contract_no" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="owner" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="owner_name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="customer" dataType="string" dropDown="dropdownCustomer">
+					<Properties />
+				</Field>
+				<Field name="sign_date" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="delivery_date" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="delivery_place" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="terms" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="afterScroll">var hasCurrent = (datasetContract.getCurrent() != null);
+buttonEdit.disabled = !hasCurrent;
+buttonDelete.disabled = !hasCurrent;</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="datasetCustomer" type="Reference" sourceModule="sample.Contract" sourceDataset="datasetCustomer">
+			<MasterLink />
+			<Fields>
+				<Field name="custom_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="custom_name" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="formCondition" type="AutoForm" dataset="datasetCondition" defaultControlWidth="200">
+			<FormGroup title="查询条件">
+				<Element name="contract_no" field="contract_no" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="element1" type="Custom" showLabel="false">
+					<FieldLabel />
+				</Element>
+				<Element name="owner_name" field="owner_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="customer" field="customer" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="sign_date1" field="sign_date1" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="sign_date2" field="sign_date2" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="tableContract" type="DataTable" width="100%" dataset="datasetContract" height="100%" showHScrollBar="false">
+			<Column name="contract_no" field="contract_no" width="150">
+				<Events>
+					<Event name="onRefresh">cell.innerHTML = "&lt;a href=\"javascript:buttonEdit.click()\"&gt;" + value + "&lt;/a&gt;";
+return false;</Event>
+				</Events>
+			</Column>
+			<Column name="owner_name" field="owner_name" />
+			<Column name="customer" field="customer" />
+			<Column name="sign_date" field="sign_date" width="120" />
+			<Column name="delivery_date" field="delivery_date" width="120" />
+			<Column name="delivery_place" field="delivery_place" />
+			<Events>
+				<Event name="onRecordDblClick">buttonEdit.click();</Event>
+			</Events>
+		</Control>
+		<Control id="buttonQuery" type="Button" value="查询" command="commandQuery" width="80" />
+		<Control id="commandQuery" type="QueryCommand" conditionDataset="datasetCondition" queryDataset="datasetContract">
+			<Parameters />
+			<Events>
+				<Event name="beforeExecute">var contract_no = datasetCondition.getValue("contract_no");
+if (contract_no) {
+  command.parameters().setValue("contract_no", "%" + contract_no + "%");
+}
+else {
+  command.parameters().setValue("contract_no", "");
+}</Event>
+			</Events>
+		</Control>
+		<Control id="buttonAdd" type="Button" width="80" value="新增合同" command="commandAdd" />
+		<Control id="buttonEdit" type="Button" width="80" value="编辑合同" command="commandEdit" disabled="true" />
+		<Control id="buttonDelete" type="Button" width="80" value="删除合同" disabled="true" command="commandDelete" />
+		<Control id="commandAdd" type="RequestCommand" path="contract-maintain.jsp">
+			<Frame />
+			<Parameters>
+				<Parameter name="op" value="add" />
+			</Parameters>
+		</Control>
+		<Control id="commandEdit" type="RequestCommand" path="contract-maintain.jsp" dataset="datasetContract" parameterFields="contract_no" method="post">
+			<Frame />
+			<Parameters>
+				<Parameter name="op" value="edit" />
+			</Parameters>
+		</Control>
+		<Control id="commandDelete" type="UpdateCommand" method="deleteContract">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetContract" submitScope="current" />
+			</DatasetInfos>
+			<Parameters />
+			<Events>
+				<Event name="beforeExecute">if (!confirm("您确定要删除该合同[" + datasetContract.getValue("contract_no") + "]吗?")) {
+  return "abort";
+}</Event>
+			</Events>
+		</Control>
+		<Control id="dropdownEmployee" type="CustomDropDown" path="/skills/form/input-assist/dropdown-employee-tree.jsp" readFields="employee_id,employee_name" writeFields="owner,owner_name" fixed="true" width="200" height="250" />
+		<Control id="dropdownCustomer" type="DatasetDropDown" dataset="datasetCustomer" labelField="custom_name" valueField="custom_id" mapValue="true" fixed="true" />
+	</Controls>
+	<Properties />
+</view>
+

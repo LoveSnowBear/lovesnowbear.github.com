@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetBranch" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="BRANCH" readOnly="true">
+			<Joins />
+			<Fields>
+				<Field name="BRANCH_ID" originField="BRANCH_ID" table="BRANCH" dataType="string" group="false" label="分公司编号">
+					<Properties />
+				</Field>
+				<Field name="BRANCH_NAME" originField="BRANCH_NAME" table="BRANCH" dataType="string" group="false" label="分公司名称">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDept" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="DEPT" readOnly="true">
+			<Joins />
+			<Fields>
+				<Field name="BRANCH_ID" originField="BRANCH_ID" table="DEPT" dataType="string" group="false" label="分公司" dropDown="dropdownBranch">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="DEPT" dataType="string" group="false" label="部门编号">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false" label="部门名称">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":branch_id" escapeEnabled="false" table="DEPT" originField="BRANCH_ID" operator="=" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink masterDataset="datasetBranch" masterKeyFields="BRANCH_ID" detailKeyFields="BRANCH_ID" detailKeyParameters="BRANCH_ID" />
+			<Parameters>
+				<Parameter name="branch_id" />
+			</Parameters>
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetEmployee" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="EMPLOYEE" readOnly="true">
+			<Joins />
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="员工编号">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false" label="部门" dropDown="dropdownDept">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="员工姓名">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" label="性别" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="BIRTHDAY" originField="BIRTHDAY" table="EMPLOYEE" dataType="date" group="false" label="生日">
+					<Properties />
+				</Field>
+				<Field name="MARRIED" originField="MARRIED" table="EMPLOYEE" group="false" label="婚否" dropDown="dropdownMarried">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="EMAIL" originField="EMAIL" table="EMPLOYEE" dataType="string" group="false" label="电子邮件">
+					<Properties />
+				</Field>
+				<Field name="WEB" originField="WEB" table="EMPLOYEE" dataType="string" group="false" label="网站">
+					<Properties />
+				</Field>
+				<Field name="CMNT" originField="CMNT" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="IMAGE" originField="IMAGE" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":dept_id" escapeEnabled="false" table="EMPLOYEE" originField="DEPT_ID" operator="=" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink masterDataset="datasetDept" masterKeyFields="DEPT_ID" detailKeyFields="DEPT_ID" detailKeyParameters="DEPT_ID" />
+			<Parameters>
+				<Parameter name="dept_id" />
+			</Parameters>
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetBranch_dic" type="Wrapper" dataSource="doradosample" originTable="BRANCH" wrappedType="AutoSql">
+			<Joins />
+			<Fields>
+				<Field name="BRANCH_ID" originField="BRANCH_ID" table="BRANCH" dataType="string" group="false" label="分公司编号">
+					<Properties />
+				</Field>
+				<Field name="BRANCH_NAME" originField="BRANCH_NAME" table="BRANCH" dataType="string" group="false" label="分公司名称">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDept_dic" type="Wrapper" dataSource="doradosample" originTable="DEPT" readOnly="true" wrappedType="AutoSql">
+			<Joins />
+			<Fields>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="DEPT" dataType="string" group="false" label="部门编号">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false" label="部门名称">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<Parameters>
+				<Parameter name="branch_id" />
+			</Parameters>
+			<Properties />
+			<MasterLink />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableBranch" type="DataTable" dataset="datasetBranch" width="100%" height="100" showHScrollBar="false">
+			<Column name="BRANCH_ID" field="BRANCH_ID" />
+			<Column name="BRANCH_NAME" field="BRANCH_NAME" />
+		</Control>
+		<Control id="tableDept" type="DataTable" dataset="datasetDept" width="100%" height="160" showHScrollBar="false">
+			<Column name="BRANCH_ID" field="BRANCH_ID" />
+			<Column name="DEPT_ID" field="DEPT_ID" />
+			<Column name="DEPT_NAME" field="DEPT_NAME" />
+		</Control>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%" showHScrollBar="false">
+			<Column name="DEPT_ID" field="DEPT_ID" />
+			<Column name="EMPLOYEE_ID" field="EMPLOYEE_ID" />
+			<Column name="EMPLOYEE_NAME" field="EMPLOYEE_NAME" />
+			<Column name="SEX" field="SEX" />
+			<Column name="BIRTHDAY" field="BIRTHDAY" />
+			<Column name="MARRIED" field="MARRIED" />
+			<Column name="SALARY" field="SALARY" />
+			<Column name="DEGREE" field="DEGREE" />
+		</Control>
+		<Control id="dropdownBranch" type="DatasetDropDown" dataset="datasetBranch_dic" mapValue="true" labelField="BRANCH_NAME" valueField="BRANCH_ID" />
+		<Control id="dropdownDept" type="DatasetDropDown" dataset="datasetDept_dic" mapValue="true" labelField="DEPT_NAME" valueField="DEPT_ID" />
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true">
+			<DropDownItem label="男" value="true" />
+			<DropDownItem label="女" value="false" />
+		</Control>
+		<Control id="dropdownMarried" type="ListDropDown" mapValue="true">
+			<DropDownItem value="true" label="已婚" />
+			<DropDownItem value="false" label="未婚" />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

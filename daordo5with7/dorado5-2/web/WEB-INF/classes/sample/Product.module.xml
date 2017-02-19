@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+	<Datasets>
+		<Dataset id="datasetCategory" type="AutoSql" originTable="category" keyFields="category_id">
+			<Joins />
+			<Fields>
+				<Field name="category_id" originField="category_id" table="category" dataType="string" group="false" label="类别编码">
+					<Properties />
+				</Field>
+				<Field name="category_name" originField="category_name" table="category" dataType="string" group="false" label="类别名称">
+					<Properties />
+				</Field>
+				<Field name="parent_id" originField="parent_id" table="category" dataType="string" group="false" label="父类别编码">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":parent_id" escapeEnabled="true" table="category" originField="parent_id" operator="=" />
+			</MatchRules>
+			<SortRules />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetProduct" type="AutoSql" originTable="product" keyFields="product_id">
+			<Joins />
+			<Fields>
+				<Field name="product_id" originField="product_id" table="product" group="false" label="产品编码">
+					<Properties />
+				</Field>
+				<Field name="product_name" originField="product_name" table="product" group="false" label="产品名称">
+					<Properties />
+				</Field>
+				<Field name="category_id" originField="category_id" table="product" group="false" label="类别编码">
+					<Properties />
+				</Field>
+				<Field name="spec" originField="spec" table="product" group="false" label="规格">
+					<Properties />
+				</Field>
+				<Field name="brand" originField="brand" table="product" group="false" label="品牌">
+					<Properties />
+				</Field>
+				<Field name="weight" originField="weight" table="product" group="false" label="重量">
+					<Properties />
+				</Field>
+				<Field name="size" originField="size" table="product" group="false" label="尺码">
+					<Properties />
+				</Field>
+				<Field name="cmnt" originField="cmnt" table="product" group="false" label="备注">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":category_id" escapeEnabled="true" table="product" originField="category_id" operator="=" />
+				<MatchRule level="1" dataType="string" value=":product_id" escapeEnabled="true" table="product" originField="product_id" operator="=" />
+				<MatchRule level="1" dataType="string" value=":product_name" escapeEnabled="true" table="product" originField="product_name" operator="like" />
+			</MatchRules>
+			<SortRules />
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+</module>
+

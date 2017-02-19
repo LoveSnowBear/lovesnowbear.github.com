@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetLogin" type="Custom" insertOnEmpty="true">
+			<MasterLink />
+			<Fields>
+				<Field name="user" label="用户名" defaultValue="admin">
+					<Properties />
+				</Field>
+				<Field name="password" label="口令" defaultValue="dorado">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="fieldlabelUser" type="FieldLabel" dataset="datasetLogin" field="user" />
+		<Control id="editorUser" type="TextEditor" dataset="datasetLogin" field="user" name="user" />
+		<Control id="fieldlabelPassword" type="FieldLabel" dataset="datasetLogin" field="password" />
+		<Control id="editorPassword" type="TextEditor" dataset="datasetLogin" field="password" editorType="password" name="password" />
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="onLoad">setTimeout("document.getElementById(\"editorUser\").focus();", 100);</Event>
+	</Events>
+</view>
+

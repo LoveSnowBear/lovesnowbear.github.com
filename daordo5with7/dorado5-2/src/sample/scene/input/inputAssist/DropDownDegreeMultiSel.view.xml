@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="com.bstek.dorado.view.control.dropdown.CustomDropDownViewModel">
+	<Datasets>
+		<Dataset id="datasetDegree" type="Reference" sourceModule="sample.HR" sourceDataset="datasetDegree" readOnly="true">
+			<MasterLink />
+			<Fields>
+				<Field name="select" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableDegree" type="DataTable" dataset="datasetDegree" showHScrollBar="false" height="100%" width="100%" showIndicator="false">
+			<Column name="select" field="select" />
+			<Column name="degree" field="degree" />
+		</Control>
+		<Control id="buttonOK" type="Button" value="确定" width="80">
+			<Events>
+				<Event name="onClick">var records = new Array();
+var record = datasetDegree.getFirstRecord();
+while (record != null) {
+  if (record.getValue("select")) {
+    records.push(record);
+  }
+  record = record.getNextRecord();
+}
+DropDown.closeFrame(records);</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Events />
+	<Properties />
+</view>
+

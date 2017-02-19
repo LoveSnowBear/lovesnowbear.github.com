@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workbench progressCount="28" version="2.0">
+<workbenchAdvisor/>
+<window height="728" maximized="true" width="1024" x="191" y="-8">
+<fastViewData fastViewLocation="1024"/>
+<perspectiveBar>
+<itemSize x="160"/>
+</perspectiveBar>
+<coolbarLayout>
+<coolItem id="group.file" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="124" y="22"/>
+<coolItem id="additions" itemType="typeGroupMarker"/>
+<coolItem id="com.bstek.ide.actionSet" itemType="typeToolBarContribution" x="169" y="22"/>
+<coolItem id="com.bstek.ide.common.actionSet" itemType="typeToolBarContribution" x="161" y="22"/>
+<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="135" y="22"/>
+<coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="78" y="22"/>
+<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="101" y="22"/>
+<coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="group.nav" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="198" y="22"/>
+<coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.jst.jsp.core.jspsource.source" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="com.bstek.ide.forms.ViewEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="com.bstek.ide.editor.PropertyFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="com.bstek.ide.dashboard.editor.DashboardEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="group.help" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
+</coolbarLayout>
+<page focus="true" label="Workspace - Dorado7 Studio">
+<editors>
+<editorArea activeWorkbook="DefaultEditorWorkbook">
+<info part="DefaultEditorWorkbook">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+</presentation>
+</folder>
+</info>
+</editorArea>
+<editor id="com.bstek.ide.forms.ViewEditor" name="Main.view.xml" partName="Main.view.xml" path="H:/daordo5with7/dorado5/src/Main.view.xml" title="Main.view.xml" tooltip="dorado5/src/Main.view.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/dorado5/src/Main.view.xml"/>
+</editor>
+<editor id="org.eclipse.jst.jsp.core.jspsource.source" name="sample-center.jsp" partName="sample-center.jsp" path="H:/daordo5with7/dorado5/web/sample-center.jsp" title="sample-center.jsp" tooltip="dorado5/web/sample-center.jsp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/dorado5/web/sample-center.jsp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jst.jsp.core.jspsource.source" name="main.jsp" partName="main.jsp" path="H:/daordo5with7/dorado5/web/main.jsp" title="main.jsp" tooltip="dorado5/web/main.jsp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/dorado5/web/main.jsp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+</editors>
+<views>
+<view id="org.eclipse.ui.console.ConsoleView" partName="Console">
+<viewState/>
+</view>
+<view id="org.eclipse.wst.server.ui.ServersView" partName="Servers">
+<viewState CommonNavigator.LINKING_ENABLED="0"/>
+</view>
+<view id="com.bstek.ide.ui.DoradoExplorer" partName="Dorado7 Explorer">
+<viewState CommonNavigator.LINKING_ENABLED="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0"/>
+</view>
+</views>
+<perspectives activePart="com.bstek.ide.ui.DoradoExplorer" activePerspective="com.bstek.ide.ui.perspectives.Dorado7Perspective">
+<perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
+<descriptor class="com.bstek.ide.ui.perspectives.Dorado7Perspective" id="com.bstek.ide.ui.perspectives.Dorado7Perspective" label="Dorado7 Studio"/>
+<alwaysOnActionSet id="org.eclipse.mylyn.context.ui.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.mylyn.doc.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.mylyn.tasks.ui.navigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.rse.core.search.searchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.annotationNavigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.navigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo"/>
+<alwaysOnActionSet id="org.eclipse.ui.externaltools.ExternalToolsSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
+<alwaysOnActionSet id="com.bstek.ide.common.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.launchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.debugActionSet"/>
+<alwaysOnActionSet id="org.eclipse.jdt.ui.JavaActionSet"/>
+<alwaysOnActionSet id="org.eclipse.jdt.ui.JavaElementCreationActionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.breakpointActionSet"/>
+<alwaysOnActionSet id="com.bstek.ide.actionSet"/>
+<alwaysOnActionSet id="com.bstek.ide.model.editor.actionSet"/>
+<alwaysOnActionSet id="com.bstek.ide.view.editor.actionSet"/>
+<alwaysOnActionSet id="com.bstek.ide.touch.editor.actionSet"/>
+<new_wizard_action id="com.bstek.ide.ui.wizard.NewDorado7StandardProjectWizard"/>
+<new_wizard_action id="com.bstek.ide.view.editor.wizard.NewViewFileWizard"/>
+<new_wizard_action id="com.bstek.ide.model.editor.wizard.NewModelFileWizard"/>
+<new_wizard_action id="com.bstek.ide.touch.editor.wizard.NewTouchFileWizard"/>
+<new_wizard_action id="org.eclipse.jdt.ui.wizards.NewClassCreationWizard"/>
+<new_wizard_action id="org.eclipse.jdt.ui.wizards.NewPackageCreationWizard"/>
+<new_wizard_action id="org.eclipse.team.cvs.ui.newProjectCheckout"/>
+<new_wizard_action id="org.eclipse.ui.wizards.new.folder"/>
+<new_wizard_action id="org.eclipse.ui.wizards.new.file"/>
+<perspective_action id="org.eclipse.team.ui.TeamSynchronizingPerspective"/>
+<perspective_action id="org.eclipse.team.cvs.ui.cvsPerspective"/>
+<perspective_action id="org.eclipse.ui.resourcePerspective"/>
+<hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+<hide_toolbar_item_id id="org.eclipse.jdt.ui.actions.OpenProjectWizard"/>
+<view id="org.eclipse.wst.server.ui.ServersView"/>
+<view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="com.bstek.ide.ui.DoradoExplorer"/>
+<fastViewBars/>
+<layout>
+<mainWindow>
+<info folder="true" part="topLeft">
+<folder activePageID="com.bstek.ide.ui.DoradoExplorer" appearance="2" expanded="2">
+<page content="com.bstek.ide.ui.DoradoExplorer" label="Dorado7 Explorer"/>
+<page content="org.eclipse.jdt.ui.PackageExplorer" label="LabelNotFound"/>
+<page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@2565b097" ratio="0.31475905" ratioLeft="418" ratioRight="910" relationship="2" relative="topLeft">
+<folder appearance="2" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="stickyFolderRight" ratio="0.75" ratioLeft="750" ratioRight="250" relationship="2" relative="topLeft">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
+<page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
+</folder>
+</info>
+<info folder="true" part="topRight" ratio="0.6907749" ratioLeft="936" ratioRight="419" relationship="2" relative="topLeft">
+<folder activePageID="org.eclipse.wst.server.ui.ServersView" appearance="2" expanded="2">
+<page content="org.eclipse.wst.server.ui.ServersView" label="Servers"/>
+<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<page content="org.eclipse.ui.views.PropertySheet" label="LabelNotFound"/>
+<page content="com.bstek.ide.ui.views.DoradoSnippetsView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+</presentation>
+</folder>
+</info>
+<info part="org.eclipse.ui.editorss" ratio="0.3950834" ratioLeft="450" ratioRight="689" relationship="2" relative="topLeft"/>
+</mainWindow>
+</layout>
+</perspective>
+</perspectives>
+<workingSets/>
+<navigationHistory>
+<editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.bstek.ide.forms.ViewEditor" path="/dorado5/src/Main.view.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jst.jsp.core.jspsource.source" path="/dorado5/web/main1.jsp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jst.jsp.core.jspsource.source" path="/dorado5/web/sample-center.jsp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jst.jsp.core.jspsource.source" path="/dorado5/web/main.jsp"/>
+</editors>
+<item historyLabel="Main.view.xml" index="0"/>
+<item historyLabel="main1.jsp" index="1">
+<position info="not_deleted" x="236" y="0"/>
+</item>
+<item historyLabel="sample-center.jsp" index="2">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="main.jsp" index="3">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="main1.jsp" index="1">
+<position info="not_deleted" x="236" y="0"/>
+</item>
+<item active="true" historyLabel="main.jsp" index="3">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+</navigationHistory>
+<input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
+</page>
+<workbenchWindowAdvisor/>
+<actionBarAdvisor/>
+<trimLayout>
+<trimArea IMemento.internal.id="128">
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
+<trimItem IMemento.internal.id="org.eclipse.mylyn.tasks.ui.trim.container"/>
+</trimArea>
+<trimArea IMemento.internal.id="1024">
+<trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
+<trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
+</trimArea>
+</trimLayout>
+</window>
+<mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jst.jsp.core.jspsource.source" name="main.jsp" tooltip="dorado5/web/main.jsp">
+<persistable path="/dorado5/web/main.jsp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jst.jsp.core.jspsource.source" name="sample-center.jsp" tooltip="dorado5/web/sample-center.jsp">
+<persistable path="/dorado5/web/sample-center.jsp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jst.jsp.core.jspsource.source" name="main1.jsp" tooltip="dorado5/web/main1.jsp">
+<persistable path="/dorado5/web/main1.jsp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.bstek.ide.forms.ViewEditor" name="Main.view.xml" tooltip="dorado5/src/Main.view.xml">
+<persistable path="/dorado5/src/Main.view.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="servlet-context.xml" tooltip="dorado5/web/WEB-INF/dorado-home/servlet-context.xml">
+<persistable path="/dorado5/web/WEB-INF/dorado-home/servlet-context.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="web.xml" tooltip="dorado5/web/WEB-INF/web.xml">
+<persistable path="/dorado5/web/WEB-INF/web.xml"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.internal.JarEntryEditorInputFactory" id="com.bstek.ide.editor.PropertyFileEditor" name="velocity.properties" tooltip="dorado5/web/WEB-INF/lib/dorado5-core.jar/com/bstek/dorado/velocity.properties">
+<persistable element="=dorado5/web\/WEB-INF\/lib\/dorado5-core.jar&lt;com.bstek.dorado" path="velocity.properties"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.internal.JarEntryEditorInputFactory" id="com.bstek.ide.editor.PropertyFileEditor" name="velocity.properties" tooltip="dorado5-2/web/WEB-INF/lib/dorado5-core.jar/com/bstek/dorado/velocity.properties">
+<persistable element="=dorado5-2/web\/WEB-INF\/lib\/dorado5-core.jar&lt;com.bstek.dorado" path="velocity.properties"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="dorado5-core.jar" tooltip="dorado5/web/WEB-INF/lib/dorado5-core.jar">
+<persistable path="/dorado5/web/WEB-INF/lib/dorado5-core.jar"/>
+</file>
+</mruList>
+</workbench>

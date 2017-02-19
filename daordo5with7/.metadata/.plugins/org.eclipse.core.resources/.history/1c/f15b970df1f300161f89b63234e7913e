@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="dataset1" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="EMPLOYEE" pageSize="10" readOnly="true">
+			<Joins />
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false">
+					<Properties />
+				</Field>
+				<Field name="BIRTHDAY" originField="BIRTHDAY" table="EMPLOYEE" dataType="date" group="false">
+					<Properties />
+				</Field>
+				<Field name="MARRIED" originField="MARRIED" table="EMPLOYEE" group="false">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="EMAIL" originField="EMAIL" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="WEB" originField="WEB" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="afterFlushData">var pageIndex=dataset1.getPageIndex();
+var pageSize=dataset1.getPageSize();
+var url="combine-chart.jsp?pageIndex="+pageIndex+"&amp;pageSize="+pageSize+"";
+window.open(url,"charFrame");</Event>
+			</Events>
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="table1" type="DataTable" dataset="dataset1" height="100%" width="100%">
+			<Column name="EMPLOYEE_ID" field="EMPLOYEE_ID" />
+			<Column name="DEPT_ID" field="DEPT_ID" />
+			<Column name="EMPLOYEE_NAME" field="EMPLOYEE_NAME" />
+			<Column name="SEX" field="SEX" />
+			<Column name="BIRTHDAY" field="BIRTHDAY" />
+			<Column name="MARRIED" field="MARRIED" />
+			<Column name="SALARY" field="SALARY" />
+			<Column name="DEGREE" field="DEGREE" />
+			<Column name="EMAIL" field="EMAIL" />
+			<Column name="WEB" field="WEB" />
+		</Control>
+		<Control id="pagepilot1" type="PagePilot" dataset="dataset1" />
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="onLoad">var pageIndex=dataset1.getPageIndex();
+var pageSize=dataset1.getPageSize();
+var url="combine-chart.jsp?pageIndex="+pageIndex+"&amp;pageSize="+pageSize+"";
+window.open(url,"charFrame");</Event>
+	</Events>
+</view>
+

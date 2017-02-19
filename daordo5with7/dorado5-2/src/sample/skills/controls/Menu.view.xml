@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clientType="smartweb2">
+  <Datasets/>
+  <Controls>
+    <Control id="menu1" type="Menu" popupContainer="subwindowPopupContainer">
+      <MenuItem name="menuitem1" label="File">
+        <MenuItem name="menuitem1" label="New" icon="images/newfile.gif"/>
+        <MenuItem name="menuitem2" label="Open" icon="images/openfile.gif"/>
+        <MenuItem name="menuitem3" label="Reopen" icon="images/openfile.gif">
+          <MenuItem name="menuitem1" label="Clear"/>
+          <MenuItem name="menuitem2" label="Dorado"/>
+          <MenuItem name="menuitem3" label="Dorado Sample"/>
+        </MenuItem>
+        <MenuItem name="menuitem4" label="Save" icon="images/savefile.gif"/>
+        <MenuItem name="menuitem5" label="Save As ..." icon="images/savefile.gif"/>
+        <MenuItem name="menuitem6" label="Exit"/>
+      </MenuItem>
+      <MenuItem name="menuitem2" label="Edit">
+        <MenuItem name="menuitem1" label="Add" icon="images/add.gif"/>
+        <MenuItem name="menuitem2" label="Delete" icon="images/delete.gif"/>
+        <MenuItem name="menuitem3" label="Copy" icon="images/copy.gif"/>
+        <MenuItem name="menuitem4" label="Cut" icon="images/cut.gif"/>
+        <MenuItem name="menuitem5" label="Paste" icon="images/paste.gif"/>
+        <MenuItem name="menuitem6" label="Undo" icon="images/undo.gif"/>
+        <MenuItem name="menuitem7" label="Redo" icon="images/redo.gif"/>
+      </MenuItem>
+      <MenuItem name="menuitem3" label="Search">
+        <MenuItem name="menuitem1" label="find"/>
+        <MenuItem name="menuitem2" label="replace"/>
+      </MenuItem>
+      <MenuItem name="menuitem4" label="Option">
+        <MenuItem name="menuitem1" label="Basic"/>
+        <MenuItem name="menuitem2" label="Advance"/>
+      </MenuItem>
+      <Events/>
+      <MenuItem name="menuitem5" label="Windows">
+        <MenuItem name="menuitem1" label="New"/>
+        <MenuItem name="menuitem2" label="Maximize"/>
+        <MenuItem name="menuitem3" label="Minimize"/>
+        <MenuItem name="menuitem4" label="Restore"/>
+      </MenuItem>
+      <MenuItem name="menuitem6" label="Help"/>
+    </Control>
+    <Control id="menubar1" type="MenuBar" menu="menu1"/>
+    <Control id="button1" type="Button" menu="menu1" value="Menu Button"/>
+    <Control id="menu2" type="Menu">
+      <MenuItem name="menuitem1" label="File">
+        <MenuItem name="menuitem1" label="New" icon="images/newfile_big.gif"/>
+        <MenuItem name="menuitem2" label="Open" icon="images/openfile_big.gif" disabled="true"/>
+        <MenuItem name="menuitem3" label="Reopen" icon="images/reopenfile_big.gif">
+          <MenuItem name="menuitem1" label="Clear"/>
+          <MenuItem name="menuitem2" label="Dorado"/>
+          <MenuItem name="menuitem3" label="Dorado Sample"/>
+        </MenuItem>
+        <MenuItem name="menuitem4" label="Save" icon="images/savefile_big.gif"/>
+        <MenuItem name="menuitem5" label="Save As ..." icon="images/saveas_big.gif"/>
+        <MenuItem name="menuitem6" label="Exit" icon="images/exit_big.gif"/>
+      </MenuItem>
+      <MenuItem name="menuitem2" label="Edit">
+        <MenuItem name="menuitem1" label="Add" icon="images/add_big.gif"/>
+        <MenuItem name="menuitem2" label="Delete" icon="images/delete_big.gif"/>
+        <MenuItem name="menuitem3" label="Copy" icon="images/copy_big.gif"/>
+        <MenuItem name="menuitem4" label="Cut" icon="images/cut_big.gif"/>
+        <MenuItem name="menuitem5" label="Paste" icon="images/paste_big.gif"/>
+        <MenuItem name="menuitem6" label="Undo" icon="images/undo_big.gif"/>
+        <MenuItem name="menuitem7" label="Redo" icon="images/redo_big.gif"/>
+      </MenuItem>
+      <MenuItem name="menuitem3" label="Search">
+        <MenuItem name="menuitem1" label="find" icon="images/find_big.gif"/>
+        <MenuItem name="menuitem2" label="replace" icon="images/replace_big.gif"/>
+      </MenuItem>
+      <MenuItem name="menuitem4" label="Option">
+        <MenuItem name="menuitem1" label="Basic"/>
+        <MenuItem name="menuitem2" label="Advance"/>
+      </MenuItem>
+      <Events/>
+      <MenuItem name="menuitem5" label="Windows">
+        <MenuItem name="menuitem1" label="New"/>
+        <MenuItem name="menuitem2" label="Maximize"/>
+        <MenuItem name="menuitem3" label="Minimize"/>
+        <MenuItem name="menuitem4" label="Restore"/>
+      </MenuItem>
+      <MenuItem name="menuitem6" label="Help"/>
+    </Control>
+    <Control id="outlookbar1" type="OutlookBar" menu="menu2" width="100%" height="100%"/>
+    <Control id="subwindow1" type="SubWindow"/>
+  </Controls>
+  <Properties/>
+</view>

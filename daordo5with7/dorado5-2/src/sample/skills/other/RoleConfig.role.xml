@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<roles>
+	<role name="role1">
+		<el>datasetEmployee.getField("email").setVisible(false)</el>
+		<el>datasetEmployee.getField("cmnt").setVisible(false)</el>
+		<el>menu1.findItem("1").setVisible(false)</el>
+		<el>menu1.findItem("2/21").setDisabled(true)</el>
+		<el>menu1.findItem("2/22").setVisible(false)</el>
+	</role>
+	<role name="role2" template="role1">
+		<el>button1.setIgnored(true)</el>
+		<el>button2.setDisabled(true)</el>
+		<el>datasetEmployee.getField("salary").setReadOnly(true)</el>
+		<el>menu1.findItem("2/1").setDisabled(true)</el>
+		<el>menu1.findItem("2/2").setDisabled(true)</el>
+		<el>menu1.findItem("3").setDisabled(true)</el>
+	</role>
+	<role name="role3">
+		<el>button2.setIgnored(true)</el>
+		<el>button3.setIgnored(true)</el>
+		<el>menubar1.setIgnored(true)</el>
+	</role>
+	<role name="role4">
+		<el>tableEmployee.setIgnored(true)</el>
+	</role>
+</roles>
+

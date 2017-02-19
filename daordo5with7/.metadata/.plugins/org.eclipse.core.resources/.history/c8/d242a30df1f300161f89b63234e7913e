@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view safe="true">
+	<Datasets />
+	<Controls>
+		<Control id="tabsetMain" type="TabSet">
+			<FrameTab name="tabSampleTree" path="sampleMaintain.tree.d" label="示例结构" cachable="true" padding="4" />
+			<FrameTab name="tabStartSample" path="sampleMaintain.start.d" label="快速体验" cachable="true" />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

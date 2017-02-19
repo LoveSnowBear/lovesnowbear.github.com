@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset type="Wrapper" keyFields="EMPLOYEE_ID" id="datasetEmployee" originTable="EMPLOYEE" dataSource="doradosample" pageSize="10" wrappedType="AutoSql">
+			<MasterLink />
+			<Fields>
+				<Field group="false" dataType="string" table="EMPLOYEE" originField="EMPLOYEE_ID" name="EMPLOYEE_ID" label="员工ID">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="string" table="EMPLOYEE" originField="DEPT_ID" name="DEPT_ID" label="部门ID">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="string" table="EMPLOYEE" originField="EMPLOYEE_NAME" name="EMPLOYEE_NAME" label="员工姓名">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="" table="EMPLOYEE" originField="SEX" name="SEX" label="性别">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="date" table="EMPLOYEE" originField="BIRTHDAY" name="BIRTHDAY" label="生日">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="" table="EMPLOYEE" originField="MARRIED" name="MARRIED" label="婚否">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="double" table="EMPLOYEE" originField="SALARY" name="SALARY" label="工资">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="string" table="EMPLOYEE" originField="DEGREE" name="DEGREE" label="学历">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="string" table="EMPLOYEE" originField="EMAIL" name="EMAIL" label="电子邮件">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="string" table="EMPLOYEE" originField="WEB" name="WEB" label="个人主页">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="string" table="EMPLOYEE" originField="CMNT" name="CMNT">
+					<Properties />
+				</Field>
+				<Field group="false" dataType="string" table="EMPLOYEE" originField="IMAGE" name="IMAGE">
+					<Properties />
+				</Field>
+				<Field name="ID" type="Dummy">
+					<Properties />
+				</Field>
+			</Fields>
+			<Joins />
+			<MatchRules />
+			<SortRules />
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="afterChange">switch (field.getName()) {
+  case "EMPLOYEE_ID":
+    var id = record.getValue("ID");
+    if( !id || id == ""){
+      record.setValue("ID",oldValue);
+    }
+    var employeeId = record.getValue("EMPLOYEE_ID");
+    if(employeeId){
+      if(employeeId == record.getValue("ID")){
+         break;
+      }
+      dsEmployeeForExist.parameters().setValue("employeeId",employeeId);
+      dsEmployeeForExist.flushData();
+      var recordExist = dsEmployeeForExist.getCurrent(); 
+      if(recordExist){ 
+          alert("用户名已存在！");
+          datasetEmployee.getCurrent().setValue("EMPLOYEE_ID",oldValue);
+      }
+    }
+    break;
+}</Event>
+				<Event name="beforeChange">switch (field.getName()) {
+  case "EMPLOYEE_ID":
+    if(value){
+      dsEmployeeForExist.parameters().setValue("employeeId",value);
+      dsEmployeeForExist.flushData();
+      var recordExist = dsEmployeeForExist.getCurrent(); 
+      if(recordExist){ 
+          throw new DoradoException("用户名已存在！");
+      }
+    }
+    break;
+}</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="dsEmployeeForExist" type="Wrapper" dataSource="doradosample" originTable="EMPLOYEE" wrappedType="AutoSql">
+			<Joins />
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":employeeId" escapeEnabled="false" table="EMPLOYEE" originField="EMPLOYEE_ID" operator="=" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control type="AutoForm" dataset="datasetEmployee" id="formEmployee" width="100%">
+			<FormGroup name="group" title="员工信息">
+				<Element name="EMPLOYEE_ID" type="TextEditor" field="EMPLOYEE_ID">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="EMPLOYEE_NAME" type="TextEditor" field="EMPLOYEE_NAME">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="EMAIL" type="TextEditor" field="EMAIL">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control type="DataTable" dataset="datasetEmployee" height="100%" id="tableEmployee" width="100%" showHScrollBar="false" readOnly="true">
+			<Column field="EMPLOYEE_ID" name="EMPLOYEE_ID" />
+			<Column field="EMPLOYEE_NAME" name="EMPLOYEE_NAME" />
+			<Column field="EMAIL" name="EMAIL" />
+			<Column field="WEB" name="WEB" />
+		</Control>
+		<Control id="pagepilotEmployee" dataset="datasetEmployee" type="PagePilot" />
+	</Controls>
+	<Properties />
+</view>
+

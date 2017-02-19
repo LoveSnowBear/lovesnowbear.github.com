@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets />
+	<Controls>
+		<Control id="datapilotEmployee" type="DataPilot" dataset="datasetEmployee" />
+		<Control id="formEmployee" type="AutoForm" dataset="datasetEmployee">
+			<FormGroup columnCount="1" title="员工信息">
+				<Element name="employee_id" field="employee_id" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="employee_name" field="employee_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="married" field="married" type="CheckBox">
+					<FieldLabel />
+					<CheckBox />
+				</Element>
+				<Element name="birthday" field="birthday" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="salary" field="salary" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="degree" field="degree" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="email" field="email" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="web" field="web" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="cmnt" field="cmnt" type="TextEditor">
+					<FieldLabel />
+					<TextEditor height="40" editorType="textarea" />
+				</Element>
+			</FormGroup>
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">var datasetEmployee = window.dialogArguments.datasetEmployee;
+registerDataset(datasetEmployee);</Event>
+	</Events>
+</view>
+

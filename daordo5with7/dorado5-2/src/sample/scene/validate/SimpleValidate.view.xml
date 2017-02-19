@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset type="Custom" id="datasetValidate">
+			<MasterLink />
+			<Fields>
+				<Field name="required" label="必填校验">
+					<Properties />
+					<Validator errorMessage="必填不能为空！" type="Required" />
+				</Field>
+				<Field name="required2" label="自定义必填校验">
+					<Properties />
+				</Field>
+				<Field name="lengthValidate" label="长度校验2-5">
+					<Properties />
+					<Validator maxLength="5" minLength="2" errorMessage="长度必须在2-5位" type="Length" />
+				</Field>
+				<Field name="lengthMinValidate" label="最小长度为2">
+					<Properties />
+					<Validator type="Length" minLength="2" errorMessage="最小长度为2" />
+				</Field>
+				<Field name="lengthMaxValidate" label="最大长度为5">
+					<Properties />
+					<Validator type="Length" maxLength="5" errorMessage="最大长度为5" />
+				</Field>
+				<Field name="rangeValidate" label="整数范围2-5" dataType="int">
+					<Properties />
+					<Validator max="5" min="2" type="Range" errorMessage="请输入2-5的整数" maxMatchRule="allow_equals" minMatchRule="allow_equals" />
+				</Field>
+				<Field name="rangeMinValidate" label="整数最小10" dataType="int">
+					<Properties />
+					<Validator min="10" type="Range" errorMessage="最小为10的整数" max="1000000000" />
+				</Field>
+				<Field name="rangeMaxValidate" label="整数最大10" dataType="int">
+					<Properties />
+					<Validator max="10" type="Range" errorMessage="最大为10的整数" />
+				</Field>
+				<Field name="numRangeValidate" dataType="double" label="浮点数范围2-5">
+					<Properties />
+					<Validator max="5" min="2" type="Range" errorMessage="请输入2-5的数字" />
+				</Field>
+				<Field name="numRangeMinValidate" dataType="double" label="浮点数最小10">
+					<Properties />
+					<Validator min="10" type="Range" errorMessage="最小为10的数字" max="10000000000000" />
+				</Field>
+				<Field name="numRangeMaxValidate" dataType="double" label="浮点数最大10">
+					<Properties />
+					<Validator max="10" type="Range" errorMessage="最大为10的数字" />
+				</Field>
+				<Field name="listValidate" label="集合校验">
+					<Properties />
+					<Validator type="List" errorMessage="输入值不符合条件,请输入学士,硕士或则博士" values="学士,硕士,博士" />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="beforePost">var required2 = record.getValue("required2");
+if(!required2  || required2 == ""){
+      throw new DoradoException("自定义必填不能为空！");
+}</Event>
+				<Event name="beforeChange">switch (field.getName()) {
+  case "required2":
+    if(!value  || value == ""){
+      throw new DoradoException("不能为空！");
+     }
+   break;
+}</Event>
+			</Events>
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control type="AutoForm" dataset="datasetValidate" id="formValidate">
+			<FormGroup name="group1" title="非空校验" expanded="true">
+				<Element field="required" type="TextEditor" name="required">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+			<FormGroup name="group2" title="自定义必填校验" expanded="true">
+				<Element field="required2" type="TextEditor" name="required2">
+					<FieldLabel>
+						<Events>
+							<Event name="onRefresh">label.innerHTML = "&lt;font color='red'&gt;*&lt;/font&gt;" + value;</Event>
+						</Events>
+					</FieldLabel>
+					<TextEditor />
+				</Element>
+			</FormGroup>
+			<FormGroup name="group3" title="长度校验" columnCount="3" expanded="true">
+				<Element field="lengthValidate" type="TextEditor" name="lengthValidate">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="lengthMinValidate" type="TextEditor" name="lengthMinValidate">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="lengthMaxValidate" type="TextEditor" name="lengthMaxValidate">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+			<FormGroup name="group4" columnCount="3" expanded="true" title="整数范围校验">
+				<Element field="rangeValidate" type="TextEditor" name="rangeValidate">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="rangeMinValidate" type="TextEditor" name="rangeMinValidate">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="rangeMaxValidate" type="TextEditor" name="rangeMaxValidate">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+			<FormGroup name="group5" columnCount="3" expanded="true" title="浮点数范围校验">
+				<Element field="numRangeValidate" type="TextEditor" name="numRangeValidate">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="numRangeMinValidate" type="TextEditor" name="numRangeMinValidate">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="numRangeMaxValidate" type="TextEditor" name="numRangeMaxValidate">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+			<FormGroup name="group6" expanded="true" title="集合校验">
+				<Element name="listValidate" type="TextEditor" field="listValidate">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="buttonSubmit" type="Button" value="校验" width="80">
+			<Events>
+				<Event name="onClick">if(datasetValidate.getCurrent()){
+  datasetValidate.postRecord();
+}</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="onLoad">datasetValidate.insertRecord();</Event>
+	</Events>
+</view>
+

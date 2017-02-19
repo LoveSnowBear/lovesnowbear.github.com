@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="dataset1" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="EMPLOYEE" pageSize="8" readOnly="true">
+			<Joins />
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" dropDown="dropdown1">
+					<Properties />
+				</Field>
+				<Field name="BIRTHDAY" originField="BIRTHDAY" table="EMPLOYEE" dataType="date" group="false">
+					<Properties />
+				</Field>
+				<Field name="MARRIED" originField="MARRIED" table="EMPLOYEE" group="false">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="EMAIL" originField="EMAIL" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="WEB" originField="WEB" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="CMNT" originField="CMNT" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="IMAGE" originField="IMAGE" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="afterFlushData">var pageIndex=dataset.getPageIndex();
+var pageSize=dataset.getPageSize();
+var url="timeseries-chart.jsp?pageIndex="+pageIndex+"&amp;pageSize="+pageSize+"";
+window.open(url,"chartFrame");</Event>
+			</Events>
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="table1" type="DataTable" width="100%" height="100%" dataset="dataset1">
+			<Column name="EMPLOYEE_ID" field="EMPLOYEE_ID" />
+			<Column name="DEPT_ID" field="DEPT_ID" />
+			<Column name="EMPLOYEE_NAME" field="EMPLOYEE_NAME" />
+			<Column name="SEX" field="SEX" />
+			<Column name="BIRTHDAY" field="BIRTHDAY" />
+			<Column name="MARRIED" field="MARRIED" />
+			<Column name="SALARY" field="SALARY" />
+			<Column name="DEGREE" field="DEGREE" />
+			<Column name="EMAIL" field="EMAIL" />
+			<Column name="WEB" field="WEB" />
+		</Control>
+		<Control id="subwindow1" type="SubWindow" width="500" height="300" status="hidden" resizable="false" />
+		<Control id="formEmployeeDetail" type="AutoForm" dataset="dataset1">
+			<FormGroup>
+				<Element name="EMPLOYEE_ID" field="EMPLOYEE_ID" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="DEPT_ID" field="DEPT_ID" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="EMPLOYEE_NAME" field="EMPLOYEE_NAME" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="SEX" field="SEX" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="BIRTHDAY" field="BIRTHDAY" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="MARRIED" field="MARRIED" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="SALARY" field="SALARY" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="DEGREE" field="DEGREE" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="EMAIL" field="EMAIL" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="WEB" field="WEB" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="CMNT" field="CMNT" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="IMAGE" field="IMAGE" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="element1" type="Custom" showLabel="false" controlId="button1" controlAlign="center" colSpan="2">
+					<FieldLabel />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="button1" type="Button" value="   关闭窗口  ">
+			<Events>
+				<Event name="onClick">subwindow1.hide();</Event>
+			</Events>
+		</Control>
+		<Control id="pagepilot1" type="PagePilot" dataset="dataset1" />
+		<Control id="dropdown1" type="ListDropDown" fixed="true" mapValue="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="onLoad">var pageIndex=dataset1.getPageIndex();
+var pageSize=dataset1.getPageSize();
+var url="timeseries-chart.jsp?pageIndex="+pageIndex+"&amp;pageSize="+pageSize+"";
+window.open(url,"chartFrame");</Event>
+	</Events>
+</view>
+

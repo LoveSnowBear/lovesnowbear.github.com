@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.skills.data.VO2ViewModel">
+	<Datasets>
+		<Dataset id="datasetBranch" type="DO" objectClazz="sample.skills.data.vo.Branch">
+			<MasterLink />
+			<Fields>
+				<Field name="id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="name" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDept" type="DO" objectClazz="sample.skills.data.vo.Dept">
+			<MasterLink masterDataset="datasetBranch" masterKeyFields="id" detailProperty="depts" />
+			<Fields>
+				<Field name="id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="name" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetEmployee" type="DO" objectClazz="sample.skills.data.vo.Employee">
+			<MasterLink masterDataset="datasetDept" masterKeyFields="id" detailProperty="employees" />
+			<Fields>
+				<Field name="birthday" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="comment" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="float">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="treeEmployee" type="DataTree" width="100%" height="100%">
+			<TreeLevel name="branch" type="Simple" dataset="datasetBranch" labelField="name" expandedIcon="../../images/folder-opened.gif" icon="../../images/folder-closed.gif" expanded="true">
+				<TreeLevel name="dept" type="Simple" dataset="datasetDept" labelField="name" expanded="true" expandedIcon="../../images/folder-opened.gif" icon="../../images/folder-closed.gif">
+					<TreeLevel name="employee" type="Simple" dataset="datasetEmployee" labelField="name" hasChild="false" icon="../../images/person.gif" />
+				</TreeLevel>
+			</TreeLevel>
+			<Events>
+				<Event name="afterCurrentChange">return;
+var currentTab;
+switch (node.getLevel()) {
+  case 1: {
+    currentTab = "tabBranch";
+    break;
+  }
+  case 2: {
+    currentTab = "tabDept";
+    break;
+  }
+  default: {
+    currentTab = "tabEmployee";
+    break;
+  }
+}
+tabsetContent.setCurrentTab(currentTab);</Event>
+			</Events>
+		</Control>
+		<Control id="tabsetContent" type="TabSet" showFrame="false">
+			<Tab name="tabBranch" visible="false" />
+			<Tab name="tabDept" visible="false" />
+			<Tab name="tabEmployee" visible="false" />
+		</Control>
+		<Control id="formBranch" type="AutoForm" dataset="datasetBranch">
+			<FormGroup title="分公司信息" columnCount="1">
+				<Element name="id" field="id" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="name" field="name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="formDept" type="AutoForm" dataset="datasetDept">
+			<FormGroup title="部门信息" columnCount="1">
+				<Element name="id" field="id" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="name" field="name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="formEmployee" type="AutoForm" dataset="datasetEmployee">
+			<FormGroup title="员工信息" columnCount="1">
+				<Element name="id" field="id" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="name" field="name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="married" field="married" type="CheckBox">
+					<FieldLabel />
+					<CheckBox />
+				</Element>
+				<Element name="sex" field="sex" type="CheckBox">
+					<FieldLabel />
+					<CheckBox />
+				</Element>
+				<Element name="salary" field="salary" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="birthday" field="birthday" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="email" field="email" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="degree" field="degree" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="web" field="web" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="comment" field="comment" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

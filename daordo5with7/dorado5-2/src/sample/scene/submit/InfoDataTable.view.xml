@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Custom" insertOnEmpty="true">
+			<MasterLink />
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="员工编号">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="姓名">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false" label="部门" dropDown="dropdownDept">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" label="性别" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="BIRTHDAY" originField="BIRTHDAY" table="EMPLOYEE" dataType="date" group="false" label="生日">
+					<Properties />
+				</Field>
+				<Field name="MARRIED" originField="MARRIED" table="EMPLOYEE" group="false" label="婚否" dropDown="dropdownMarried">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="EMAIL" originField="EMAIL" table="EMPLOYEE" dataType="string" group="false" label="邮箱">
+					<Properties />
+				</Field>
+				<Field name="WEB" originField="WEB" table="EMPLOYEE" dataType="string" group="false" label="网址">
+					<Properties />
+				</Field>
+				<Field name="CMNT" originField="CMNT" table="EMPLOYEE" dataType="string" group="false" label="备注">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="afterChange">EmployeeBiz.checkEmployeeId(dataset,record,field,oldValue);</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="datasetEmployee_dic" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="EMPLOYEE">
+			<Joins />
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="员工编号">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false" dropDown="dropdownDept" label="部门">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="姓名">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" dropDown="dropdownSex" label="性别">
+					<Properties />
+				</Field>
+				<Field name="BIRTHDAY" originField="BIRTHDAY" table="EMPLOYEE" dataType="date" group="false" label="生日">
+					<Properties />
+				</Field>
+				<Field name="MARRIED" originField="MARRIED" table="EMPLOYEE" group="false" dropDown="dropdownMarried" label="婚否">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="EMAIL" originField="EMAIL" table="EMPLOYEE" dataType="string" group="false" label="邮箱">
+					<Properties />
+				</Field>
+				<Field name="WEB" originField="WEB" table="EMPLOYEE" dataType="string" group="false" label="网页">
+					<Properties />
+				</Field>
+				<Field name="CMNT" originField="CMNT" table="EMPLOYEE" dataType="string" group="false" label="备注">
+					<Properties />
+				</Field>
+				<Field name="IMAGE" originField="IMAGE" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":EMPLOYEE_ID" escapeEnabled="false" table="EMPLOYEE" originField="EMPLOYEE_ID" operator="like" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDept_dic" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="DEPT">
+			<Joins />
+			<Fields>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="BRANCH_ID" originField="BRANCH_ID" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetControl" type="Form">
+			<MasterLink />
+			<Fields>
+				<Field name="checkMultiRecord" dataType="boolean" defaultValue="true">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%" showHScrollBar="false">
+			<Column name="EMPLOYEE_ID" field="EMPLOYEE_ID" width="200" />
+			<Column name="EMPLOYEE_NAME" field="EMPLOYEE_NAME" readOnly="true" />
+			<Column name="DEPT_ID" field="DEPT_ID" readOnly="true" width="150" />
+			<Column name="SEX" field="SEX" readOnly="true" align="center" />
+			<Column name="BIRTHDAY" field="BIRTHDAY" readOnly="true" />
+			<Column name="MARRIED" field="MARRIED" readOnly="true" />
+			<Column name="SALARY" field="SALARY" readOnly="true" />
+			<Column name="DEGREE" field="DEGREE" readOnly="true" />
+		</Control>
+		<Control id="buttonInsert" type="Button" value="插入一行" width="70">
+			<Events>
+				<Event name="onClick">${Script.getDataset("datasetEmployee")}.insertRecord();</Event>
+			</Events>
+		</Control>
+		<Control id="dropdownDept" type="DatasetDropDown" dataset="datasetDept_dic" mapValue="true" labelField="DEPT_NAME" valueField="DEPT_ID" />
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+		<Control id="dropdownMarried" type="ListDropDown" mapValue="true">
+			<DropDownItem value="true" label="已婚" />
+			<DropDownItem value="false" label="未婚" />
+		</Control>
+		<Control id="editorCheckMultiRecord" type="CheckBox" dataset="datasetControl" field="checkMultiRecord" />
+		<Control id="tableEmployee_dic" type="DataTable" dataset="datasetEmployee_dic" width="100%" height="100%" readOnly="true">
+			<Column name="EMPLOYEE_ID" field="EMPLOYEE_ID" width="150" />
+			<Column name="EMPLOYEE_NAME" field="EMPLOYEE_NAME" width="60" />
+			<Column name="DEPT_ID" field="DEPT_ID" width="150" />
+			<Column name="SEX" field="SEX" width="50" />
+			<Column name="BIRTHDAY" field="BIRTHDAY" width="100" />
+			<Column name="MARRIED" field="MARRIED" width="50" />
+			<Column name="SALARY" field="SALARY" />
+			<Column name="DEGREE" field="DEGREE" />
+			<Events>
+				<Event name="onRecordDblClick">EmployeeBiz.feedbackEmployee(
+  ${Script.getDataset("datasetEmployee_dic")}.getCurrent(),
+  ${Script.getDataset("datasetEmployee")}.getCurrent()
+);
+${Script.getControl("subwindowMultiEmployee")}.hide();</Event>
+			</Events>
+		</Control>
+		<Control id="subwindowMultiEmployee" type="SubWindow" showCloseButton="true" showMaximizeButton="false" showMinimizeButton="false" status="hidden" width="600" height="400" />
+		<Control id="buttonOk1Emp" type="Button" value="确定" width="70">
+			<Events>
+				<Event name="onClick">var datasetEmployee_dic = ${Script.getDataset("datasetEmployee_dic")};
+var datasetEmployee = ${Script.getDataset("datasetEmployee")};
+EmployeeBiz.feedbackEmployee(
+  datasetEmployee_dic.getCurrent(),
+  datasetEmployee._currentRecord
+);
+datasetEmployee._currentRecord=null;
+${Script.getControl("subwindowMultiEmployee")}.hide();</Event>
+			</Events>
+		</Control>
+		<Control id="buttonClose" type="Button" value="取消" width="70">
+			<Events>
+				<Event name="onClick">${Script.getControl("subwindowMultiEmployee")}.hide();</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">var EmployeeBiz={};
+EmployeeBiz.checkEmployeeId=function(dataset,record,field,oldValue){
+  if(field.getName()=="EMPLOYEE_ID"){
+    var employeeId=record.getValue("EMPLOYEE_ID");
+    var dsDic=${Script.getDataset("datasetEmployee_dic")};
+    dsDic.parameters().setValue("employee_id","%"+employeeId.toUpperCase()+"%");
+    dsDic.flushData();
+    var employee=dsDic.getCurrent();
+    if(employee){
+      if(employee.getNextRecord() &amp;&amp; ${Script.getDataset("datasetControl")}.getValue("checkMultiRecord")){
+        ${Script.getControl("subwindowMultiEmployee")}.show(true,true);
+        dataset._currentRecord=record;
+      }else{
+        EmployeeBiz.feedbackEmployee(employee,record);
+      }
+    }
+  }
+};
+EmployeeBiz.feedbackEmployee=function(employee,record){
+  if(record &amp;&amp; employee){
+    record.copyRecord(employee);
+    setTimeout('${Script.getDataset("datasetEmployee")}.refreshControls();',50);
+  }
+}</Event>
+	</Events>
+</view>
+

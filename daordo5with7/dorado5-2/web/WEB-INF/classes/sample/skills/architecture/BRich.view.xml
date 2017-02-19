@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee" pageSize="10">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+					<Validator type="Required" />
+					<Validator type="Length" maxLength="15" />
+				</Field>
+				<Field name="employee_name" dataType="string">
+					<Properties />
+					<Validator type="Required" />
+				</Field>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="datetime" format="yyyy年MM月dd日">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+		<Control id="datapilot1" type="DataPilot" dataset="datasetEmployee" />
+		<Control id="pagepilot1" type="PagePilot" dataset="datasetEmployee" />
+		<Control id="form1" type="AutoForm" dataset="datasetEmployee" defaultControlWidth="200">
+			<FormGroup columnCount="1" title="表单">
+				<Element name="employee_id" field="employee_id" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="employee_name" field="employee_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="sex" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="married" field="married" type="CheckBox">
+					<FieldLabel />
+					<CheckBox />
+				</Element>
+				<Element name="birthday" field="birthday" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="table1" type="DataTable" dataset="datasetEmployee" width="100%" height="100%" showHScrollBar="false">
+			<Column name="employee_id" field="employee_id" />
+			<Column name="employee_name" field="employee_name" />
+			<Column name="sex" field="sex" width="60" />
+		</Control>
+		<Control id="table2" type="DataTable" dataset="datasetEmployee" width="100%" height="100%" showHScrollBar="false">
+			<Column name="employee_name" field="employee_name" />
+			<Column name="married" field="married" width="40" rendererType="checkbox">
+				<Events />
+			</Column>
+			<Column name="birthday" field="birthday" />
+		</Control>
+	</Controls>
+	<Properties />
+	<Events />
+</view>
+

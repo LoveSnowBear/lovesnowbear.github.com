@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets />
+	<Controls>
+		<Control id="buttonNewWindow1" type="Button" value="添加随机定位子窗体">
+			<Events>
+				<Event name="onClick">var contarner = document.getElementById("windowContainer");
+
+for (var i = 0; i &lt; 3; i++) {
+  var win = DoradoFactory.create("SubWindow");
+  win.setTitle("新的子窗体" + (++serialNumber));
+  win.style.position = "absolute";
+  win.style.width = 300;
+  win.style.height = 100;
+  win.style.left = Math.random() * (contarner.offsetWidth - 300);
+  win.style.top = Math.random() * (contarner.offsetHeight - 100);
+  win.setShowCloseButton(true);
+  win.activate();
+  
+  var color = Math.round(Math.random() * Math.pow(16, 6)).toString(16);
+  if (color.length &lt; 6) {
+    for (var j = color.length; j &lt; 6; j++) color += "0";
+  }
+  win.getContentContainer().style.backgroundColor = "#" + color;
+  
+  contarner.appendChild(win);
+  EventManager.addDoradoEvent(win, "afterHide", function(subWindow) {
+      subWindow.destroy();
+    }
+  );
+  
+  windows.push(win);
+}</Event>
+			</Events>
+		</Control>
+		<Control id="buttonNewWindow2" type="Button" value="添加流式布局子窗体">
+			<Events>
+				<Event name="onClick">var contarner = document.getElementById("windowContainer");
+
+var win = DoradoFactory.create("SubWindow");
+win.setTitle("新的子窗体" + (++serialNumber));
+win.style.width = 300;
+win.style.height = 100;
+win.setShowCloseButton(true);
+win.activate();
+
+var color = Math.round(Math.random() * Math.pow(16, 6)).toString(16);
+if (color.length &lt; 6) {
+  for (var i = color.length; i &lt; 6; i++) color += "0";
+}
+win.getContentContainer().style.backgroundColor = "#" + color;
+
+contarner.appendChild(win);
+EventManager.addDoradoEvent(win, "afterHide", function(subWindow) {
+    subWindow.destroy();
+  }
+);
+
+windows.push(win);</Event>
+			</Events>
+		</Control>
+		<Control id="buttonCloseAll" type="Button" value="关闭所有子窗体">
+			<Events>
+				<Event name="onClick">for (var i = 0; i &lt; windows.length; i++) {
+  var win = windows[i];
+  win.hide();
+}
+windows = new Array();</Event>
+			</Events>
+		</Control>
+		<Control id="buttonShowExclusiveWindow" type="Button" value="显示一个排他子窗体">
+			<Events>
+				<Event name="onClick">if (exclusiveWidnow == null) {
+  exclusiveWidnow = DoradoFactory.create("SubWindow", null, null, "hidden");
+  exclusiveWidnow.setTitle("排他式子窗体");
+  exclusiveWidnow.style.position = "absolute";
+  exclusiveWidnow.style.width = 300;
+  exclusiveWidnow.style.height = 200;
+  exclusiveWidnow.setShowMinimizeButton(false);
+  exclusiveWidnow.setShowCloseButton(true);
+  exclusiveWidnow.setResizable(false);
+  exclusiveWidnow.activate();
+  document.body.appendChild(exclusiveWidnow);
+  
+  EventManager.addDoradoEvent(exclusiveWidnow, "beforeHide", function(subWindow) {
+      if (!confirm("确实要关闭吗?")) {
+        throw new AbortException();
+      }
+    }
+  );
+}
+exclusiveWidnow.show(true, true);</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">var serialNumber = 0;
+var windows = new Array();
+var exclusiveWidnow = null;</Event>
+	</Events>
+</view>
+

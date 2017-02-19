@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Wrapper" wrappedType="AutoSql" originTable="employee" keyFields="employee_id">
+			<Joins>
+				<Join name="dept" originTable="dept" keyFields="dept_id" sourceTable="employee" sourceKeyFields="dept_id" />
+				<Join name="branch" originTable="branch" keyFields="branch_id" sourceTable="dept" sourceKeyFields="branch_id" />
+			</Joins>
+			<Fields>
+				<Field name="branch_name" originField="branch_name" table="branch" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="dept_name" originField="dept_name" table="dept" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="employee_name" originField="employee_name" table="employee" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="birthday" originField="birthday" table="employee" dataType="date" group="false">
+					<Properties />
+				</Field>
+				<Field name="salary" originField="salary" table="employee" dataType="double" group="false">
+					<Properties />
+				</Field>
+				<Field name="degree" originField="degree" table="employee" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules>
+				<SortRule originField="branch_name" table="branch" descent="false" />
+				<SortRule originField="dept_name" table="dept" descent="false" />
+			</SortRules>
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" height="100%" width="100%">
+			<Column name="branch_name" field="branch_name" groupable="true" width="120" />
+			<Column name="dept_name" field="dept_name" groupable="true" width="170" />
+			<Column name="employee_name" field="employee_name" width="120" />
+			<Column name="birthday" field="birthday" width="120" />
+			<Column name="salary" field="salary" />
+			<Column name="degree" field="degree" />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

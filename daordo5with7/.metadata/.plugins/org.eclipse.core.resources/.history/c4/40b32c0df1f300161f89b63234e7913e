@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clientType="smartweb2">
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee">
+			<MasterLink />
+			<Fields>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date" format="yyyy年MM月dd日">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="float">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			
+			
+			
+			
+			
+			
+			
+			&gt;
+		
+		
+		
+		
+		
+		
+		
+		
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" showDefinedColsOnly="true" width="100%" highlightSelection="false" showIndicator="false" height="400">
+			<Column name="married" field="married" sortable="true" rendererType="checkbox" width="40">
+				<Events>
+					<Event name="onRefresh">if (record.getValue("married")){
+  row.style.backgroundColor = "#E6E6E6";
+}
+else{
+  row.style.backgroundColor = "white";
+}
+return true;</Event>
+				</Events>
+			</Column>
+			<Column name="employee_name" field="employee_name" sortable="true" width="150">
+				<Events>
+					<Event name="onRefresh">cell.innerText = value + " (" + record.getValue("employee_id") + ")";</Event>
+				</Events>
+			</Column>
+			<Column name="sex" field="sex" sortable="true" dropDown="dropdownSex" align="center" width="70" editorType="radiogroup">
+				<Events>
+					<Event name="onRefresh">if (record.getValue("sex")){
+  cell.innerHTML = "&lt;img src='../../images/man.gif'&gt;";
+}
+else{
+  cell.innerHTML = "&lt;img src='../../images/woman.gif'&gt;";
+}</Event>
+				</Events>
+			</Column>
+			<Column name="birthday" field="birthday" sortable="true" width="110" />
+			<Column name="salary" field="salary" sortable="true" width="150">
+				<Events>
+					<Event name="onRefresh">var salary = record.getValue("salary");;
+if (salary &gt; 4000) {
+  cell.style.color="red";
+  cell.style.fontWeight="bold";
+}
+else {
+  cell.style.color="";
+  cell.style.fontWeight="";
+}
+cell.innerText = "$ " + value + " /month";</Event>
+				</Events>
+			</Column>
+			<Column name="web" field="web" sortable="true" readOnly="true" width="160">
+				<Events>
+					<Event name="onRefresh">cell.innerHTML = "&lt;a href='http://" + value + "' target='_blank'&gt;" + value + "&lt;/a &gt;";</Event>
+				</Events>
+			</Column>
+			<Column name="operation" label="操作" align="center" readOnly="true" width="180">
+				<Events>
+					<Event name="onRefresh">var html = "&lt;button onclick=\"raiseSalary(event, 1000);\" style=\"border-width:1px\"&gt;加薪(+)&lt;/button&gt;&amp;nbsp;" +
+  "&lt;button onclick=\"raiseSalary(event, -1000);\" style=\"border-width:1px\"&gt;减薪(-)&lt;/button&gt;";
+cell.innerHTML = html;
+cell.record = record;</Event>
+				</Events>
+			</Column>
+			<Events />
+		</Control>
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">function raiseSalary(event, adjust) {
+  var record = event.target.parentNode.record;
+  datasetEmployee.setCurrent(record);
+  datasetEmployee.setValue("salary", datasetEmployee.getValue("salary") + adjust);
+}</Event>
+	</Events>
+</view>
+

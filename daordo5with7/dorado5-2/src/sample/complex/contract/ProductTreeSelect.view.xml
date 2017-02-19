@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetCategory" type="Reference" sourceModule="sample.Product" sourceDataset="datasetCategory">
+			<MasterLink />
+			<Fields>
+				<Field name="category_id" dataType="string" valueProtected="true">
+					<Properties />
+				</Field>
+				<Field name="parent_id" dataType="string" readOnly="true">
+					<Properties />
+				</Field>
+				<Field name="category_name" dataType="string" defaultValue="&lt;新分类&gt;">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters>
+				<Parameter name="parent_id" value="$null" />
+			</Parameters>
+			<Properties />
+			<Events>
+				<Event name="beforeDelete">var category_id = parseInt(record.getValue("category_id"));
+if (record.getString("parent_id") == "" &amp;&amp; 
+   (category_id == 1 || category_id == 2 || category_id == 3)) {
+  return "处于演示数据的安全考虑,本例不允许您删除顶层的分类!";
+}</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="datasetProduct" type="Reference" sourceModule="sample.Product" sourceDataset="datasetProduct">
+			<MasterLink />
+			<Fields>
+				<Field name="product_id" dataType="string" valueProtected="true">
+					<Properties />
+				</Field>
+				<Field name="category_id" dataType="string" readOnly="true">
+					<Properties />
+				</Field>
+				<Field name="product_name" dataType="string" defaultValue="&lt;新产品&gt;">
+					<Properties />
+				</Field>
+				<Field name="spec" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="brand" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="weight" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="size" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="treeProduct" type="DataTree" width="100%" height="100%">
+			<TreeLevel name="category" type="Recursive" dataset="datasetCategory" recursiveKeyFields="category_id" recursiveKeyParameters="parent_id" labelField="category_name" icon="../../images/folder-closed.gif" expandedIcon="../../images/folder-opened.gif">
+				<TreeLevel name="product" type="Simple" dataset="datasetProduct" masterKeyFields="category_id" detailKeyParameters="category_id" labelField="product_name" icon="../../images/product.gif" hasChild="false" checkable="true" />
+			</TreeLevel>
+			<Events />
+		</Control>
+		<Control id="buttonInsert" type="Button" value="添加" width="80">
+			<Events>
+				<Event name="onClick">var nodes = treeProduct.getAllCheckedNodes();
+treeProduct.clearAllCheckedState();
+parent.processSelectedProduct(nodes);</Event>
+			</Events>
+		</Control>
+		<Control id="buttonInsertAndClose" type="Button" value="添加并关闭">
+			<Events>
+				<Event name="onClick">buttonInsert.click();
+SubWindow.hideParent();</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

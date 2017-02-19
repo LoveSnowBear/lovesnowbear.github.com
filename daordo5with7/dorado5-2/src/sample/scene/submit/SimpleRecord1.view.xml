@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetEmployee" wrappedType="AutoSql" type="Wrapper" dataSource="doradosample" originTable="EMPLOYEE" pageSize="20" keyFields="EMPLOYEE_ID">
+			<Joins />
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="员工ID">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" dropDown="dropdownDept" label="部门编号">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="员工名">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" dropDown="dropdownSex" label="性别">
+					<Properties />
+				</Field>
+				<Field name="BIRTHDAY" originField="BIRTHDAY" table="EMPLOYEE" dataType="date" group="false" label="生日">
+					<Properties />
+				</Field>
+				<Field name="MARRIED" originField="MARRIED" table="EMPLOYEE" group="false" label="婚否">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="工资">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="EMAIL" originField="EMAIL" table="EMPLOYEE" dataType="string" group="false" label="电子邮件">
+					<Properties />
+				</Field>
+				<Field name="WEB" originField="WEB" table="EMPLOYEE" dataType="string" group="false" label="网址">
+					<Properties />
+				</Field>
+				<Field name="CMNT" originField="CMNT" table="EMPLOYEE" dataType="string" group="false" label="备注">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDept" wrappedType="AutoSql" type="Wrapper" dataSource="doradosample" originTable="DEPT">
+			<Joins />
+			<Fields>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="BRANCH_ID" originField="BRANCH_ID" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+		<Control id="dropdownMarried" type="ListDropDown" mapValue="true" autoDropDown="true">
+			<DropDownItem value="true" label="已婚" />
+			<DropDownItem value="false" label="未婚" />
+		</Control>
+		<Control id="dropdownDept" type="DatasetDropDown" dataset="datasetDept" mapValue="true" autoDropDown="true" labelField="DEPT_NAME" valueField="DEPT_ID" fixed="true" />
+		<Control id="datapilotEmployee" type="DataPilot" dataset="datasetEmployee" />
+		<Control id="pagepilotEmployee" type="PagePilot" dataset="datasetEmployee" />
+		<Control id="formEmployee" type="AutoForm" dataset="datasetEmployee">
+			<FormGroup name="group1" title="基本信息" columnCount="3">
+				<Element field="EMPLOYEE_ID" type="TextEditor" name="EMPLOYEE_ID">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="DEPT_ID" type="TextEditor" name="DEPT_ID">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="EMPLOYEE_NAME" type="TextEditor" name="EMPLOYEE_NAME">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="SEX" type="TextEditor" name="SEX">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="BIRTHDAY" type="TextEditor" name="BIRTHDAY">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="MARRIED" type="TextEditor" name="MARRIED">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="SALARY" type="TextEditor" name="SALARY">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="DEGREE" type="TextEditor" name="DEGREE">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+			<FormGroup name="group2" title="备注" columnCount="1">
+				<Element field="EMAIL" type="TextEditor" name="EMAIL">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="WEB" type="TextEditor" name="WEB">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="CMNT" type="TextEditor" name="CMNT">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="50" />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%" readOnly="true" fixedColumn="2">
+			<Column name="employee_id" field="employee_id" width="100">
+				<Events />
+			</Column>
+			<Column name="employee_name" field="employee_name" />
+			<Column name="dept_id" field="dept_id" width="160">
+				<Events />
+			</Column>
+			<Column name="sex" field="sex" align="center" dropDown="dropdownSex" rendererType="radiogroup" />
+			<ColumnGroup name="group1" label="组合列">
+				<Column name="birthday" field="birthday" width="120" />
+				<Column name="salary" field="salary" />
+				<Column name="married" field="married" rendererType="checkbox" width="40" />
+				<Events />
+			</ColumnGroup>
+			<Column name="degree" field="degree">
+				<Events />
+			</Column>
+			<Column name="email" field="email" width="150" />
+			<Column name="web" field="web" width="150" />
+			<Column name="cmnt" field="cmnt" width="150" editorType="textarea" noWrap="false" />
+		</Control>
+		<Control id="commandSave" type="UpdateCommand">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetEmployee" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+		<Control id="buttonSave" type="Button" command="commandSave" width="80" value="保存" />
+	</Controls>
+	<Properties />
+</view>
+

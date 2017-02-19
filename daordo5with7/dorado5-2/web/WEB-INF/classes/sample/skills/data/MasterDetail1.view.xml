@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetBranch" type="Reference" sourceModule="sample.HR" sourceDataset="datasetBranch" readOnly="true">
+			<MasterLink />
+			<Fields>
+				<Field name="branch_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="branch_name" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="beforeDelete">return "abort";</Event>
+				<Event name="beforeInsert">return "abort";</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee" readOnly="true" pageSize="3" autoLoadData="false">
+			<MasterLink masterDataset="datasetBranch" detailKeyParameters="branch_id" masterKeyFields="branch_id" />
+			<Fields>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="beforeInsert">return "abort";</Event>
+				<Event name="beforeDelete">return "abort";</Event>
+			</Events>
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+		<Control id="tableBranch" type="DataTable" dataset="datasetBranch" height="100%" showHScrollBar="false" confirmDelete="false" width="100%">
+			<Column name="branch_id" field="branch_id" />
+			<Column name="branch_name" field="branch_name" />
+		</Control>
+		<Control id="pagepilotEmployee" type="PagePilot" dataset="datasetEmployee" />
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" height="100%" confirmDelete="false" width="100%">
+			<Column name="employee_id" field="employee_id" />
+			<Column name="employee_name" field="employee_name" />
+			<Column name="dept_id" field="dept_id" />
+			<Column name="sex" field="sex" />
+			<Column name="married" field="married" />
+			<Column name="birthday" field="birthday" />
+			<Column name="salary" field="salary" />
+			<Column name="degree" field="degree" />
+			<Column name="email" field="email" />
+			<Column name="web" field="web" />
+			<Column name="cmnt" field="cmnt" />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

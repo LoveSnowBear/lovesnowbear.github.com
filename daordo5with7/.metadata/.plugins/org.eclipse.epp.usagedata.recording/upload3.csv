@@ -1,0 +1,270 @@
+what,kind,bundleId,bundleVersion,description,time
+java.vendor,sysinfo,,,"Oracle Corporation",1487209021713
+java.version,sysinfo,,,"1.8.0_121",1487209021713
+java.vm.info,sysinfo,,,"mixed mode",1487209021713
+java.vm.name,sysinfo,,,"Java HotSpot(TM) 64-Bit Server VM",1487209021713
+java.vm.specification.name,sysinfo,,,"Java Virtual Machine Specification",1487209021713
+java.vm.specification.vendor,sysinfo,,,"Oracle Corporation",1487209021713
+java.vm.specification.version,sysinfo,,,"1.8",1487209021713
+java.vm.vendor,sysinfo,,,"Oracle Corporation",1487209021713
+java.vm.version,sysinfo,,,"25.121-b13",1487209021713
+started,bundle,org.eclipse.wst.jsdt.core,1.1.102.v201111090634,"org.eclipse.wst.jsdt.core",1487209022197
+started,bundle,org.eclipse.jst.jee,1.0.402.v201202021530,"org.eclipse.jst.jee",1487209023103
+started,bundle,org.eclipse.jdt.apt.core,3.3.500.v20110420-1015,"org.eclipse.jdt.apt.core",1487209023478
+started,bundle,org.eclipse.jdt.apt.pluggable.core,1.0.400.v20110305-1450,"org.eclipse.jdt.apt.pluggable.core",1487209023494
+started,bundle,org.eclipse.wst.dtd.core,1.1.501.v201107252021,"org.eclipse.wst.dtd.core",1487209023806
+started,bundle,org.eclipse.wst.sse.ui,1.3.2.v201201041522,"org.eclipse.wst.sse.ui",1487209023822
+started,bundle,org.eclipse.wst.html.ui,1.0.602.v201202091936,"org.eclipse.wst.html.ui",1487209023838
+started,bundle,org.eclipse.jst.jsf.common,1.2.3.v201104061039,"org.eclipse.jst.jsf.common",1487209023838
+started,bundle,org.eclipse.jst.jsf.core,1.3.105.v201108261005,"org.eclipse.jst.jsf.core",1487209023853
+started,bundle,org.eclipse.jst.jsp.core,1.2.402.v201112071853,"org.eclipse.jst.jsp.core",1487209023916
+started,bundle,org.eclipse.wst.wsdl.validation,1.1.502.v201104071820,"org.eclipse.wst.wsdl.validation",1487209023994
+started,bundle,org.eclipse.wst.xsd.core,1.1.600.v201104070312,"org.eclipse.wst.xsd.core",1487209024025
+started,bundle,org.eclipse.wst.xsl.core,1.1.100.v201102270516,"org.eclipse.wst.xsl.core",1487209024041
+started,bundle,org.eclipse.emf.common.ui,2.7.0.v20120130-0943,"org.eclipse.emf.common.ui",1487209026862
+started,bundle,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.common.editor",1487209027065
+opened,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209027940
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209029650
+started,bundle,com.bstek.ide.dashboard.editor,0.5.0.201406201759,"com.bstek.ide.dashboard.editor",1487209029907
+started,bundle,org.eclipse.draw2d,3.7.2.v20111017-2020,"org.eclipse.draw2d",1487209030142
+started,bundle,com.bstek.ide.core2,0.5.0.201406201759,"com.bstek.ide.core2",1487209030142
+opened,editor,com.bstek.ide.dashboard.editor,0.5.0.201406201759,"com.bstek.ide.dashboard.editor.DashboardEditor",1487209030157
+activated,editor,com.bstek.ide.dashboard.editor,0.5.0.201406201759,"com.bstek.ide.dashboard.editor.DashboardEditor",1487209030204
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209032019
+closed,editor,com.bstek.ide.dashboard.editor,0.5.0.201406201759,"com.bstek.ide.dashboard.editor.DashboardEditor",1487209032019
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209050678
+activated,view,org.eclipse.ui.views,3.6.0.v20110928-1505,"org.eclipse.ui.views.PropertySheet",1487209053878
+executed,command,org.eclipse.ui.views,3.6.0.v20110928-1505,"org.eclipse.ui.views.properties.NewPropertySheetCommand",1487209053878
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209055108
+error,log,,,"Save Failed",1487209059230
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209059308
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1487209059355
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209062523
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209081411
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209086552
+started,bundle,com.bstek.ide.notifications,0.5.0.201406201759,"com.bstek.ide.notifications",1487209087537
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209087849
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209092632
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209092867
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209093921
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209094030
+closed,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209094030
+opened,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209095535
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209095550
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209105886
+started,bundle,org.eclipse.ltk.core.refactoring,3.5.201.r372_v20111101-0700,"org.eclipse.ltk.core.refactoring",1487209107131
+started,bundle,org.eclipse.ltk.ui.refactoring,3.6.0.v20110928-1453,"org.eclipse.ltk.ui.refactoring",1487209107131
+started,bundle,org.eclipse.compare.core,3.5.200.I20110208-0800,"org.eclipse.compare.core",1487209107506
+started,bundle,org.eclipse.compare,3.5.202.R37x_v20111109-0800,"org.eclipse.compare",1487209107506
+started,bundle,org.eclipse.debug.ui,3.7.102.v20111129-1423_r372,"org.eclipse.debug.ui",1487209107975
+started,bundle,runjettyrun.jetty7,1.3.4,"runjettyrun.jetty7",1487209108329
+started,bundle,runjettyrun.jetty8,1.3.4,"runjettyrun.jetty8",1487209108329
+started,bundle,runjettyrun.jetty9,1.3.4,"runjettyrun.jetty9",1487209108329
+started,bundle,runjettyrun,1.3.4,"runjettyrun",1487209108348
+started,bundle,org.eclipse.jdt.debug,3.7.1.v20111006_r372,"org.eclipse.jdt.debug",1487209108371
+started,bundle,org.eclipse.jdt.debug.ui,3.6.1.v20111006_r372,"org.eclipse.jdt.debug.ui",1487209108479
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209110339
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209113750
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209137488
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209139991
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209143567
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209143646
+closed,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209143646
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209159528
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209161069
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209164226
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209167132
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209167853
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209168072
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209171131
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209175032
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209179084
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209182737
+started,bundle,org.eclipse.wst.html.core,1.1.502.v201202091936,"org.eclipse.wst.html.core",1487209205735
+started,bundle,org.eclipse.wst.common.uriresolver,1.1.401.v201004280700,"org.eclipse.wst.common.uriresolver",1487209206016
+started,bundle,org.eclipse.wst.css.core,1.1.501.v201111292150,"org.eclipse.wst.css.core",1487209206063
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487209206120
+started,bundle,org.eclipse.wst.jsdt.manipulation,1.0.300.v201104272153,"org.eclipse.wst.jsdt.manipulation",1487209207453
+started,bundle,org.eclipse.wst.jsdt.ui,1.1.102.v201201131900,"org.eclipse.wst.jsdt.ui",1487209207453
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209215412
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209217377
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1487209217393
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209222744
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209227746
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1487209227762
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209228703
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209232420
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209232467
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209234033
+opened,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209246140
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209246156
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209254531
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209254719
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209260996
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209265035
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209269735
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209341374
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209342445
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209353155
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209354509
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209356216
+started,bundle,org.eclipse.wst.ws.service.policy.ui,1.0.300.v201108240515,"org.eclipse.wst.ws.service.policy.ui",1487209356675
+started,bundle,org.eclipse.wst.ws.service.policy,1.0.303.v201009221810,"org.eclipse.wst.ws.service.policy",1487209356675
+started,bundle,org.eclipse.wst.command.env,1.0.409.v201004211805,"org.eclipse.wst.command.env",1487209356711
+started,bundle,org.eclipse.wst.ws,1.1.203.v201004211805,"org.eclipse.wst.ws",1487209356712
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.refresh",1487209358394
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487209358691
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487209359832
+started,bundle,org.eclipse.rse.services,3.2.101.R33x_v201109141647,"org.eclipse.rse.services",1487209372775
+started,bundle,org.eclipse.rse.core,3.2.2.R33x_v201110030150,"org.eclipse.rse.core",1487209372806
+started,bundle,org.eclipse.rse.ui,3.2.1.R33x_v201109141647,"org.eclipse.rse.ui",1487209372958
+started,bundle,org.eclipse.rse.subsystems.files.core,3.2.101.R33x_v201107181530,"org.eclipse.rse.subsystems.files.core",1487209372973
+started,bundle,org.eclipse.rse.subsystems.files.local,2.1.200.v201101042155,"org.eclipse.rse.subsystems.files.local",1487209372973
+started,bundle,org.eclipse.rse.files.ui,3.2.1.R33x_v201109141647,"org.eclipse.rse.files.ui",1487209372989
+started,bundle,org.eclipse.rse.subsystems.shells.core,3.1.201.R33x_v201106281309,"org.eclipse.rse.subsystems.shells.core",1487209372989
+started,bundle,org.eclipse.rse.subsystems.shells.local,2.1.300.v201101042155,"org.eclipse.rse.subsystems.shells.local",1487209372989
+started,bundle,org.eclipse.rse.connectorservice.local,2.1.300.v201101042155,"org.eclipse.rse.connectorservice.local",1487209373036
+started,bundle,org.eclipse.rse.services.local,2.1.300.v201105311250,"org.eclipse.rse.services.local",1487209373051
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487209373051
+started,bundle,com.bstek.ide.extension2,0.5.0.201406201759,"com.bstek.ide.extension2",1487209373317
+started,bundle,com.bstek.ide.common.editor2,0.5.0.201406201759,"com.bstek.ide.common.editor2",1487209373317
+started,bundle,com.bstek.ide.view.editor2,0.5.0.201406201759,"com.bstek.ide.view.editor2",1487209373333
+started,bundle,com.bstek.ide.scala,1.0.0.201406201834,"com.bstek.ide.scala",1487209373333
+started,bundle,com.bstek.ide.touch.editor,1.0.0.201406201834,"com.bstek.ide.touch.editor",1487209373333
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487209375588
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487209375776
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487209376807
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487209376916
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487209377981
+started,bundle,com.bstek.ide.ui,0.5.0.201406201759,"com.bstek.ide.ui",1487209383143
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209383456
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209386068
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209386844
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209397736
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209398760
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.refresh",1487209403919
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487209407538
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487209407616
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209418584
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209418631
+closed,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209418631
+opened,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209421289
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209421304
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209435681
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209439465
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209441515
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209449578
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209453673
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209456691
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209513897
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209545117
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209578708
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209579452
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209579515
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209598655
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209614567
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209615270
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209615333
+started,bundle,com.bstek.ide.libraries2,0.5.0.201406201759,"com.bstek.ide.libraries2",1487209615364
+started,bundle,com.bstek.ide.launching,1.0.0.201406201759,"com.bstek.ide.launching",1487209615364
+started,bundle,org.eclipse.core.variables,3.2.500.v20110928-1503,"org.eclipse.core.variables",1487209615554
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209616022
+opened,view,org.eclipse.ui.console,3.5.100.v20111007_r372,"org.eclipse.ui.console.ConsoleView",1487209617034
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209621587
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209631110
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209636583
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209638758
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209641082
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209641238
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209644296
+closed,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209644296
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209648755
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209773786
+opened,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209775190
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209775210
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209777065
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209803105
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209871051
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209878706
+started,bundle,com.bstek.ide.core,1.2.7.201207311458,"com.bstek.ide.core",1487209883787
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209896910
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.newWizard",1487209896926
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209899297
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209902454
+executed,command,org.eclipse.ltk.ui.refactoring,3.6.0.v20110928-1453,"org.eclipse.ltk.ui.refactoring.commands.deleteResources",1487209902470
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1487209902470
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209905274
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209925924
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.newWizard",1487209925928
+opened,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209943845
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209943907
+closed,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209946396
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209948604
+closed,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209948604
+opened,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209949479
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487209949495
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487209953431
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487209957545
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209966721
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209984737
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487209985663
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210025600
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.refresh",1487210030951
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487210033118
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487210033196
+closed,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487210033196
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487210033384
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487210033446
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.refresh",1487210035652
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487210035793
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487210035855
+opened,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487210044257
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487210044288
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487210050141
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1487210057816
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487210065657
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210071218
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210073558
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1487210073683
+opened,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487210084408
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487210084440
+activated,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487210091880
+closed,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487210091880
+activated,view,com.bstek.ide.ui.navigator,1.0.0.201406201759,"com.bstek.ide.ui.DoradoExplorer",1487210092718
+closed,editor,com.bstek.ide.common.editor,1.2.7.201207311458,"com.bstek.ide.editor.PropertyFileEditor",1487210092718
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210271819
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210277812
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210291103
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210292675
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210305228
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210305713
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210306551
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210578813
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.refresh",1487210584461
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.refresh",1487210598702
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487210635286
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487210636658
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210636736
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210638055
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210638133
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487210638680
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.ui.navigator"".",1487210640109
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210640236
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210648073
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210648089
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210648151
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210657209
+closed,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1487210657396
+error,log,,,"Unhandled event loop exception",1487210659766
+stopped,bundle,org.eclipse.jst.ws.axis.creation.ui,1.0.700.v201104070312,"org.eclipse.jst.ws.axis.creation.ui",1487210660110
+stopped,bundle,org.eclipse.jst.ws.axis.consumption.ui,1.0.505.v201004211805,"org.eclipse.jst.ws.axis.consumption.ui",1487210660126
+stopped,bundle,org.eclipse.jst.ws.axis.consumption.core,1.0.407.v201104071820,"org.eclipse.jst.ws.axis.consumption.core",1487210660147
+stopped,bundle,org.eclipse.jst.ws.axis2.creation.ui,1.0.104.v201004211805,"org.eclipse.jst.ws.axis2.creation.ui",1487210660156
+stopped,bundle,org.eclipse.jst.ws.axis2.consumption.ui,1.0.103.v201004211805,"org.eclipse.jst.ws.axis2.consumption.ui",1487210660156
+stopped,bundle,org.eclipse.jst.ws.axis2.creation.core,1.0.106.v201004211805,"org.eclipse.jst.ws.axis2.creation.core",1487210660176
+stopped,bundle,org.eclipse.jst.ws.axis2.consumption.core,1.0.105.v201004211805,"org.eclipse.jst.ws.axis2.consumption.core",1487210660176
+stopped,bundle,org.eclipse.jst.ws.axis2.ui,1.0.303.v201003110431,"org.eclipse.jst.ws.axis2.ui",1487210660216
+stopped,bundle,org.eclipse.jst.ws.axis2.core,1.0.204.v201004211805,"org.eclipse.jst.ws.axis2.core",1487210660216
+stopped,bundle,org.eclipse.jst.ws.cxf.creation.ui,1.0.100.v201104022153,"org.eclipse.jst.ws.cxf.creation.ui",1487210660234
+stopped,bundle,org.eclipse.jst.ws.creation.ui,1.0.609.v201103082016,"org.eclipse.jst.ws.creation.ui",1487210660237
+stopped,bundle,org.eclipse.jst.ws.cxf.consumption.ui,1.0.0.v201003222311,"org.eclipse.jst.ws.cxf.consumption.ui",1487210660237

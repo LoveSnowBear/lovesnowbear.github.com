@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetCss" type="Custom" listener="sample.skills.table.test.CssListener">
+			<MasterLink />
+			<Fields>
+				<Field name="index" label=" " readOnly="true">
+					<Properties />
+				</Field>
+				<Field name="id" readOnly="true">
+					<Properties />
+				</Field>
+				<Field name="key" dataType="string" label="CSS名称" readOnly="true">
+					<Properties />
+				</Field>
+				<Field name="label" dataType="string" label="CSS标题" readOnly="true">
+					<Properties />
+				</Field>
+				<Field name="value" dataType="string" label="[在这里填入你自定义的css设定]">
+					<Properties />
+				</Field>
+				<Field name="sample" label="sample范例" readOnly="true">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters>
+				<Parameter name="eventSet" value="Table" dataType="string" />
+			</Parameters>
+			<Properties />
+			<Events>
+				<Event name="beforeInsert">return new AbortException();</Event>
+			</Events>
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableCSS" type="DataTable" dataset="datasetCss" height="100%" width="100%" showHScrollBar="false" showIndicator="false">
+			<Column name="index" field="index" width="20" />
+			<Column name="label" field="label" width="300">
+				<Events>
+					<Event name="onRefresh">cell.innerHTML = record.getString("label") + "(" + record.getString("key")+")";
+return false;</Event>
+				</Events>
+			</Column>
+		</Control>
+		<Control id="buttonAppendCss" type="Button" value="添加并预览" command="commandUpdateCss">
+			<Events />
+		</Control>
+		<Control id="commandUpdateCss" type="UpdateCommand" alwaysPerform="true">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetCss" />
+			</DatasetInfos>
+			<Parameters />
+			<Events>
+				<Event name="onSuccess">open("table-review.jsp","cssView");</Event>
+			</Events>
+		</Control>
+		<Control id="datalabelSample" type="DataLabel" dataset="datasetCss" field="sample" />
+		<Control id="datalabelKey" type="DataLabel" dataset="datasetCss" field="key" />
+		<Control id="splitpanel1" type="SplitPanel" orientation="vertical" />
+		<Control id="formCss" type="AutoForm" dataset="datasetCss">
+			<FormGroup showBevel="false" columnCount="1">
+				<Element name="value" field="value" type="TextEditor" showLabel="false">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="100" />
+				</Element>
+				<Element name="element1" type="Custom" showLabel="false" controlId="buttonAppendCss" controlAlign="right">
+					<FieldLabel />
+				</Element>
+			</FormGroup>
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

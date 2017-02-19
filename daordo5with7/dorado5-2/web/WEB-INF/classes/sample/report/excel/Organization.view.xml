@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetBranch" type="Reference" sourceModule="sample.HR" sourceDataset="datasetBranch">
+			<MasterLink />
+			<Fields>
+				<Field name="branch_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="branch_name" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDept" type="Reference" sourceModule="sample.HR" sourceDataset="datasetDept" autoLoadPage="true">
+			<MasterLink masterKeyFields="branch_id" detailKeyFields="branch_id" detailKeyParameters="branch_id" masterDataset="datasetBranch" />
+			<Fields>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="branch_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_name" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee" autoLoadPage="true">
+			<MasterLink masterDataset="datasetDept" masterKeyFields="dept_id" detailKeyFields="dept_id" detailKeyParameters="dept_id" />
+			<Fields>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls />
+	<Properties />
+</view>
+

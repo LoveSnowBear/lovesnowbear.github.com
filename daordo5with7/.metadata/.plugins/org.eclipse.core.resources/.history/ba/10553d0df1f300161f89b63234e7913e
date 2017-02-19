@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.skills.other.RoleConfigViewModel">
+	<Datasets>
+		<Dataset id="datasetRole" type="Form">
+			<MasterLink />
+			<Fields>
+				<Field name="role">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetEmployee" type="Reference" sourceModule="sample.HR" sourceDataset="datasetEmployee" pageSize="20">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_name">
+					<Properties />
+				</Field>
+				<Field name="branch_id">
+					<Properties />
+				</Field>
+				<Field name="branch_name">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Events />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="dropdownRole" type="ListDropDown" fixed="true" autoDropDown="true">
+			<DropDownItem value="role1" />
+			<DropDownItem value="role2" />
+			<DropDownItem value="role3" />
+			<DropDownItem value="role4" />
+		</Control>
+		<Control id="editorRole" type="TextEditor" dataset="datasetRole" field="role" dropDown="dropdownRole" />
+		<Control id="buttonRefresh" type="Button" value="使用此角色访问本页面" command="commandRefresh" />
+		<Control id="commandRefresh" type="RequestCommand" dataset="datasetRole" path="role-config.jsp">
+			<Frame />
+			<Parameters />
+			<Events>
+				<Event name="beforeExecute">if (!datasetRole.getValue("role")) {
+  return new DoradoException("请选择一个角色!");
+}</Event>
+			</Events>
+		</Control>
+		<Control id="subwindow" type="SubWindow" title="这是角色[${Request.role}]所看到的视图" />
+		<Control id="menu1" type="Menu" popupContainer="document.body" />
+		<Control id="menubar1" type="MenuBar" menu="menu1" />
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%">
+			<Column name="employee_id" field="employee_id" />
+			<Column name="employee_name" field="employee_name" />
+			<Column name="dept_id" field="dept_id" />
+			<Column name="sex" field="sex" />
+			<Column name="married" field="married" />
+			<Column name="birthday" field="birthday" />
+			<Column name="salary" field="salary" />
+			<Column name="degree" field="degree" />
+			<Column name="email" field="email" />
+			<Column name="cmnt" field="cmnt" width="150" editorType="textarea" />
+		</Control>
+		<Control id="button1" type="Button" value="按钮1" />
+		<Control id="button2" type="Button" value="按钮2" />
+		<Control id="button3" type="Button" value="按钮3" />
+	</Controls>
+	<Properties />
+</view>
+

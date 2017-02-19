@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetProject" type="Wrapper" wrappedType="AutoSql" originTable="project" keyFields="id" readOnly="true">
+			<MasterLink />
+			<Joins>
+				<Join name="o" originTable="employee" keyFields="employee_id" sourceTable="project" sourceKeyFields="owner" />
+				<Join name="c" originTable="employee" keyFields="employee_id" sourceTable="project" sourceKeyFields="checker" />
+			</Joins>
+			<Fields>
+				<Field name="id" originField="id" table="project" group="false" dataType="long">
+					<Properties />
+				</Field>
+				<Field name="task_name" originField="task_name" table="project" group="false" label="任务" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="parent_id" originField="parent_id" table="project" group="false" dataType="long">
+					<Properties />
+				</Field>
+				<Field name="start_time" originField="start_time" table="project" group="false" label="开始时间" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="end_time" originField="end_time" table="project" group="false" label="结束时间" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="owner" originField="owner" table="project" group="false" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="owner_name" originField="employee_name" table="o" dataType="string" group="false" label="负责人">
+					<Properties />
+				</Field>
+				<Field name="checker" originField="checker" table="project" group="false" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="checker_name" originField="employee_name" table="c" dataType="string" group="false" label="检查人">
+					<Properties />
+				</Field>
+				<Field name="progress" originField="progress" table="project" group="false" label="完成进度" dataType="int">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="int" value=":parent_id" escapeEnabled="false" table="project" originField="parent_id" operator="=" />
+			</MatchRules>
+			<SortRules />
+			<Parameters>
+				<Parameter name="parent_id" value="$null" />
+			</Parameters>
+			<Properties />
+			<Events />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="treegridProject" type="TreeGrid" recursiveKeyParameters="parent_id" recursiveKeyFields="id" treeColumn="task_name" dataset="datasetProject" fixedColumn="1" expandLevel="1" width="100%" height="100%" showHScrollBar="false">
+			<Column name="task_name" field="task_name" width="180">
+				<Events />
+			</Column>
+			<Column name="start_time" field="start_time" width="120" />
+			<Column name="end_time" field="end_time" width="120" />
+			<Column name="progress" field="progress" width="120">
+				<Events>
+					<Event name="onCreateCellRenderer">var bar = DoradoFactory.create("ProgressBar");
+bar.style.width = "100%";
+bar.style.height = "18";
+bar.setTextPattern("\${position}%");
+bar.setValue = function(value) {
+  this.setPosition(parseInt(value));
+};
+return bar;</Event>
+				</Events>
+			</Column>
+			<Column name="owner_name" field="owner_name" />
+			<Column name="checker_name" field="checker_name" />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

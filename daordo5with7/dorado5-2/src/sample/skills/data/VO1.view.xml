@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.skills.data.VO1ViewModel">
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Custom" objectClazz="sample.skills.data.vo.Employee" listener="sample.skills.data.VO1_datasetEmployeeListener" pageSize="10">
+			<MasterLink />
+			<Fields>
+				<Field name="id" dataType="string" readOnly="true">
+					<Properties />
+				</Field>
+				<Field name="name" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="float">
+					<Properties />
+				</Field>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="comment" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="pagepilotEmployee" type="PagePilot" dataset="datasetEmployee" />
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%" />
+		<Control id="buttonUpdateEmployees" type="Button" command="commandUpdateEmployees" value="保存" width="75" />
+		<Control id="commandUpdateEmployees" type="UpdateCommand" method="updateEmployees">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetEmployee" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+		<Control id="buttonRaiseSalary" type="Button" command="commandRaiseSalary" value="为当前员工加薪" />
+		<Control id="commandRaiseSalary" type="UpdateCommand" method="raiseSalary">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetEmployee" submitScope="current" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="sample.skills.data.vo" default-lazy="false">
+  <class name="Employee">
+    <id name="id" column="EMPLOYEE_ID"/>
+    <property name="name" column="EMPLOYEE_NAME"/>
+    <property name="birthday" column="BIRTHDAY"/>
+    <property name="salary" column="SALARY"/>
+    <property name="sex" column="SEX"/>
+    <property name="married" column="MARRIED"/>
+    <property name="degree" column="DEGREE"/>
+    <property name="email" column="EMAIL"/>
+    <property name="web" column="WEB"/>
+    <property name="comment" column="CMNT"/>
+  </class>
+</hibernate-mapping>

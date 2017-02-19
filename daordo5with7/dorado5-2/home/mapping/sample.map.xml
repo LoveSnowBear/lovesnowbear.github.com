@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+  <forwards/>
+  <exceptions>
+    <exception clazz="com.bstek.dorado.security.UserNotLoggedInException" path="/admin/access.d"/>
+  </exceptions>
+  <controllers>
+    <controller name="picture" clazz="sample.skills.other.picture.PictureController">
+      <action name="upload">
+        <forward name="success" contextRelative="false" path="/skills/other/picture/picture-upload.jsp"/>
+      </action>
+    </controller>
+    <controller name="admin/sampleMaintain" safe="true">
+      <action>
+        <forward name="success" contextRelative="false" path="/admin/sample-maintain.jsp"/>
+      </action>
+      <action name="tree">
+        <forward name="success" contextRelative="false" path="/admin/sample-tree-maintain.jsp"/>
+      </action>
+      <action name="start">
+        <forward name="success" contextRelative="false" path="/admin/start-sample-maintain.jsp"/>
+      </action>
+    </controller>
+    <controller name="admin/access" clazz="sample.admin.AccessController">
+      <action>
+        <forward name="success" path="/admin/login.jsp"/>
+      </action>
+      <action name="login">
+        <forward name="success" contextRelative="false" path="/admin/sampleMaintain.d" redirect="true"/>
+        <forward name="failure" path="/admin/access.d"/>
+      </action>
+      <action name="logout">
+        <forward name="success" path="/admin/access.d"/>
+      </action>
+    </controller>
+    <controller name="excel" clazz="sample.scene.submit.ExcelController">
+      <action name="upload">
+        <forward name="success" contextRelative="false" path="/scene/submit/success-upload.jsp"/>
+      </action>
+    </controller>
+    <controller name="simpleUpload" clazz="sample.scene.upload.simpleUpload.UploadController">
+      <action name="upload">
+        <forward name="success" contextRelative="false" path="/scene/upload/simpleUpload/do-upload.jsp"/>
+      </action>
+    </controller>
+    <controller name="multiUpload1" clazz="sample.scene.upload.multiUpload1.UploadController">
+      <action name="upload">
+        <forward name="success" contextRelative="false" path="/scene/upload//multiUpload1/do-upload.jsp"/>
+      </action>
+    </controller>
+    <controller name="multiUpload2" clazz="sample.scene.upload.multiUpload2.MultiFileUploadController"/>
+  </controllers>
+</mapping>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Custom" listener="sample.scene.submit.ExcelImport_datasetEmployeeListener" autoLoadData="false">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_id" label="工号">
+					<Properties />
+				</Field>
+				<Field name="employee_name" label="姓名">
+					<Properties />
+				</Field>
+				<Field name="dept_name" label="部门">
+					<Properties />
+				</Field>
+				<Field name="married" label="婚否">
+					<Properties />
+				</Field>
+				<Field name="sex" label="性别">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date" label="生日">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="degree" label="学历">
+					<Properties />
+				</Field>
+				<Field name="email" label="邮箱">
+					<Properties />
+				</Field>
+				<Field name="web" label="网址">
+					<Properties />
+				</Field>
+				<Field name="cmnt" label="备注">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%">
+			<Column name="employee_id" field="employee_id" width="150" />
+			<Column name="employee_name" field="employee_name" />
+			<Column name="dept_name" field="dept_name" width="200" />
+			<Column name="married" field="married" width="50" align="center" />
+			<Column name="sex" field="sex" width="50" align="center" />
+			<Column name="birthday" field="birthday" width="120" />
+			<Column name="salary" field="salary" />
+			<Column name="degree" field="degree" width="50" />
+			<Column name="email" field="email" width="200" />
+			<Column name="web" field="web" width="200" />
+			<Column name="cmnt" field="cmnt" width="200" />
+		</Control>
+		<Control id="subwindowUpload" type="SubWindow" width="300" height="100" />
+		<Control id="buttonUpload" type="Button" value="上传" width="70">
+			<Events>
+				<Event name="onClick">if(document.getElementById("dataFile").value){
+  document.getElementById("excelForm").submit();
+}</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

@@ -1,0 +1,31 @@
+<html>
+<head>
+<title></title>
+<script language="javascript" src="preload.js" charset="utf-8"></script>
+<script>
+function openApp() {
+  open("main.jsp", "_self");
+}
+</script>
+</head>
+<body onload="window_onload()" style="margin: 0; overflow: hidden">
+<table style="width: 100%; height: 100%;">
+  <tr>
+    <td align="center" valign="middle">
+      <div style="width: 100%; background-color: white;">
+        <img src="images/index.gif" />
+      </div>
+      <table cellspacing="0" style="width: 150; height: 3; background-color: #E0E0E0; table-layout: fixed">
+        <tr>
+          <td id="progress" style="width: 0%; background-color: #759AE2"></td>
+          <td></td>
+        </tr>
+      </table>
+      <p style="margin: 8">
+        <a href="javascript: openApp()"><img src="images/enter.gif" border="0" /></a>
+      </p>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

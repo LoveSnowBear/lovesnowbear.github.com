@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources>
+	<datasource name="doradosample" type="JDBC">
+		<minEvictableIdleTimeMillis>30000</minEvictableIdleTimeMillis>
+		<timeBetweenEvictionRunsMillis>30000</timeBetweenEvictionRunsMillis>
+		<driver>org.hsqldb.jdbcDriver</driver>
+		<url>jdbc:hsqldb:file:#NOT ASSIGNED#</url>
+		<dialect>com.bstek.dorado.data.db.dialect.HSQLDBDialect</dialect>
+		<user>sa</user>
+		<minIdle>0</minIdle>
+		<maxIdle>0</maxIdle>
+		<maxActive>0</maxActive>
+		<loginTimeout>0</loginTimeout>
+		<maxWait>0</maxWait>
+	</datasource>	
+</datasources>
+

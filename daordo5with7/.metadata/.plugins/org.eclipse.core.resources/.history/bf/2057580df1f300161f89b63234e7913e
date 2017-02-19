@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetSchedule" type="Wrapper" wrappedType="AutoSql" originTable="schedule" keyFields="id">
+			<MasterLink />
+			<Joins />
+			<Fields>
+				<Field name="id" originField="id" table="schedule" group="false">
+					<Properties />
+				</Field>
+				<Field name="start_time" originField="start_time" table="schedule" group="false" label="开始时间" dataType="datetime">
+					<Properties />
+				</Field>
+				<Field name="end_time" originField="end_time" table="schedule" group="false" label="结束时间" dataType="datetime">
+					<Properties />
+				</Field>
+				<Field name="task" originField="task" table="schedule" group="false" label="任务" dropDown="dropdownTask" toolTip="您也可以在此处直接输入您的任务信息">
+					<Properties />
+				</Field>
+				<Field name="cmnt" originField="cmnt" table="schedule" group="false" label="备注">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="datetime" value=":start_time" escapeEnabled="false" table="schedule" originField="start_time" operator="&gt;" />
+				<MatchRule level="1" dataType="datetime" value=":end_time" escapeEnabled="false" table="schedule" originField="start_time" operator="&lt;" />
+			</MatchRules>
+			<SortRules />
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="afterInsert">var calendarDate = calendarSchedule.getDate();
+if (calendarDate != null) {
+  var day = formatDate(calendarDate, "yyyy-MM-dd");
+  dataset.setValue("start_time", parseDate(day + " 08:00:00"));
+  dataset.setValue("end_time",  parseDate(day + " 08:00:00"));
+}</Event>
+				<Event name="onFilterRecord">var date = record.getValue("start_time");
+var calendarDate = calendarSchedule.getDate();
+if (date != null &amp;&amp; calendarDate != null) {
+  return (date.getFullYear() == calendarDate.getFullYear() &amp;&amp;
+    date.getMonth() == calendarDate.getMonth() &amp;&amp;
+    date.getDate() == calendarDate.getDate());
+}
+else {
+  return true;
+}</Event>
+			</Events>
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="dropdownTask" type="ListDropDown">
+			<DropDownItem value="开会" />
+			<DropDownItem value="外出" />
+			<DropDownItem value="约会" />
+		</Control>
+		<Control id="tableSchedule" type="DataTable" dataset="datasetSchedule" height="100%" width="200" showHScrollBar="false" showIndicator="false" rowHeight="50">
+			<Column name="description" label="任务描述">
+				<Events>
+					<Event name="onRefresh">var HTML = record.getString("task") + "&lt;br&gt;" +
+  formatDate(record.getValue("start_time"), "HH:mm") + "&amp;nbsp;至&amp;nbsp;" +
+  formatDate(record.getValue("end_time"), "HH:mm");
+cell.innerHTML = HTML;
+cell.title = record.getValue("cmnt");
+return false;</Event>
+				</Events>
+			</Column>
+			<Events>
+				<Event name="onRecordDblClick">buttonEdit.click();</Event>
+			</Events>
+		</Control>
+		<Control id="calendarSchedule" type="Calendar" width="100%" height="100%" calendarType="schedule" dataset="datasetSchedule" field="start_time" date="2006-4-3">
+			<Events>
+				<Event name="beforeMonthChange">var year = date.getFullYear();
+var month = date.getMonth();
+var startTime = new Date(year, month, 1);
+var endTime = new Date(year, month + 1, 1);
+var parameters = datasetSchedule.parameters();
+parameters.setDataType("start_time", "date");
+parameters.setValue("start_time", startTime);
+parameters.setDataType("end_time", "date");
+parameters.setValue("end_time", endTime);
+datasetSchedule.flushData();</Event>
+				<Event name="afterDateChange">calendar.disableBinding();
+datasetSchedule.refreshControls();
+calendar.enableBinding();
+
+buttonEdit.disabled = (datasetSchedule.getCurrent() == null);
+buttonDelete.disabled = buttonEdit.disabled;</Event>
+				<Event name="onContentRefresh">var records = calendar.getRecords(date);
+if (records.length &gt; 0) {
+  cell.innerHTML = "&lt;IMG src=\"../../images/highlight.gif\"&gt;" + records.length + "项任务";
+  var tip = "";
+  for (var i = 0; i &lt; records.length; i++) {
+    var record = records[i];    
+    if (i &gt; 0) tip += "\n";
+    tip += (i + 1) + ". " + record.getString("task");
+    cell.title = tip;
+  }
+}
+else {
+  cell.innerHTML = "&amp;nbsp;";
+  cell.title = "";
+}
+cell.style.color = "navy";</Event>
+			</Events>
+		</Control>
+		<Control id="buttonAdd" type="Button" value="添加">
+			<Events>
+				<Event name="onClick">datasetSchedule.insertRecord();
+subwindowTask.show(true, true);</Event>
+			</Events>
+		</Control>
+		<Control id="buttonEdit" type="Button" value="编辑">
+			<Events>
+				<Event name="onClick">subwindowTask.show(true, true);</Event>
+			</Events>
+		</Control>
+		<Control id="buttonDelete" type="Button" value="删除">
+			<Events>
+				<Event name="onClick">if (datasetSchedule.getCurrent() != null) {
+  datasetSchedule.deleteRecord(); 
+  commandSave.execute();
+}</Event>
+			</Events>
+		</Control>
+		<Control id="subwindowTask" type="SubWindow" status="hidden">
+			<Events>
+				<Event name="afterHide">if (datasetSchedule.getCurrent() != null) {
+  datasetSchedule.cancelRecord();
+}</Event>
+			</Events>
+		</Control>
+		<Control id="formTask" type="AutoForm" dataset="datasetSchedule">
+			<FormGroup columnCount="1" title="任务属性">
+				<Element name="start_time" field="start_time" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="end_time" field="end_time" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="task" field="task" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="cmnt" field="cmnt" type="TextEditor">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="60" />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="buttonOK" type="Button" value="确定">
+			<Events>
+				<Event name="onClick">if (datasetSchedule.postRecord()) {
+  commandSave.execute();
+  subwindowTask.hide();
+}</Event>
+			</Events>
+		</Control>
+		<Control id="buttonCancel" type="Button" value="取消">
+			<Events>
+				<Event name="onClick">datasetSchedule.cancelRecord();
+subwindowTask.hide();</Event>
+			</Events>
+		</Control>
+		<Control id="commandSave" type="UpdateCommand">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetSchedule" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

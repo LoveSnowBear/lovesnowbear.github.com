@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="sample.skills.data.vo" default-lazy="false">
+  <class name="Dept">
+    <id name="id" column="DEPT_ID"/>
+    <property name="name" column="DEPT_NAME" insert="true" update="true"/>
+    <bag name="employees" cascade="all">
+      <key column="DEPT_ID"/>
+      <one-to-many class="Employee"/>
+    </bag>
+  </class>
+</hibernate-mapping>

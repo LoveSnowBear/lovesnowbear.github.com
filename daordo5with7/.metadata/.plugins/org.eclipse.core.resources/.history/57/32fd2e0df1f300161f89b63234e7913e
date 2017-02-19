@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.skills.table.TableViewModel">
+	<Datasets>
+		<Dataset id="datasetOption" type="Form">
+			<MasterLink />
+			<Fields>
+				<Field name="autoLoadPage" dataType="boolean" label="自动分批数据下载">
+					<Properties />
+				</Field>
+				<Field name="pageSize" label="每页记录数" dataType="int" defaultValue="5">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events>
+				<Event name="afterChange">switch (field.getName()) {
+  case "autoLoadPage":
+    resetPageSizeReadOnly();
+    dataset.refreshControls();
+    break;
+}</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="datasetEmployee" type="Wrapper" originTable="employee" keyFields="employee_id" retrieveAfterUpdate="true" wrappedType="AutoSql" autoProcessParameters="true" autoLoadPage="${Request.autoLoadPage}">
+			<Fields>
+				<Field name="employee_id" originField="employee_id" table="employee" group="false" label="${Resource.hr.employee_id}" dataType="string" toolTip="这里是一段注释!">
+					<Properties />
+				</Field>
+				<Field name="employee_name" originField="employee_name" table="employee" group="false" label="${Resource.hr.employee_name}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_id" originField="dept_id" table="employee" group="false" label="${Resource.hr.dept_id}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" originField="sex" table="employee" group="false" label="${Resource.hr.sex}" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="married" group="false" originField="married" table="employee" label="${Resource.hr.married}" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" originField="birthday" table="employee" group="false" label="${Resource.hr.birthday}" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" originField="salary" table="employee" group="false" label="${Resource.hr.salary}" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" originField="degree" table="employee" group="false" label="${Resource.hr.degree}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" originField="email" table="employee" group="false" label="${Resource.hr.email}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" originField="web" table="employee" group="false" label="${Resource.hr.web}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" originField="cmnt" table="employee" group="false" label="${Resource.hr.cmnt}" dataType="string">
+					<Properties />
+					<Validator type="Length" maxLength="40" />
+				</Field>
+			</Fields>
+			<Joins>
+				<Join name="dept" originTable="dept" keyFields="dept_id" sourceTable="employee" sourceKeyFields="dept_id" />
+			</Joins>
+			<MatchRules />
+			<SortRules />
+			<Parameters />
+			<Properties />
+			<MasterLink />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="formOption" type="AutoForm" dataset="datasetOption" width="500" defaultLabelWidth="150">
+			<FormGroup title="选项" columnCount="2">
+				<Element name="autoLoadPage" field="autoLoadPage" type="CheckBox" colSpan="2">
+					<FieldLabel />
+					<CheckBox />
+				</Element>
+				<Element name="pageSize" field="pageSize" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="element1" type="Custom" showLabel="false" controlId="buttonRefresh">
+					<FieldLabel />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="buttonRefresh" type="Button" value="刷新" command="commandRefresh" width="80" />
+		<Control id="commandRefresh" type="QueryCommand" conditionDataset="datasetOption" queryDataset="datasetEmployee" queryMode="form-get">
+			<Parameters />
+		</Control>
+		<Control id="dropdownSex" type="ListDropDown" autoDropDown="true" mapValue="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" showFilterBar="true" rowDraggable="true" fixedColumn="1" dynaRowHeight="true" height="100%">
+			<Column name="employee_id" field="employee_id" width="100" readOnly="true" />
+			<Column name="employee_name" field="employee_name" noWrap="false" editorType="text" />
+			<Column name="dept_id" field="dept_id" readOnly="true" />
+			<Column name="sex" field="sex" align="center" dropDown="dropdownSex" rendererType="radiogroup" />
+			<ColumnGroup name="group1" label="组合列">
+				<Column name="birthday" field="birthday" width="120" />
+				<Column name="salary" field="salary" />
+				<Column name="married" field="married" rendererType="checkbox" width="40" />
+				<Events />
+			</ColumnGroup>
+			<Column name="degree" field="degree">
+				<Events />
+			</Column>
+			<Column name="email" field="email" width="150" />
+			<Column name="web" field="web" width="150" />
+			<Column name="cmnt" field="cmnt" width="150" editorType="textarea" noWrap="false" />
+		</Control>
+		<Control id="dropdownEmployee" type="DynamicDropDown" filterParameter="employee_name" fixed="true" readFields="employee_id,employee_name" writeFields="employee_id,employee_name" width="200" visibleFields="employee_name" cachable="false" autoDropDown="true">
+			<Dataset type="DropDown" sourceModule="sample.HR" sourceDataset="datasetEmployee" pageSize="20">
+				<Fields>
+					<Field name="employee_id" dataType="string">
+						<Properties />
+					</Field>
+					<Field name="employee_name" dataType="string">
+						<Properties />
+					</Field>
+				</Fields>
+				<Parameters />
+				<Properties />
+			</Dataset>
+			<Parameters />
+			<Events />
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">var cellEditor_checkBox, cellEditor_radioGroup, cellEditor_textEditor;
+  
+function resetPageSizeReadOnly() {
+  datasetOption.getField("pageSize").setReadOnly(!parseBoolean(datasetOption.getValue("autoLoadPage")));
+}</Event>
+		<Event name="onDatasetsPrepared">resetPageSizeReadOnly();</Event>
+	</Events>
+</view>
+

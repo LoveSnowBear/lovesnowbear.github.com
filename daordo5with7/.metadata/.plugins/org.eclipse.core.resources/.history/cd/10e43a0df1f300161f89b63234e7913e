@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.skills.other.AJAXViewModel">
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Wrapper" wrappedType="AutoSql" dataSource="doradosample" originTable="employee" keyFields="employee_id" autoLoadData="false" async="true">
+			<Joins />
+			<Fields>
+				<Field name="employee_id" originField="employee_id" table="employee" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="dept_id" originField="dept_id" table="employee" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="employee_name" originField="employee_name" table="employee" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="sex" originField="sex" table="employee" dataType="boolean" group="false">
+					<Properties />
+				</Field>
+				<Field name="birthday" originField="birthday" table="employee" dataType="date" group="false">
+					<Properties />
+				</Field>
+				<Field name="married" originField="married" table="employee" dataType="boolean" group="false">
+					<Properties />
+				</Field>
+				<Field name="salary" originField="salary" table="employee" dataType="double" group="false">
+					<Properties />
+				</Field>
+				<Field name="degree" originField="degree" table="employee" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="email" originField="email" table="employee" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="web" originField="web" table="employee" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="cmnt" originField="cmnt" table="employee" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="image" originField="image" table="employee" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules>
+				<MatchRule level="1" dataType="string" value=":employee_id" escapeEnabled="false" table="employee" originField="employee_id" operator="=" />
+			</MatchRules>
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="editorNum1" type="TextEditor" width="70" value="7" dataType="float" />
+		<Control id="editorNum2" type="TextEditor" width="70" value="8" dataType="float" />
+		<Control id="editorNum3" type="TextEditor" width="150" readOnly="true" />
+		<Control id="buttonMultiply" type="Button" value="=" command="commandMultiply" width="30" />
+		<Control id="commandMultiply" type="RPCCommand" async="true" method="multiply">
+			<Parameters />
+			<Events>
+				<Event name="beforeExecute">command.parameters().setValue("num1", editorNum1.value);
+command.parameters().setValue("num2", editorNum2.value);</Event>
+				<Event name="onSuccess">editorNum3.value = command.outParameters().getValue("num3");</Event>
+			</Events>
+		</Control>
+		<Control id="editorNum4" type="TextEditor" width="70" value="100" dataType="float" />
+		<Control id="editorNum5" type="TextEditor" width="70" value="0" dataType="float" />
+		<Control id="editorNum6" type="TextEditor" width="150" readOnly="true" />
+		<Control id="buttonDivide" type="Button" value="=" command="commandDivide" width="30" />
+		<Control id="commandDivide" type="RPCCommand" method="divide" async="true">
+			<Parameters />
+			<Events>
+				<Event name="beforeExecute">command.parameters().setValue("num1", editorNum4.value);
+command.parameters().setValue("num2", editorNum5.value);</Event>
+				<Event name="onSuccess">editorNum6.value = command.outParameters().getValue("num3");</Event>
+			</Events>
+		</Control>
+		<Control id="commandGetSystemInfo" type="RPCCommand" showLoadingTip="false" method="getSystemInfo">
+			<Parameters />
+			<Events>
+				<Event name="onSuccess">var freeMemory = command.outParameters().getValue("freeMemory");
+var totalMemory = command.outParameters().getValue("totalMemory");
+labelFreeMemory.innerText = formatFloat(freeMemory / 1000, "#,##.###");
+labelTotalMemory.innerText = formatFloat(totalMemory / 1000, "#,##.###");
+var position = formatFloat((freeMemory / totalMemory) * 100, "##");
+progressbarMemory.setPosition(position);
+setTimeout("labelGetSystemInfoRetrieving.style.backgroundColor = \"\";", 200);
+
+setTimeout("commandGetSystemInfo.execute()", scrollbarInterval.getPosition() * 1000);</Event>
+				<Event name="beforeExecute">labelGetSystemInfoRetrieving.style.backgroundColor = "red";</Event>
+			</Events>
+		</Control>
+		<Control id="progressbarMemory" type="ProgressBar" width="250" textPattern="空闲率 \${position}%" />
+		<Control id="scrollbarInterval" type="ScrollBar" width="250" orientation="horizontal" min="1" max="10" smallChange="1" bigChange="1" position="2" pageSize="1">
+			<Events>
+				<Event name="onPositionChanged">labelInterval.innerText = scrollBar.getPosition();</Event>
+			</Events>
+		</Control>
+		<Control id="buttonHeavyOperation" type="Button" command="commandHeavyOperation" value="测试" width="75" />
+		<Control id="commandHeavyOperation" type="RPCCommand" method="heavyOperation" async="true">
+			<Parameters />
+			<Events>
+				<Event name="onSuccess">buttonHeavyOperation.disabled = false;</Event>
+				<Event name="beforeExecute">buttonHeavyOperation.disabled = true;</Event>
+			</Events>
+		</Control>
+		<Control id="editorEmployeeId" type="TextEditor" value="CHENGYU" />
+		<Control id="buttonRetrieveData1" type="Button" command="commandRetrieveData" value="利用查询命令提取" />
+		<Control id="commandRetrieveData" type="QueryCommand" queryDataset="datasetEmployee" showLoadingTip="true" async="true">
+			<Parameters />
+			<Events>
+				<Event name="beforeExecute">command.parameters().setValue("employee_id", editorEmployeeId.value);
+buttonRetrieveData1.disabled = true;</Event>
+				<Event name="onSuccess">var record = datasetEmployee.getCurrent();
+if (record != null) {
+  alert(record);
+}
+else {
+  alert("没有匹配的记录！");
+}
+buttonRetrieveData1.disabled = false;</Event>
+			</Events>
+		</Control>
+		<Control id="buttonRetrieveData2" type="Button" value="利用回调函数提取">
+			<Events>
+				<Event name="onClick">buttonRetrieveData2.disabled = true;
+showLoadingTip();
+
+datasetEmployee.parameters().setValue("employee_id", editorEmployeeId.value);
+datasetEmployee.flushData(function(successful) {
+    if (successful) { 
+      var record = datasetEmployee.getCurrent();
+      if (record != null) {
+        alert(record);
+      }
+      else {
+        alert("没有匹配的记录！");
+      }
+    }
+    
+    buttonRetrieveData2.disabled = false;
+    hideLoadingTip();
+  }
+);</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="onLoad">setTimeout("commandGetSystemInfo.execute();", 1000);</Event>
+	</Events>
+</view>
+

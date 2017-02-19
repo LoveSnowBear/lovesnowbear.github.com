@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetBranch" type="Reference" sourceModule="sample.HR" sourceDataset="datasetBranch">
+			<MasterLink />
+			<Fields />
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableBranch" type="DataTable" dataset="datasetBranch" width="100%" height="100%" showHScrollBar="false" />
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="onDatasetsPrepared">registerMe();</Event>
+		<Event name="functions">function registerMe() {
+  window.parent.establishBinding(datasetBranch);
+}</Event>
+	</Events>
+</view>
+

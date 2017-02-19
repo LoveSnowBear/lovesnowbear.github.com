@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetCondition" type="Form">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_name" label="姓名(Like)">
+					<Properties />
+				</Field>
+				<Field name="dept_id" dropDown="dropdownDept" label="部门(=)">
+					<Properties />
+				</Field>
+				<Field name="dept_name">
+					<Properties />
+				</Field>
+				<Field name="sex" label="性别(=)">
+					<Properties />
+				</Field>
+				<Field name="married" label="婚否(=)">
+					<Properties />
+				</Field>
+				<Field name="salary1" label="薪水(&gt;=)" dataType="int">
+					<Properties />
+				</Field>
+				<Field name="salary2" label="薪水(&lt;=)" dataType="int">
+					<Properties />
+				</Field>
+				<Field name="birthday1" label="生日(&gt;=)" dataType="date" format="yyyyMMdd">
+					<Properties />
+				</Field>
+				<Field name="birthday2" label="生日(&lt;=)" dataType="date" format="yyyyMMdd">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetEmployee" type="Wrapper" originTable="employee" keyFields="employee_id" wrappedType="AutoSql" pageSize="20">
+			<Fields>
+				<Field name="employee_id" originField="employee_id" table="employee" group="false" label="${Resource.hr.employee_id}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" originField="employee_name" table="employee" group="false" label="${Resource.hr.employee_name}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_id" originField="dept_id" table="employee" group="false" label="${Resource.hr.dept_id}" dataType="string" dropDown="dropdownDept">
+					<Properties />
+				</Field>
+				<Field name="sex" originField="sex" table="employee" group="false" label="${Resource.hr.sex}" dataType="boolean" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="married" group="false" originField="married" table="employee" label="${Resource.hr.married}" dataType="boolean" dropDown="dropdownMarried">
+					<Properties />
+				</Field>
+				<Field name="birthday" originField="birthday" table="employee" group="false" label="${Resource.hr.birthday}" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" originField="salary" table="employee" group="false" label="${Resource.hr.salary}" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" originField="degree" table="employee" group="false" label="${Resource.hr.degree}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" originField="email" table="employee" group="false" label="${Resource.hr.email}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" originField="web" table="employee" group="false" label="${Resource.hr.web}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" originField="cmnt" table="employee" group="false" label="${Resource.hr.cmnt}" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Joins>
+				<Join name="dept" originTable="dept" keyFields="dept_id" sourceTable="employee" sourceKeyFields="dept_id" />
+			</Joins>
+			<MatchRules>
+				<MatchRule originField="employee_name" table="employee" operator="like" dataType="string" value=":employee_name" escapeEnabled="true" />
+				<MatchRule table="employee" originField="dept_id" operator="=" value=":dept_id" dataType="string" escapeEnabled="true" />
+				<MatchRule table="employee" operator="=" value=":sex" originField="sex" dataType="boolean" escapeEnabled="true" />
+				<MatchRule originField="married" table="employee" operator="=" dataType="boolean" value=":married" escapeEnabled="true" />
+				<MatchRule originField="birthday" table="employee" operator="&gt;=" dataType="date" value=":birthday1" escapeEnabled="true" />
+				<MatchRule table="employee" operator="&lt;=" dataType="date" value=":birthday2" originField="birthday" escapeEnabled="true" />
+				<MatchRule originField="salary" table="employee" operator="&gt;=" dataType="double" value=":salary1" escapeEnabled="true" />
+				<MatchRule table="employee" operator="&lt;=" dataType="double" value=":salary2" originField="salary" escapeEnabled="true" />
+				<MatchRule originField="branch_id" table="dept" operator="=" dataType="string" value=":branch_id" escapeEnabled="true" />
+			</MatchRules>
+			<SortRules />
+			<Parameters />
+			<Properties />
+			<MasterLink />
+			<Events>
+				<Event name="afterInsert">winEmployee.show(true,true);</Event>
+			</Events>
+		</Dataset>
+		<Dataset id="datasetDept" type="Wrapper" dataSource="doradosample" originTable="DEPT" wrappedType="AutoSql">
+			<Joins />
+			<Fields>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="BRANCH_ID" originField="BRANCH_ID" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true" autoDropDown="true">
+			<DropDownItem value="true" label="男" />
+			<DropDownItem value="false" label="女" />
+		</Control>
+		<Control id="dropdownMarried" type="ListDropDown" mapValue="true" autoDropDown="true">
+			<DropDownItem value="true" label="已婚" />
+			<DropDownItem value="false" label="未婚" />
+		</Control>
+		<Control id="dropdownDept" type="DatasetDropDown" dataset="datasetDept" mapValue="true" autoDropDown="true" labelField="DEPT_NAME" valueField="DEPT_ID" fixed="true" />
+		<Control id="datapilotEmployee" type="DataPilot" dataset="datasetEmployee" />
+		<Control id="pagepilotEmployee" type="PagePilot" dataset="datasetEmployee" />
+		<Control id="commandQuery" type="QueryCommand" conditionDataset="datasetCondition" queryDataset="datasetEmployee">
+			<Parameters />
+		</Control>
+		<Control id="buttonQuery" type="Button" value="查询" width="80" command="commandQuery" />
+		<Control id="formCondition" type="AutoForm" dataset="datasetCondition" width="100%">
+			<FormGroup label="group1" title="查询条件">
+				<Element name="dept_id" type="TextEditor" field="dept_id">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="employee_name" type="TextEditor" field="employee_name">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="sex" type="TextEditor" field="sex">
+					<FieldLabel />
+					<TextEditor dropDown="dropdownSex" />
+				</Element>
+				<Element name="married" type="TextEditor" field="married">
+					<FieldLabel />
+					<TextEditor dropDown="dropdownMarried" />
+				</Element>
+				<Element name="salary1" type="TextEditor" field="salary1">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="salary2" type="TextEditor" field="salary2">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="birthday1" type="TextEditor" field="birthday1">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="birthday2" type="TextEditor" field="birthday2">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="element1" type="Custom" showLabel="false" colSpan="2" controlAlign="right" controlId="buttonQuery">
+					<FieldLabel />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%" readOnly="true" fixedColumn="2">
+			<Column name="employee_id" field="employee_id" width="100">
+				<Events />
+			</Column>
+			<Column name="employee_name" field="employee_name" />
+			<Column name="dept_id" field="dept_id" width="160">
+				<Events />
+			</Column>
+			<Column name="sex" field="sex" align="center" dropDown="dropdownSex" rendererType="radiogroup" />
+			<ColumnGroup name="group1" label="组合列">
+				<Column name="birthday" field="birthday" width="120" />
+				<Column name="salary" field="salary" />
+				<Column name="married" field="married" rendererType="checkbox" width="40" />
+				<Events />
+			</ColumnGroup>
+			<Column name="degree" field="degree">
+				<Events />
+			</Column>
+			<Column name="email" field="email" width="150" />
+			<Column name="web" field="web" width="150" />
+			<Column name="cmnt" field="cmnt" width="150" editorType="textarea" noWrap="false" />
+			<Events>
+				<Event name="onRecordDblClick">winEmployee.show(true,true);</Event>
+			</Events>
+		</Control>
+		<Control id="commandSave" type="UpdateCommand">
+			<DatasetInfos>
+				<DatasetInfo dataset="datasetEmployee" />
+			</DatasetInfos>
+			<Parameters />
+		</Control>
+		<Control id="buttonSave" type="Button" command="commandSave" width="80" value="保存" />
+		<Control id="formEmployee" type="AutoForm" dataset="datasetEmployee" defaultLabelWidth="80">
+			<FormGroup name="group1" title="基本信息" columnCount="3">
+				<Element field="EMPLOYEE_ID" type="TextEditor" name="EMPLOYEE_ID">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="DEPT_ID" type="TextEditor" name="DEPT_ID">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="EMPLOYEE_NAME" type="TextEditor" name="EMPLOYEE_NAME">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="SEX" type="TextEditor" name="SEX">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="BIRTHDAY" type="TextEditor" name="BIRTHDAY">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="MARRIED" type="TextEditor" name="MARRIED">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="SALARY" type="TextEditor" name="SALARY">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="DEGREE" type="TextEditor" name="DEGREE">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+			<FormGroup name="group2" title="备注" columnCount="1" expanded="true">
+				<Element field="EMAIL" type="TextEditor" name="EMAIL">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="WEB" type="TextEditor" name="WEB">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="CMNT" type="TextEditor" name="CMNT">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="50" />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="winEmployee" type="SubWindow" title="员工编辑" showCloseButton="false" showMaximizeButton="false" showMinimizeButton="false" status="hidden" width="600" height="330" />
+		<Control id="buttonOK" type="Button" value="确定" width="80">
+			<Events>
+				<Event name="onClick">if(datasetEmployee.postRecord()){
+  winEmployee.hide();
+}</Event>
+			</Events>
+		</Control>
+		<Control id="buttonCancel" type="Button" value="取消" width="80">
+			<Events>
+				<Event name="onClick">datasetEmployee.cancelRecord();
+winEmployee.hide();</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

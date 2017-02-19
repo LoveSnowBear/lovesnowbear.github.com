@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset type="Form" id="datasetCondition">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_name" label="姓名(Like)">
+					<Properties />
+				</Field>
+				<Field name="dept_id">
+					<Properties />
+				</Field>
+				<Field name="dept_name" dropDown="dropdownDept" label="部门(=)">
+					<Properties />
+				</Field>
+				<Field name="sex" label="性别(=)">
+					<Properties />
+				</Field>
+				<Field name="married" label="婚否(=)">
+					<Properties />
+				</Field>
+				<Field name="salary1" label="薪水(&gt;=)" dataType="int">
+					<Properties />
+				</Field>
+				<Field name="salary2" label="薪水(&lt;=)" dataType="int">
+					<Properties />
+				</Field>
+				<Field name="birthday1" label="生日(&gt;=)" dataType="date" format="yyyyMMdd">
+					<Properties />
+				</Field>
+				<Field name="birthday2" label="生日(&lt;=)" dataType="date" format="yyyyMMdd">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset sourceDataset="datasetEmployee" type="Reference" conditionDataset="datasetCondition" async="true" id="datasetEmployee" sourceModule="sample.HR" readOnly="true" showLoadingTip="true" pageSize="20">
+			<MasterLink />
+			<Fields>
+				<Field name="employee_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_id" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" dropDown="dropdownSex" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="married" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" dataType="double">
+					<Properties />
+				</Field>
+				<Field lookupField="dept_name" lookupKeyFields="dept_id" type="Lookup" keyFields="dept_id" label="${Resource.hr.dept_name}" dataType="" lookupModule="sample.HR" lookupDataset="datasetDeptForLookup" name="dept_name">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+			<Events />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control type="DynamicDropDown" writeFields="dept_id,dept_name" visibleFields="dept_name" filterParameter="dept_name" id="dropdownDept" width="200" readFields="dept_id,dept_name">
+			<Dataset sourceDataset="datasetDept" type="DropDown" sourceModule="sample.HR" pageSize="100">
+				<Fields />
+				<Parameters />
+				<Properties />
+			</Dataset>
+			<Parameters />
+		</Control>
+		<Control autoDropDown="true" id="dropdownSex" mapValue="true" fixed="true" type="ListDropDown">
+			<DropDownItem label="&lt;忽略&gt;" />
+			<DropDownItem label="男" value="true" />
+			<DropDownItem label="女" value="false" />
+		</Control>
+		<Control autoDropDown="true" id="dropdownMarried" mapValue="true" fixed="true" type="ListDropDown">
+			<DropDownItem label="&lt;忽略&gt;" />
+			<DropDownItem label="已婚" value="true" />
+			<DropDownItem label="未婚" value="false" />
+		</Control>
+		<Control id="buttonQuery" width="100" command="commandQuery" type="Button" value="查询" />
+		<Control id="commandQuery" async="true" queryDataset="datasetEmployee" type="QueryCommand" conditionDataset="datasetCondition">
+			<Parameters />
+			<Events>
+				<Event name="beforeExecute">var employee_name = datasetCondition.getValue("employee_name");
+if (employee_name) {
+  command.parameters().setValue("employee_name", "%" + employee_name + "%");
+}
+else {
+  command.parameters().setValue("employee_name", "");
+}</Event>
+			</Events>
+		</Control>
+		<Control type="AutoForm" dataset="datasetCondition" id="formCondition1" width="100%">
+			<FormGroup showBevel="false" title="查询条件">
+				<Element name="employee_name" type="TextEditor" field="employee_name">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="dept_name" type="TextEditor" field="dept_name">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="sex" type="TextEditor" field="sex">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="married" dataset="datasetCondition" type="CheckBox" field="married">
+					<FieldLabel />
+					<CheckBox />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control type="AutoForm" dataset="datasetCondition" id="formCondition2" width="100%">
+			<FormGroup showBevel="false" title="查询条件">
+				<Element name="salary1" type="TextEditor" field="salary1">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="salary2" type="TextEditor" field="salary2">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="birthday1" type="TextEditor" field="birthday1">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="birthday2" type="TextEditor" field="birthday2">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="pilotEmployee" dataset="datasetEmployee" maxLink="10" type="PagePilot" />
+		<Control type="DataTable" showHScrollBar="false" dataset="datasetEmployee" height="100%" id="tableEmployee" width="100%">
+			<Column field="employee_id" name="employee_id" />
+			<Column field="employee_name" name="employee_name" />
+			<Column field="dept_name" width="150" name="dept_name" />
+			<Column field="sex" name="sex" />
+			<Column field="married" editorType="checkbox" name="married" />
+			<Column field="birthday" width="120" name="birthday" />
+			<Column field="salary" name="salary" />
+			<Events />
+		</Control>
+		<Control id="tabsetCondition" type="TabSet" height="110">
+			<Tab name="tab1" label="基本条件" />
+			<Tab name="tab2" label="其他条件" />
+		</Control>
+		<Control id="buttonClear" width="100" type="Button" value="清空">
+			<Events>
+				<Event name="onClick">datasetCondition.clearData();
+datasetCondition.insertRecord();
+</Event>
+			</Events>
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

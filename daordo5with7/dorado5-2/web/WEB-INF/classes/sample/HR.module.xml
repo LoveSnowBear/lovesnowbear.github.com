@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+	<Datasets>
+		<Dataset id="datasetBranch" type="AutoSql" originTable="branch" keyFields="branch_id" scope="application">
+			<Fields>
+				<Field name="branch_id" dataType="string" originField="branch_id" label="${Resource.hr.branch_id}">
+					<Properties />
+				</Field>
+				<Field name="branch_name" dataType="string" originField="branch_name" label="${Resource.hr.branch_name}">
+					<Properties />
+				</Field>
+			</Fields>
+			<Joins />
+			<MatchRules />
+			<SortRules />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDept" type="AutoSql" originTable="dept" keyFields="dept_id">
+			<Fields>
+				<Field name="dept_id" dataType="string" originField="dept_id" label="${Resource.hr.dept_id}">
+					<Properties />
+				</Field>
+				<Field name="branch_id" dataType="string" originField="branch_id" label="${Resource.hr.branch_id}">
+					<Properties />
+				</Field>
+				<Field name="dept_name" dataType="string" originField="dept_name" label="${Resource.hr.dept_name}">
+					<Properties />
+				</Field>
+			</Fields>
+			<Joins />
+			<MatchRules>
+				<MatchRule originField="branch_id" table="dept" operator="=" dataType="string" value=":branch_id" escapeEnabled="true" />
+				<MatchRule originField="dept_name" value=":dept_name" table="dept" operator="like" escapeEnabled="true" dataType="string" />
+			</MatchRules>
+			<SortRules />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetEmployee" type="AutoSql" originTable="employee" keyFields="employee_id" retrieveAfterUpdate="true">
+			<Fields>
+				<Field name="employee_id" originField="employee_id" table="employee" group="false" label="${Resource.hr.employee_id}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="employee_name" originField="employee_name" table="employee" group="false" label="${Resource.hr.employee_name}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="dept_id" originField="dept_id" table="employee" group="false" label="${Resource.hr.dept_id}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" originField="sex" table="employee" group="false" label="${Resource.hr.sex}" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="married" group="false" originField="married" table="employee" label="${Resource.hr.married}" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" originField="birthday" table="employee" group="false" label="${Resource.hr.birthday}" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" originField="salary" table="employee" group="false" label="${Resource.hr.salary}" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" originField="degree" table="employee" group="false" label="${Resource.hr.degree}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" originField="email" table="employee" group="false" label="${Resource.hr.email}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" originField="web" table="employee" group="false" label="${Resource.hr.web}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" originField="cmnt" table="employee" group="false" label="${Resource.hr.cmnt}" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Joins>
+				<Join name="dept" originTable="dept" keyFields="dept_id" sourceTable="employee" sourceKeyFields="dept_id" />
+			</Joins>
+			<MatchRules>
+				<MatchRule originField="employee_name" table="employee" operator="like" dataType="string" value=":employee_name" escapeEnabled="true" />
+				<MatchRule table="employee" originField="dept_id" operator="=" value=":dept_id" dataType="string" escapeEnabled="true" />
+				<MatchRule table="employee" operator="=" value=":sex" originField="sex" dataType="boolean" escapeEnabled="true" />
+				<MatchRule originField="married" table="employee" operator="=" dataType="boolean" value=":married" escapeEnabled="true" />
+				<MatchRule originField="birthday" table="employee" operator="&gt;=" dataType="date" value=":birthday1" escapeEnabled="true" />
+				<MatchRule table="employee" operator="&lt;=" dataType="date" value=":birthday2" originField="birthday" escapeEnabled="true" />
+				<MatchRule originField="salary" table="employee" operator="&gt;=" dataType="double" value=":salary1" escapeEnabled="true" />
+				<MatchRule table="employee" operator="&lt;=" dataType="double" value=":salary2" originField="salary" escapeEnabled="true" />
+				<MatchRule originField="branch_id" table="dept" operator="=" dataType="string" value=":branch_id" escapeEnabled="true" />
+			</MatchRules>
+			<SortRules />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDeptForLookup" type="AutoSql" originTable="dept" keyFields="dept_id" scope="application">
+			<Fields>
+				<Field name="dept_id" dataType="string" originField="dept_id" label="${Resource.hr.dept_id}">
+					<Properties />
+				</Field>
+				<Field name="branch_id" dataType="string" originField="branch_id" label="${Resource.hr.branch_id}">
+					<Properties />
+				</Field>
+				<Field name="dept_name" dataType="string" originField="dept_name" label="${Resource.hr.dept_name}">
+					<Properties />
+				</Field>
+			</Fields>
+			<Joins />
+			<MatchRules>
+				<MatchRule originField="branch_id" table="dept" operator="=" dataType="string" value=":branch_id" escapeEnabled="true" />
+				<MatchRule originField="dept_name" value=":dept_name" table="dept" operator="like" escapeEnabled="true" dataType="string" />
+			</MatchRules>
+			<SortRules />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDegree" type="Custom" listeners="sample.HR_datasetDegreeListener" listener="sample.HR_datasetDegreeListener" scope="application">
+			<Fields>
+				<Field name="degree" dataType="string">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+</module>
+

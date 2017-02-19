@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view clazz="sample.scene.upload.multiUpload1.UploadDemoViewModel">
+	<Datasets>
+		<Dataset id="dsFiles" type="Custom" autoLoadData="true">
+			<MasterLink />
+			<Fields>
+				<Field name="fileName" label="文件名">
+					<Properties />
+				</Field>
+				<Field name="filePath" label="文件上传路径">
+					<Properties />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableFiles" type="DataTable" dataset="dsFiles" width="100%" showHScrollBar="false" readOnly="true">
+			<Column name="fileName" field="fileName" />
+			<Column name="filePath" field="filePath" />
+		</Control>
+		<Control id="cmdShowUpload" type="RequestCommand" path="do-upload.jsp">
+			<Frame width="400" height="120" center="true" target="_subwindow" />
+			<Parameters />
+		</Control>
+		<Control id="btnAddFile" type="Button" value="上传文件" command="cmdShowUpload">
+			<Events />
+		</Control>
+		<Control id="cmdRemoveFile" type="RPCCommand" method="removeFile">
+			<Parameters />
+			<Events>
+				<Event name="beforeExecute">var dataset = dsFiles;
+var record = dataset.getCurrent();
+if(record){
+  var filePath = record.getValue("filePath");
+  command.parameters().setValue("filePath",filePath);
+}else{
+  alert("没有可删除的文件。");
+  return new AbortException();
+}</Event>
+				<Event name="onSuccess">var dataset = dsFiles;
+dataset.deleteRecord();
+alert("删除成功。");</Event>
+			</Events>
+		</Control>
+		<Control id="btnRemoveFile" type="Button" value="移除文件" command="cmdRemoveFile" />
+	</Controls>
+	<Properties />
+	<Events>
+		<Event name="functions">function uploadSuccess(fileName,path){
+  dsFiles.insertRecord();
+  dsFiles.setValue("fileName",fileName);
+  dsFiles.setValue("filePath",path);
+}</Event>
+	</Events>
+</view>
+

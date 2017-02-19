@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets />
+	<Controls>
+		<Control type="Menu" id="menuMain">
+			<MenuItem name="query" label="数据查询场景">
+				<MenuItem name="simplequery" label="简单查询" path="/skills/data/query.jsp" />
+				<MenuItem name="table" label="表格过滤功能" path="/skills/table/table.jsp" />
+				<MenuItem name="tabsetquery" label="使用Tabset将查询条件分组" path="/scene/query/tabsetquery.jsp" />
+				<MenuItem name="hiddenquery" label="查询条件隐藏，使用快捷键呼叫出来" path="/scene/query/hiddenquery.jsp" />
+				<MenuItem name="treequery" label="将查询结果在树节点中的定位" path="/scene/query/tree-query.jsp" />
+				<MenuItem name="masterlink" label="主从（联动）显示">
+					<MenuItem name="tabletable" label=" 表格+表格" path="/scene/query/masterlink/tabletable.jsp" />
+					<MenuItem name="navTree" label=" 树+表格" path="/skills/tree/nav-tree.jsp" />
+					<MenuItem name="tableform" label="表格+AutoForm" path="/scene/query/masterlink/tableform.jsp" />
+					<MenuItem name="cascadedropdown" label="联动下拉框" path="/skills/form/cascade-dropdown.jsp" />
+				</MenuItem>
+			</MenuItem>
+			<MenuItem name="submit" label="数据维护场景">
+				<MenuItem name="singlerecord1" label="单条记录的维护（利用联动的AutoForm）" path="/scene/submit/simple-record1.jsp" />
+				<MenuItem name="singlerecord2" label="单条记录的维护（利用弹出的AutoForm）" path="/scene/submit/simple-record2.jsp" />
+				<MenuItem name="mutiplerecord" label="批量数据维护（利用可编辑的DataTable）" path="/scene/submit/mutiple-record.jsp" />
+				<MenuItem name="contractquery" label="合同管理" path="/scene/complex/contract/contract-query.jsp" />
+				<MenuItem name="update" label="提交并记录日志" path="/skills/data/update.jsp" />
+				<MenuItem name="master-detail2" label="主从表提交" path="/skills/data/master-detail2.jsp" />
+				<MenuItem name="info-datatable" label="根据业务主键自动填写完整信息" path="/scene/submit/info-datatable.jsp" />
+				<MenuItem name="update" label="提交并记录日志" path="/skills/data/update.jsp" />
+				<MenuItem name="excel-import" label="利用Excel批量数据导入" path="/scene/submit/excel-import.jsp" />
+				<MenuItem name="infodatatable" label="快速添加记录" path="/scene/submit/info-datatable.jsp" />
+			</MenuItem>
+			<MenuItem name="validate" label="数据校验">
+				<MenuItem name="simpleValidate" label="简单校验器" path="/scene/validate/simpleValidate.jsp" />
+				<MenuItem name="patternValidate" label="正则表达式校验" path="/scene/validate/patternValidate.jsp" />
+				<MenuItem name="uniqueValidateByDataset" label="唯一性校验" path="/scene/validate/uniqueValidateByDataset.jsp" />
+				<MenuItem name="customValidator" label="自定义校验器" path="/scene/validate/customValidator.jsp" />
+			</MenuItem>
+			<MenuItem name="input" label="数据录入">
+				<MenuItem name="inputAssist" label="录入辅助（Dropdown展示）" path="/scene/input/input-assist/input-assist.jsp" />
+				<MenuItem name="filterDropDown" label="自动过滤Dropdown" path="/scene/input/filter-dropdown.jsp" />
+			</MenuItem>
+			<MenuItem name="upload" label="文件上传">
+				<MenuItem name="simpleUpload" label="单文件上传" path="/scene/upload/simpleUpload/uploadDemo.jsp" />
+				<MenuItem name="multiUpload1" label="多文件上传" path="/scene/upload/multiUpload1/uploadDemo.jsp" />
+				<MenuItem name="multiUpload2" label="带进度条的上传" path="/scene/upload/multiUpload2/uploadDemo.jsp" />
+			</MenuItem>
+			<Events>
+				<Event name="onItemClick">var path = item.getPath();
+if(path){
+  openPage(__CONTEXT_PATH + path);
+  throw new AbortException();
+}</Event>
+			</Events>
+		</Control>
+		<Control id="menubarMain" type="MenuBar" menu="menuMain" />
+	</Controls>
+	<Properties />
+</view>
+

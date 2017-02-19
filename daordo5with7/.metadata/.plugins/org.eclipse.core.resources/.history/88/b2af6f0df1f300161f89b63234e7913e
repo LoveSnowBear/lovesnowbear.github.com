@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Wrapper" dataSource="doradosample" originTable="EMPLOYEE" readOnly="true" wrappedType="AutoSql" pageSize="20">
+			<Joins />
+			<Fields>
+				<Field name="EMPLOYEE_ID" originField="EMPLOYEE_ID" table="EMPLOYEE" dataType="string" group="false" label="员工编号">
+					<Properties />
+				</Field>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="EMPLOYEE" dataType="string" group="false" label="部门" dropDown="dropdownDept">
+					<Properties />
+				</Field>
+				<Field name="EMPLOYEE_NAME" originField="EMPLOYEE_NAME" table="EMPLOYEE" dataType="string" group="false" label="员工姓名">
+					<Properties />
+				</Field>
+				<Field name="SEX" originField="SEX" table="EMPLOYEE" group="false" label="性别" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="BIRTHDAY" originField="BIRTHDAY" table="EMPLOYEE" dataType="date" group="false" label="生日">
+					<Properties />
+				</Field>
+				<Field name="MARRIED" originField="MARRIED" table="EMPLOYEE" group="false" label="婚否" dropDown="dropdownMarried">
+					<Properties />
+				</Field>
+				<Field name="SALARY" originField="SALARY" table="EMPLOYEE" dataType="double" group="false" label="薪水">
+					<Properties />
+				</Field>
+				<Field name="DEGREE" originField="DEGREE" table="EMPLOYEE" dataType="string" group="false" label="学历">
+					<Properties />
+				</Field>
+				<Field name="EMAIL" originField="EMAIL" table="EMPLOYEE" dataType="string" group="false" label="电子邮件">
+					<Properties />
+				</Field>
+				<Field name="WEB" originField="WEB" table="EMPLOYEE" dataType="string" group="false" label="网站">
+					<Properties />
+				</Field>
+				<Field name="CMNT" originField="CMNT" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+				<Field name="IMAGE" originField="IMAGE" table="EMPLOYEE" dataType="string" group="false">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<Parameters />
+			<Properties />
+			<MasterLink />
+		</Dataset>
+		<Dataset id="datasetBranch" type="Wrapper" dataSource="doradosample" originTable="BRANCH" wrappedType="AutoSql">
+			<Joins />
+			<Fields>
+				<Field name="BRANCH_ID" originField="BRANCH_ID" table="BRANCH" dataType="string" group="false" label="分公司编号">
+					<Properties />
+				</Field>
+				<Field name="BRANCH_NAME" originField="BRANCH_NAME" table="BRANCH" dataType="string" group="false" label="分公司名称">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<MasterLink />
+			<Parameters />
+			<Properties />
+		</Dataset>
+		<Dataset id="datasetDept" type="Wrapper" dataSource="doradosample" originTable="DEPT" readOnly="true" wrappedType="AutoSql">
+			<Joins />
+			<Fields>
+				<Field name="DEPT_ID" originField="DEPT_ID" table="DEPT" dataType="string" group="false" label="部门编号">
+					<Properties />
+				</Field>
+				<Field name="DEPT_NAME" originField="DEPT_NAME" table="DEPT" dataType="string" group="false" label="部门名称">
+					<Properties />
+				</Field>
+			</Fields>
+			<MatchRules />
+			<SortRules />
+			<Parameters>
+				<Parameter name="branch_id" />
+			</Parameters>
+			<Properties />
+			<MasterLink />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="tableEmployee" type="DataTable" dataset="datasetEmployee" width="100%" height="100%" showHScrollBar="false">
+			<Column name="DEPT_ID" field="DEPT_ID" />
+			<Column name="EMPLOYEE_ID" field="EMPLOYEE_ID" />
+			<Column name="EMPLOYEE_NAME" field="EMPLOYEE_NAME" />
+			<Column name="SEX" field="SEX" />
+			<Column name="BIRTHDAY" field="BIRTHDAY" />
+			<Column name="MARRIED" field="MARRIED" />
+			<Column name="SALARY" field="SALARY" />
+			<Column name="DEGREE" field="DEGREE" />
+		</Control>
+		<Control id="formEmployee" type="AutoForm" dataset="datasetEmployee">
+			<FormGroup name="group1" columnCount="3">
+				<Element field="EMPLOYEE_ID" type="TextEditor" name="EMPLOYEE_ID">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="EMPLOYEE_NAME" type="TextEditor" name="EMPLOYEE_NAME">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="DEPT_ID" type="TextEditor" name="DEPT_ID">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="SEX" type="TextEditor" name="SEX">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="BIRTHDAY" type="TextEditor" name="BIRTHDAY">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="MARRIED" type="TextEditor" name="MARRIED">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="SALARY" type="TextEditor" name="SALARY">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="DEGREE" type="TextEditor" name="DEGREE">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="EMAIL" type="TextEditor" name="EMAIL">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="WEB" type="TextEditor" name="WEB" colSpan="3">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="CMNT" type="TextEditor" name="CMNT" colSpan="3">
+					<FieldLabel />
+					<TextEditor editorType="textarea" height="80px" />
+				</Element>
+			</FormGroup>
+		</Control>
+		<Control id="dropdownBranch" type="DatasetDropDown" dataset="datasetBranch" mapValue="true" labelField="BRANCH_NAME" valueField="BRANCH_ID" />
+		<Control id="dropdownDept" type="DatasetDropDown" dataset="datasetDept" mapValue="true" labelField="DEPT_NAME" valueField="DEPT_ID" />
+		<Control id="dropdownSex" type="ListDropDown" mapValue="true">
+			<DropDownItem label="男" value="true" />
+			<DropDownItem label="女" value="false" />
+		</Control>
+		<Control id="dropdownMarried" type="ListDropDown" mapValue="true">
+			<DropDownItem value="true" label="已婚" />
+			<DropDownItem value="false" label="未婚" />
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

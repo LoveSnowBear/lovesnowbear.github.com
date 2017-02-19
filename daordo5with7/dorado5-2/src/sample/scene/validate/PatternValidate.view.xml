@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset type="Custom" id="datasetPatternValidate">
+			<MasterLink />
+			<Fields>
+				<Field name="validateChinese" label="中文校验" dataType="">
+					<Properties />
+					<Validator errorMessage="请输入中文" type="Pattern" pattern="^[\u4e00-\u9fa5]+$" />
+				</Field>
+				<Field name="validateAlpha" label="字母校验" dataType="">
+					<Properties />
+					<Validator type="Pattern" pattern="^[a-zA-Z]+$" errorMessage="请输入字母。" />
+				</Field>
+				<Field name="validateURL" label="URL校验" dataType="">
+					<Properties />
+					<Validator type="Pattern" pattern="^(http|https|ftp):\/\/(([A-Za-z0-9][A-Za-z0-9_-]*)(\.[A-Za-z0-9][A-Za-z0-9_-]*)+)(:(\d+))?\/?" errorMessage="请输入有效的URL地址." />
+				</Field>
+				<Field name="validateEmail" label="邮件地址校验">
+					<Properties />
+					<Validator type="Pattern" pattern="\w{1,}[@][\w\-]{1,}([.]([\w\-]{1,})){1,3}$" errorMessage="请输入有效的邮件地址。" />
+				</Field>
+				<Field name="validateNumber" label="数字校验">
+					<Properties />
+					<Validator errorMessage="请输入有效的数字." type="Pattern" pattern="^\d+$" />
+				</Field>
+				<Field name="validatePhone" label="电话号码校验">
+					<Properties />
+					<Validator type="Pattern" pattern="^((0[1-9]{3})?(0[12][0-9])?[-])?\d{6,8}$" errorMessage="请输入正确的电话号码。" />
+				</Field>
+				<Field name="validateMobilePhone" label="手机校验">
+					<Properties />
+					<Validator type="Pattern" errorMessage="请输入正确的手机号码。" pattern="(^0?[1][35][0-9]{9}$)" />
+				</Field>
+				<Field name="validateDateCn" label="日期校验">
+					<Properties />
+					<Validator type="Pattern" errorMessage="请使用这样的日期格式: yyyy/mm/dd. 例如:2006/03/17.请输入值." pattern="^(\d{4})\/(\d{2})\/(\d{2})$" />
+				</Field>
+				<Field name="validateZIP" label="邮政编码校验">
+					<Properties />
+					<Validator type="Pattern" pattern="^[0-9]\d{5}$" errorMessage="请输入正确的邮政编码" />
+				</Field>
+			</Fields>
+			<Parameters />
+			<Properties />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control type="AutoForm" dataset="datasetPatternValidate" id="formPatternValidate" width="400">
+			<FormGroup name="group1" title="正则表达式校验" showBevel="false" columnCount="1">
+				<Element field="validateChinese" type="TextEditor" name="validateChinese">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="validateAlpha" type="TextEditor" name="validateAlpha">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="validateURL" type="TextEditor" name="validateURL">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="validateEmail" type="TextEditor" name="validateEmail">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="validateNumber" type="TextEditor" name="validateNumber">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="validatePhone" type="TextEditor" name="validatePhone">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="validateMobilePhone" type="TextEditor" name="validateMobilePhone">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="validateDateCn" type="TextEditor" name="validateDateCn">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element field="validateZIP" type="TextEditor" name="validateZIP">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+			</FormGroup>
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

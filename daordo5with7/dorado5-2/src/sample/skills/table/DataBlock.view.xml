@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+	<Datasets>
+		<Dataset id="datasetEmployee" type="Wrapper" originTable="employee" keyFields="employee_id" retrieveAfterUpdate="true" wrappedType="AutoSql">
+			<Fields>
+				<Field name="employee_id" originField="employee_id" table="employee" label="${Resource.hr.employee_id}" dataType="string" valueProtected="true">
+					<Properties />
+				</Field>
+				<Field name="employee_name" originField="employee_name" table="employee" label="${Resource.hr.employee_name}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="sex" originField="sex" table="employee" label="${Resource.hr.sex}" dataType="boolean" dropDown="dropdownSex">
+					<Properties />
+				</Field>
+				<Field name="married" originField="married" table="employee" label="${Resource.hr.married}" dataType="boolean">
+					<Properties />
+				</Field>
+				<Field name="birthday" originField="birthday" table="employee" label="${Resource.hr.birthday}" dataType="date">
+					<Properties />
+				</Field>
+				<Field name="salary" originField="salary" table="employee" label="${Resource.hr.salary}" dataType="double">
+					<Properties />
+				</Field>
+				<Field name="degree" originField="degree" table="employee" label="${Resource.hr.degree}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="email" originField="email" table="employee" label="${Resource.hr.email}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="web" originField="web" table="employee" label="${Resource.hr.web}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="cmnt" originField="cmnt" table="employee" label="${Resource.hr.cmnt}" dataType="string">
+					<Properties />
+				</Field>
+				<Field name="image" dataType="string" table="employee" originField="image">
+					<Properties />
+				</Field>
+			</Fields>
+			<Joins />
+			<MatchRules />
+			<SortRules>
+				<SortRule table="employee" originField="degree" descent="true" />
+			</SortRules>
+			<Parameters />
+			<Properties />
+			<MasterLink />
+		</Dataset>
+	</Datasets>
+	<Controls>
+		<Control id="datablockEmployee" type="DataBlock" dataset="datasetEmployee" width="100%" height="100%" blockHeight="130" blockWidth="120">
+			<Events>
+				<Event name="onRefreshBlock">var HTML = "&lt;CENTER style=\"padding: 6px\"&gt;" +
+  "&lt;DIV style=\"padding: 4px\"&gt;&lt;IMG src=\"#img\" style=\"width: 91px; height: 91px\"&gt;&lt;/DIV&gt;" + 
+  "&lt;DIV&gt;#employee_name&lt;/DIV&gt;" +
+  "&lt;/CENTER&gt;";
+
+var imgURL;
+if (record.getValue("image")) {
+  imgURL = "${request.getContextPath()}/picture.output.d?employee_id=" +
+    record.getValue("employee_id");
+}
+else {
+  imgURL = (record.getValue("sex")) ? "images/man.jpg" : "images/woman.jpg";
+}
+
+HTML = HTML.replace("#img", imgURL);
+HTML = HTML.replace("#employee_name", record.getValue("employee_name"));
+block.innerHTML = HTML;</Event>
+			</Events>
+		</Control>
+		<Control id="formEmployee" type="AutoForm" dataset="datasetEmployee" groupType="subwindow">
+			<FormGroup showBevel="false" title="员工信息" columnCount="3">
+				<Element name="employee_name" field="employee_name" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="birthday" field="birthday" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="sex" field="sex" type="CheckBox">
+					<FieldLabel />
+					<CheckBox />
+				</Element>
+				<Element name="salary" field="salary" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="degree" field="degree" type="TextEditor">
+					<FieldLabel />
+					<TextEditor />
+				</Element>
+				<Element name="married" field="married" type="CheckBox">
+					<FieldLabel />
+					<CheckBox />
+				</Element>
+			</FormGroup>
+		</Control>
+	</Controls>
+	<Properties />
+</view>
+

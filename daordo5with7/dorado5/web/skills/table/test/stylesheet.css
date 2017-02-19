@@ -1,0 +1,53 @@
+/* Javadoc style sheet */
+
+/* Define colors, fonts and other style attributes here to override the defaults */
+
+/* Page background color */
+body { font-family: verdana; font-size: 10pt; }
+a    { font-family: verdana; color: blue}
+a:visited    { font-family: verdana; color: navy }
+code { font-family: verdana; }
+dd   { font-family: verdana; }
+dl   { font-family: verdana; }
+pre  { font-family: verdana; }
+table    { border-collapse: collapse; border-color: #e0e0e0 }
+ParamsTable    { border-collapse: collapse; border-color: #e0e0e0 }
+
+/* Table colors */
+.TableHeadingColor {
+	FONT-SIZE: 10pt; BACKGROUND: #aaaaaa; COLOR: #ffffff; FONT-FAMILY: verdana
+}
+.TableSubHeadingColor  { font-family: verdana; font-size: 10pt; background: #e0e0e0 }
+.TableRowColor         { font-family: verdana; font-size: 10pt; }
+.ParamsTableHeader    { font-family: verdana; font-size: 10pt; background: #e0e0e0 }
+.MethodHeadingColor     { font-family: verdana; font-size: 10pt; color: #FFFFFF; background: #aaaaaa }
+
+/* P colors */
+.ObjectHeadingColor { font-family: verdana; font-size: 18pt; color: #000000;}
+.ObjectTitleColor { font-family: verdana; font-size: 9pt; }
+.ObjectDescriptionColor { font-family: verdana; font-size: 9pt; }
+.ObjectSampleColor { font-family: verdana; font-size: 9pt; color: #000000; background: #dddddd }
+
+/* Font used in left-hand frame lists */
+.FrameTitleFont   { font-size: 9pt; }
+.FrameHeadingFont { font-size: 10pt; font-family: verdana }
+.FrameItemFont    { font-size: 9pt; }
+.MemberItemFont    { font-size: 12pt; font-family: verdana }
+.ReturnItemFont    { font-size: 9pt; }
+.TitleItemFont    { font-size: 9pt; }
+.SampleItemFont    { font-size: 9pt; }
+.ParamItemFont    { font-size: 9pt; }
+.ParamsItemFont    { font-size: 9pt; }
+
+/* Example of smaller, sans-serif font in frames */
+/* .FrameItemFont  { font-size: 10pt; font-family: Helvetica, Arial, sans-serif } */
+
+/* Navigation bar fonts and colors */
+.NavBarCell1    { font-size: 9pt; background-color: #CEDAF2 }
+.NavBarCell1Rev { background-color: #000000 }
+.NavBarFont1    { color: #000000;}
+.NavBarFont1Rev { color: #F0F2F7;}
+
+.NavBarCell2    { background-color: #F0F2F7;}
+.NavBarCell3    { background-color: #F0F2F7;}
+
